@@ -1,0 +1,13 @@
+.wrapper {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.header,
+.footer,
+.main {
+  padding: 1rem;
+}
