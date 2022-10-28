@@ -1,16 +1,17 @@
 import { useState } from 'react';
+import { CharacterClassUnion } from 'shared/constants/global';
 
 type TalentKeyUnion = 'a' | 'b' | 'c';
 
 type TalentState = {
-  class: string,
+  class: CharacterClassUnion | null,
   talents: {
     [key in TalentKeyUnion]: string
   }
 };
 
 const initialState: TalentState = {
-  class: 'rogue',
+  class: null,
   talents: {
     a: '',
     b: '',
@@ -19,10 +20,17 @@ const initialState: TalentState = {
 };
 
 export const useTalentCalc = () => {
-  const [state, setState] = useState<TalentState | null>(initialState);
+  const [state, setState] = useState<TalentState>(initialState);
+
+  const handleClassChange = (newClass: CharacterClassUnion) => {
+    setState((prev) => ({
+      ...prev,
+      class: newClass,
+    }));
+  };
 
   return {
-    state,
-    setState,
+    currentClass: state.class,
+    onClassChange: handleClassChange,
   };
 };
