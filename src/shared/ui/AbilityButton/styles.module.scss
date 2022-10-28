@@ -1,0 +1,15 @@
+.wrapper {
+  height: 3rem;
+  width: 3rem;
+  overflow: hidden;
+  padding: 0;
+  line-height: .5;
+
+  &.active {
+    border-color: red;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
