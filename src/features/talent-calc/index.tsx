@@ -4,12 +4,13 @@ import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
 
 export const TalentCalc = () => {
-  const { state, setState } = useTalentCalc();
-  console.log(state, setState);
-
+  const { currentClass, onClassChange } = useTalentCalc();
   return (
     <div>
-      <ClassChoser />
+      <ClassChoser
+        currentClass={currentClass}
+        onClassChange={onClassChange}
+      />
       <SpecializationTrees />
       <Controls />
     </div>
