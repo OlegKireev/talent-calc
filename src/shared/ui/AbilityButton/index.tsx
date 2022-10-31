@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import styles from './styles.module.scss';
 
 interface AbilityButtonProps {
-  children: ReactNode
+  children?: ReactNode
   background?: string,
   isActive?: boolean
   isDisabled?: boolean
