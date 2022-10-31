@@ -1,12 +1,14 @@
 import { TalentType } from 'shared/constants/talentsData';
 import { Fragment } from 'react';
+import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { Talent } from './Talent';
 import styles from './styles.module.scss';
 
 export interface TreeProps {
   title: string
-  talents: TalentType[],
+  talents: TalentType[]
   backgroundImage?: string
+  onTalentChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
 }
 
 const numberToArray = (number: number) => new Array(Math.max(number, 0))
@@ -17,6 +19,7 @@ export const Tree = ({
   title,
   talents,
   backgroundImage,
+  onTalentChange,
 }: TreeProps) => {
   const maxRows = talents.sort((a, b) => b.tier - a.tier)[0].tier;
   const rows = numberToArray(maxRows);
@@ -33,7 +36,7 @@ export const Tree = ({
           {rows.map((row) => {
             let spaceBetweenCells = 0;
             return (
-              <tr>
+              <tr key={`row-${row}`}>
                 {talents
                   .filter((talent) => talent.tier === row)
                   .map((talent, i) => {
@@ -54,7 +57,10 @@ export const Tree = ({
                             title={talent.title}
                             description={talent.description[1]}
                             max={talent.max}
+                            id={talent.id}
                             icon={talent.icon}
+                            specialization={title}
+                            onChange={onTalentChange}
                           />
                         </td>
                       </Fragment>
