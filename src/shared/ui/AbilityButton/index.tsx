@@ -4,13 +4,15 @@ import styles from './styles.module.scss';
 
 interface AbilityButtonProps {
   children: ReactNode
-  isActive: boolean
-  isDisabled: boolean
-  onClick: () => any
+  background?: string,
+  isActive?: boolean
+  isDisabled?: boolean
+  onClick?: () => any
 }
 
 export const AbilityButton = ({
   children,
+  background,
   isActive,
   isDisabled,
   onClick,
@@ -19,7 +21,11 @@ export const AbilityButton = ({
     type="button"
     className={cx(styles.wrapper, {
       [styles.active]: isActive,
+      [styles.withBackground]: Boolean(background),
     })}
+    style={{
+      backgroundImage: `url("${background}")`,
+    }}
     disabled={isDisabled}
     onClick={onClick}
   >

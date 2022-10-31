@@ -4,12 +4,19 @@
   overflow: hidden;
   padding: 0;
   line-height: .5;
+  border: 0;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 
   &.active {
     border-color: red;
   }
 
-  &:not(:disabled) {
-    cursor: pointer;
+  &.withBackground {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }
