@@ -17,6 +17,7 @@ export const ClassChoser = ({
         key={characterClass}
         isActive={characterClass === currentClass}
         isDisabled={false}
+        background={`https://wow.zamimg.com/images/wow/icons/medium/class_${characterClass}.jpg`}
         onClick={() => onClassChange(characterClass)}
       >
         {characterClass}
