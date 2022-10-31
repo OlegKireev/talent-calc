@@ -1,12 +1,12 @@
 export const characterClasses = [
-  'warrion',
+  'warrior',
   'hunter',
   'rogue',
   'mage',
   'warlock',
   'paladin',
   'shaman',
-  'death knight',
+  'deathknight',
   'priest',
   'druid',
 ] as const;
