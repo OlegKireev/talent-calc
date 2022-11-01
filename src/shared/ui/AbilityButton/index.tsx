@@ -24,7 +24,7 @@ export const AbilityButton = ({
       [styles.withBackground]: Boolean(background),
     })}
     style={{
-      backgroundImage: `url("${background}")`,
+      backgroundImage: `url("https://wow.zamimg.com/images/Icon/large/border/default.png"), url("${background}")`,
     }}
     disabled={isDisabled}
     onClick={onClick}
