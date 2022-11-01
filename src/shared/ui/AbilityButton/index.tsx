@@ -1,5 +1,5 @@
+import { MouseEvent, ReactNode } from 'react';
 import cx from 'classnames';
-import { ReactNode } from 'react';
 import styles from './styles.module.scss';
 
 interface AbilityButtonProps {
@@ -7,7 +7,8 @@ interface AbilityButtonProps {
   background?: string,
   isActive?: boolean
   isDisabled?: boolean
-  onClick?: () => any
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => any
+  onRightClick?: (e: MouseEvent<HTMLButtonElement>) => any
 }
 
 export const AbilityButton = ({
@@ -16,6 +17,7 @@ export const AbilityButton = ({
   isActive,
   isDisabled,
   onClick,
+  onRightClick,
 }: AbilityButtonProps) => (
   <button
     type="button"
@@ -28,6 +30,7 @@ export const AbilityButton = ({
     }}
     disabled={isDisabled}
     onClick={onClick}
+    onContextMenu={onRightClick}
   >
     {children}
   </button>
