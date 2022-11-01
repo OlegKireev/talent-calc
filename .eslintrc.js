@@ -20,9 +20,10 @@ module.exports = {
     'react'
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off',
     'import/prefer-default-export': 'off',
+    'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': 'off',
+    'react/require-default-props': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
   }
 }
