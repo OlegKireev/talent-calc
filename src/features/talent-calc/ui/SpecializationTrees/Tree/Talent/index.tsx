@@ -1,7 +1,4 @@
 import { HandleTalentChangeArgs } from 'features/talent-calc';
-import {
-  createSearchParams, useNavigate,
-} from 'react-router-dom';
 import { TalentMaxValueType } from 'shared/constants/talentsData';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 
@@ -11,40 +8,35 @@ export interface TalentProps {
   icon?: string
   max: TalentMaxValueType,
   id: string,
+  value?: number,
   specialization: string,
   onChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
-  // required?: string; // row/column (4/3)
 }
 
 export const Talent = ({
   title,
   icon,
   id,
+  value = 0,
   max,
   specialization,
   onChange,
 }: TalentProps) => {
-  const navigate = useNavigate();
-
   const handleClick = () => {
-    onChange({
-      specialization,
-      id,
-      value: 2,
-    });
-    // navigate({
-    //   pathname: '/',
-    //   search: `?${createSearchParams({
-    //     l: '1',
-    //   })}`,
-    // });
+    if (value < max) {
+      onChange({
+        specialization,
+        id,
+        value: value + 1,
+      });
+    }
   };
   return (
     <AbilityButton
       background={icon}
       onClick={handleClick}
     >
-      {title}
+      {value}
     </AbilityButton>
   );
 };
