@@ -6,10 +6,11 @@ export interface TalentProps {
   title: string;
   description: string
   icon?: string
-  max: TalentMaxValueType,
-  id: string,
-  value?: number,
-  specialization: string,
+  max: TalentMaxValueType
+  id: string
+  value?: number
+  specialization: string
+  isDisabled?: boolean
   onChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
 }
 
@@ -20,6 +21,7 @@ export const Talent = ({
   value = 0,
   max,
   specialization,
+  isDisabled,
   onChange,
 }: TalentProps) => {
   const handleClick = () => {
@@ -34,9 +36,10 @@ export const Talent = ({
   return (
     <AbilityButton
       background={icon}
+      isDisabled={isDisabled}
       onClick={handleClick}
     >
-      {value}
+      {`${value}/${max}`}
     </AbilityButton>
   );
 };
