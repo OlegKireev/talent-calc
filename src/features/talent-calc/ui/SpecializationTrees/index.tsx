@@ -21,9 +21,13 @@ export const SpecializationTrees = ({
 
   const talentsByClass = talentsData[currentClass];
 
+  if (!Object.keys(data).length || !talentsByClass?.length) {
+    return null;
+  }
+
   return (
     <div className={styles.wrapper}>
-      {talentsByClass?.map((specializationData) => (
+      {talentsByClass.map((specializationData) => (
         <Tree
           data={data[specializationData.title]}
           title={specializationData.title}
