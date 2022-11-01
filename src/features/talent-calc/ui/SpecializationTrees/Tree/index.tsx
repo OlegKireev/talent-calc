@@ -1,7 +1,8 @@
-import { TalentType } from 'shared/constants/talentsData';
 import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataType } from 'features/talent-calc/lib/transform';
+import { getTierTotal } from 'features/talent-calc/lib/getTierTotal';
+import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
 import { Talent } from './Talent';
 import styles from './styles.module.scss';
@@ -22,9 +23,8 @@ export const Tree = ({
   onTalentChange,
 }: TreeProps) => {
   const maxRows = talents.sort((a, b) => b.tier - a.tier)[0].tier;
-  const rows = numberToArray(maxRows);
-
-  const total = Object.values(data || {}).reduce((acc, cur) => acc + cur, 0);
+  const rows = numberToArray(maxRows) as TalentTierType[];
+  const total = Object.values(data).reduce((acc, cur) => acc + cur, 0);
 
   return (
     <div
@@ -37,6 +37,8 @@ export const Tree = ({
         <tbody>
           {rows.map((row) => {
             let spaceBetweenCells = 0;
+            const tierTotal = getTierTotal(row, talents, data);
+
             return (
               <tr key={`row-${row}`}>
                 {talents
@@ -47,7 +49,7 @@ export const Tree = ({
                       spaceBetweenCells += 1;
                     }
                     const emplyCells = numberToArray(cellOffset);
-                    const isTierAvailable = talent.tier === 1 || total > (talent.tier - 1) * 5 - 1;
+                    const isTierAvailable = total - tierTotal > (talent.tier - 1) * 5 - 1;
 
                     return (
                       <Fragment key={`tier${row}-${talent.title}`}>
@@ -57,9 +59,9 @@ export const Tree = ({
                         <td>
                           <Talent
                             key={talent.title}
-                            value={(!!data && Object.hasOwn(data, talent.id)) ? data[talent.id] : 0}
+                            value={data[talent.id]}
                             title={talent.title}
-                            description={talent.description[1]}
+                            description={talent.description}
                             max={talent.max}
                             id={talent.id}
                             icon={talent.icon}
