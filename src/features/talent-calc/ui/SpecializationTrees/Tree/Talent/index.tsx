@@ -1,4 +1,5 @@
 import { HandleTalentChangeArgs } from 'features/talent-calc';
+import { MouseEvent } from 'react';
 import { TalentMaxValueType } from 'shared/constants/talentsData';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 
@@ -24,7 +25,7 @@ export const Talent = ({
   isDisabled,
   onChange,
 }: TalentProps) => {
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (value < max) {
       onChange({
         specialization,
@@ -33,11 +34,22 @@ export const Talent = ({
       });
     }
   };
+  const handleRightClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (value > 0) {
+      onChange({
+        specialization,
+        id,
+        value: value - 1,
+      });
+    }
+  };
   return (
     <AbilityButton
       background={icon}
       isDisabled={isDisabled}
       onClick={handleClick}
+      onRightClick={handleRightClick}
     >
       {`${value}/${max}`}
     </AbilityButton>
