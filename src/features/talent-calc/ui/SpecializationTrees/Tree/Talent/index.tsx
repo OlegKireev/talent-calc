@@ -11,7 +11,7 @@ export interface TalentProps {
   id: string
   value?: number
   specialization: string
-  isDisabled?: boolean
+  isAvailable: boolean
   onChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
 }
 
@@ -22,11 +22,11 @@ export const Talent = ({
   value = 0,
   max,
   specialization,
-  isDisabled,
+  isAvailable,
   onChange,
 }: TalentProps) => {
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (value < max) {
+  const handleClick = () => {
+    if (isAvailable && value < max) {
       onChange({
         specialization,
         id,
@@ -36,7 +36,7 @@ export const Talent = ({
   };
   const handleRightClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (value > 0) {
+    if (isAvailable && value > 0) {
       onChange({
         specialization,
         id,
@@ -47,7 +47,7 @@ export const Talent = ({
   return (
     <AbilityButton
       background={icon}
-      isDisabled={isDisabled}
+      isDisabled={!isAvailable}
       onClick={handleClick}
       onRightClick={handleRightClick}
     >

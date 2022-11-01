@@ -24,6 +24,8 @@ export const Tree = ({
   const maxRows = talents.sort((a, b) => b.tier - a.tier)[0].tier;
   const rows = numberToArray(maxRows);
 
+  const total = Object.values(data || {}).reduce((acc, cur) => acc + cur, 0);
+
   return (
     <div
       className={styles.wrapper}
@@ -45,6 +47,7 @@ export const Tree = ({
                       spaceBetweenCells += 1;
                     }
                     const emplyCells = numberToArray(cellOffset);
+                    const isTierAvailable = talent.tier === 1 || total > (talent.tier - 1) * 5 - 1;
 
                     return (
                       <Fragment key={`tier${row}-${talent.title}`}>
@@ -61,6 +64,7 @@ export const Tree = ({
                             id={talent.id}
                             icon={talent.icon}
                             specialization={title}
+                            isAvailable={isTierAvailable}
                             onChange={onTalentChange}
                           />
                         </td>
@@ -73,7 +77,7 @@ export const Tree = ({
         </tbody>
       </table>
       <h4>
-        {title}
+        {`${title} (${total})`}
       </h4>
     </div>
   );
