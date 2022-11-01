@@ -14,7 +14,7 @@ export const TalentCalc = () => {
   const [talents, setTalents] = useState<TalentsDataReturn>({});
 
   useEffect(() => {
-    if (!currentClass) {
+    if (!currentClass || !talentsData[currentClass]) {
       return;
     }
     setTalents(createTalentsState(talentsData[currentClass]!));
