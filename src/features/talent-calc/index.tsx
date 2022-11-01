@@ -4,14 +4,14 @@ import { useTalentCalc } from './model/useTalentCalc';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
+import { createTalentsState, TalentsDataReturn } from './lib/transform';
 import styles from './styles.module.scss';
-import { createTalentsState } from './lib/transform';
 
 export type HandleTalentChangeArgs = { specialization: string, id: string, value: number };
 
 export const TalentCalc = () => {
   const { currentClass, onClassChange } = useTalentCalc();
-  const [talents, setTalents] = useState({});
+  const [talents, setTalents] = useState<TalentsDataReturn>({});
 
   useEffect(() => {
     if (!currentClass) {
@@ -34,8 +34,6 @@ export const TalentCalc = () => {
     }));
   };
 
-  console.log(talents);
-
   return (
     <div className={styles.wrapper}>
       <ClassChoser
@@ -44,6 +42,7 @@ export const TalentCalc = () => {
       />
       <SpecializationTrees
         currentClass={currentClass}
+        data={talents}
         onTalentChange={handleTalentChange}
       />
       <Controls />

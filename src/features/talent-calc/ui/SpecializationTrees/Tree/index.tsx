@@ -1,21 +1,21 @@
 import { TalentType } from 'shared/constants/talentsData';
 import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
+import { TalentsDataType } from 'features/talent-calc/lib/transform';
+import { numberToArray } from 'shared/lib/transform';
 import { Talent } from './Talent';
 import styles from './styles.module.scss';
 
 export interface TreeProps {
+  data: TalentsDataType,
   title: string
   talents: TalentType[]
   backgroundImage?: string
   onTalentChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
 }
 
-const numberToArray = (number: number) => new Array(Math.max(number, 0))
-  .fill(0)
-  .map((_, i) => i + 1);
-
 export const Tree = ({
+  data,
   title,
   talents,
   backgroundImage,
@@ -54,6 +54,7 @@ export const Tree = ({
                         <td>
                           <Talent
                             key={talent.title}
+                            value={(!!data && Object.hasOwn(data, talent.id)) ? data[talent.id] : 0}
                             title={talent.title}
                             description={talent.description[1]}
                             max={talent.max}
