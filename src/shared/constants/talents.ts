@@ -1,0 +1,33 @@
+export const mage = [
+  'mage_frost_frostbite',
+  'mage_frost_imporved_frostbolt',
+  'mage_frost_ice_floes',
+  'mage_frost_ice_shards',
+  'mage_frost_fronst_warding',
+  'mage_frost_precision',
+  'mage_frost_permafrost',
+  'mage_frost_piercing_ice',
+  'mage_frost_icy_veins',
+  'mage_frost_improved_blizzard',
+  'mage_frost_arctic_reach',
+  'mage_frost_frost_channeling',
+  'mage_frost_shatter',
+  'mage_frost_cold_snap',
+  'mage_frost_improved_cone_of_cold',
+  'mage_frost_frozen_core',
+  'mage_frost_cold_as_ice',
+  'mage_frost_winters_chill',
+  'mage_frost_shattered_barrier',
+  'mage_frost_ice_barrier',
+  'mage_frost_arctic_winds',
+  'mage_frost_emprowered_frostbolt',
+  'mage_frost_fingers_of_frost',
+  'mage_frost_brainfreeze',
+  'mage_frost_summon_water_elemental',
+  'mage_frost_enduring_winter',
+  'mage_frost_chilled_to_the_bone',
+  'mage_frost_deep_freeze',
+] as const;
+
+export type MageTalentsId = typeof mage[number];
+export type CharacterTalentId = MageTalentsId;
