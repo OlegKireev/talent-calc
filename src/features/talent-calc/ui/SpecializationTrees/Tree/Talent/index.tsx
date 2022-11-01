@@ -1,15 +1,15 @@
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { MouseEvent } from 'react';
-import { TalentMaxValueType } from 'shared/constants/talentsData';
+import { TalentDescription, TalentMaxValueType } from 'shared/constants/talentsData';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 
 export interface TalentProps {
   title: string;
-  description: string
-  icon?: string
+  icon: string
   max: TalentMaxValueType
   id: string
   value?: number
+  description: TalentDescription
   specialization: string
   isAvailable: boolean
   onChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
