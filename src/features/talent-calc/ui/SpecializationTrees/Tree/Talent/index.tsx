@@ -6,11 +6,11 @@ import { AbilityButton } from 'shared/ui/AbilityButton';
 export interface TalentProps {
   title: string;
   icon: string
-  max: TalentMaxValueType
   id: string
   value?: number
-  description: TalentDescription
+  max: TalentMaxValueType
   specialization: string
+  description: TalentDescription
   isAvailable: boolean
   onChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
 }
