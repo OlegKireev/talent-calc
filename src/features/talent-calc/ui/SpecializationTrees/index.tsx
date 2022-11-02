@@ -1,5 +1,5 @@
 import { CharacterClassUnion } from 'shared/constants/global';
-import { talentsData } from 'shared/constants/talentsData';
+import { TaletsOfClassType } from 'shared/constants/talentsData';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataReturn } from 'features/talent-calc/lib/transform';
 import { Tree } from './Tree';
@@ -7,11 +7,13 @@ import styles from './styles.module.scss';
 
 interface SpecializationTreesProps {
   currentClass: CharacterClassUnion | null
+  talentsByClass: TaletsOfClassType[],
   data: TalentsDataReturn,
-  onTalentChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
+  onTalentChange: (args: HandleTalentChangeArgs) => void
 }
 export const SpecializationTrees = ({
   currentClass,
+  talentsByClass,
   data,
   onTalentChange,
 }: SpecializationTreesProps) => {
@@ -19,9 +21,7 @@ export const SpecializationTrees = ({
     return null;
   }
 
-  const talentsByClass = talentsData[currentClass];
-
-  if (!Object.keys(data).length || !talentsByClass?.length) {
+  if (!data || !Object.keys(data).length || !talentsByClass?.length) {
     return null;
   }
 
