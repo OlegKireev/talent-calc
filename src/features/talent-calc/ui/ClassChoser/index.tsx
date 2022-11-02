@@ -1,10 +1,10 @@
-import { characterClasses, CharacterClassUnion } from 'shared/constants/global';
+import { characterClasses, CharacterClassType } from 'shared/constants/global';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 import styles from './styles.module.scss';
 
 interface ClassChoserProps {
-  currentClass: CharacterClassUnion | null,
-  onClassChange: (newClass: CharacterClassUnion) => void,
+  currentClass: CharacterClassType | null,
+  onClassChange: (newClass: CharacterClassType) => void,
 }
 
 export const ClassChoser = ({

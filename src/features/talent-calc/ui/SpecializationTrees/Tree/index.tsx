@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataType } from 'features/talent-calc/lib/transform';
-import { getTierTotal } from 'features/talent-calc/lib/getTierTotal';
+import { getTierTotal } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
 import { Talent } from './Talent';

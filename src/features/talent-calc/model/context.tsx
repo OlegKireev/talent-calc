@@ -1,12 +1,12 @@
 import {
   createContext, useContext, useMemo, useState,
 } from 'react';
-import { CharacterClassUnion } from 'shared/constants/global';
+import { CharacterClassType } from 'shared/constants/global';
 
 // Что возвращает контекс
 type TalentCalcContextType = {
-  currentClass: CharacterClassUnion | null,
-  onClassChange: (newClass: CharacterClassUnion) => void,
+  currentClass: CharacterClassType | null,
+  onClassChange: (newClass: CharacterClassType) => void,
 };
 
 const initialState = {
@@ -19,7 +19,7 @@ const TalentCalcContext = createContext<TalentCalcContextType | undefined>(
 );
 
 export type TalentState = {
-  class: CharacterClassUnion | null,
+  class: CharacterClassType | null,
   talents: {
     [key in string]?: string
   }
@@ -33,7 +33,7 @@ export const TalentCalcProvider = ({
     talents: {},
   });
 
-  const handleClassChange = (newClass: CharacterClassUnion) => {
+  const handleClassChange = (newClass: CharacterClassType) => {
     setState((prev) => ({
       ...prev,
       class: newClass,
