@@ -1,5 +1,5 @@
-import { CharacterTalentId } from './talents';
-import { CharacterClassUnion } from './global';
+import { CharacterTalentIdType } from './talents';
+import { CharacterClassType, CharacterSpecsType } from './global';
 
 export type TalentTierType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 export type TalentColumnType = 1 | 2 | 3 | 4;
@@ -18,7 +18,7 @@ export type AbilityRange = number;
 
 export type TalentType = {
   title: string,
-  id: CharacterTalentId,
+  id: CharacterTalentIdType,
   // TODO: make dependence of 'max'
   description: TalentDescription,
   icon: string,
@@ -32,17 +32,198 @@ export type TalentType = {
 };
 
 export type TaletsOfClassType = {
-  title: string,
+  title: CharacterSpecsType,
   backgroundImage: string,
   talents: TalentType[]
 };
 
 export type TalentsType = {
-  [key in CharacterClassUnion]?: TaletsOfClassType[]
+  [key in CharacterClassType]: TaletsOfClassType[]
 };
 
-export const talentsData: TalentsType = {
+export const TALENTS_TEMPLATE: TalentsType = {
+  deathknight: [{
+    title: 'blood',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/398.jpg',
+    talents: [{
+      id: 'deathknight_blood_butchery',
+      title: 'Butchery',
+      description: {
+        1: 'Whenever you kill an enemy that grants experience or honor, you generate up to 10 runic power. &nbsp;In addition, you generate 1 runic power per 5 sec while in combat.',
+        2: 'Whenever you kill an enemy that grants experience or honor, you generate up to 20 runic power. &nbsp;In addition, you generate 2 runic power per 5 sec while in combat.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/inv_axe_68.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }, {
+    title: 'frost',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/399.jpg',
+    talents: [{
+      id: 'deathknight_frost_improved_icy_touch',
+      title: 'Improved Icy Touch',
+      description: {
+        1: 'Your Icy Touch does an additional 5% damage and your Frost Fever reduces melee and ranged attack speed by an additional 2%.',
+        2: 'Your Icy Touch does an additional 10% damage and your Frost Fever reduces melee and ranged attack speed by an additional 4%.',
+        3: 'Your Icy Touch does an additional 15% damage and your Frost Fever reduces melee and ranged attack speed by an additional 6%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_deathknight_icetouch.jpg',
+      tier: 1,
+      column: 1,
+      max: 3,
+    }],
+  }, {
+    title: 'unholy',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/400.jpg',
+    talents: [{
+      id: 'deathknight_unholy_vicious_strikes',
+      title: 'Vicious Strikes',
+      description: {
+        1: 'Increases the critical strike chance by 3% and critical strike damage bonus by 15% of your Plague Strike and Scourge Strike.',
+        2: 'Increases the critical strike chance by 6% and critical strike damage bonus by 30% of your Plague Strike and Scourge Strike.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_deathknight_plaguestrike.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }],
+  druid: [{
+    title: 'balance',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/283.jpg',
+    talents: [{
+      id: 'druid_balance_starlight_wrath',
+      title: 'Starlight Wrath',
+      description: {
+        1: 'Reduces the cast time of your Wrath and Starfire spells by 0.1 sec.',
+        2: 'Reduces the cast time of your Wrath and Starfire spells by 0.2 sec.',
+        3: 'Reduces the cast time of your Wrath and Starfire spells by 0.3 sec.',
+        4: 'Reduces the cast time of your Wrath and Starfire spells by 0.4 sec.',
+        5: 'Reduces the cast time of your Wrath and Starfire spells by 0.5 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_abolishmagic.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }, {
+    title: 'feral',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/281.jpg',
+    talents: [{
+      id: 'druid_feral_ferocity',
+      title: 'Ferocity',
+      description: {
+        1: 'Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle abilities by 1 Rage or Energy.',
+        2: 'Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle abilities by 2 Rage or Energy.',
+        3: 'Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle abilities by 3 Rage or Energy.',
+        4: 'Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle abilities by 4 Rage or Energy.',
+        5: 'Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle abilities by 5 Rage or Energy.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_hunter_pet_hyena.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }, {
+    title: 'restoration',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/282.jpg',
+    talents: [{
+      id: 'druid_restoration_improved_mark_of_the_wild',
+      title: 'Improved Mark of the Wild',
+      description: {
+        1: 'Increases the effects of your Mark of the Wild and Gift of the Wild spells by 20%, and increases all of your total attributes by 1%.',
+        2: 'Increases the effects of your Mark of the Wild and Gift of the Wild spells by 40%, and increases all of your total attributes by 2%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_regeneration.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }],
+  hunter: [{
+    title: 'beast_mastery',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/361.jpg',
+    talents: [{
+      id: 'hunter_beast_mastery_imporved_aspect_of_the_hawk',
+      title: 'Improved Aspect of the Hawk',
+      description: {
+        1: 'While Aspect of the Hawk or Dragonhawk is active, all normal ranged attacks have a 10% chance of increasing ranged attack speed by 3% for 12 sec.',
+        2: 'While Aspect of the Hawk or Dragonhawk is active, all normal ranged attacks have a 10% chance of increasing ranged attack speed by 6% for 12 sec.',
+        3: 'While Aspect of the Hawk or Dragonhawk is active, all normal ranged attacks have a 10% chance of increasing ranged attack speed by 9% for 12 sec.',
+        4: 'While Aspect of the Hawk or Dragonhawk is active, all normal ranged attacks have a 10% chance of increasing ranged attack speed by 12% for 12 sec.',
+        5: 'While Aspect of the Hawk or Dragonhawk is active, all normal ranged attacks have a 10% chance of increasing ranged attack speed by 15% for 12 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_ravenform.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }, {
+    title: 'marksmanship',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/363.jpg',
+    talents: [{
+      id: 'hunter_marksmanship_improved_concussive_shot',
+      title: 'Improved Concussive Shot',
+      description: {
+        1: 'Increases the duration of your Concussive Shot\'s daze effect by 1 sec.',
+        2: 'Increases the duration of your Concussive Shot\'s daze effect by 2 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_frost_stun.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }, {
+    title: 'survival',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/362.jpg',
+    talents: [{
+      id: 'hunter_survival_improved_tracking',
+      title: 'Improved Tracking',
+      description: {
+        1: 'While tracking Beasts, Demons, Dragonkin, Elementals, Giants, Humanoids and Undead, all damage done to those types by the Hunter is increased by 1%.',
+        2: 'While tracking Beasts, Demons, Dragonkin, Elementals, Giants, Humanoids and Undead, all damage done to those types by the Hunter is increased by 2%.',
+        3: 'While tracking Beasts, Demons, Dragonkin, Elementals, Giants, Humanoids and Undead, all damage done to those types by the Hunter is increased by 3%.',
+        4: 'While tracking Beasts, Demons, Dragonkin, Elementals, Giants, Humanoids and Undead, all damage done to those types by the Hunter is increased by 4%.',
+        5: 'While tracking Beasts, Demons, Dragonkin, Elementals, Giants, Humanoids and Undead, all damage done to those types by the Hunter is increased by 5%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_hunter_improvedtracking.jpg',
+      tier: 1,
+      column: 1,
+      max: 5,
+    }],
+  }],
   mage: [{
+    title: 'arcane',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/81.jpg',
+    talents: [{
+      id: 'mage_arcane_arcance_subtlety',
+      title: 'Arcane Subtlety',
+      description: {
+        1: 'Reduces the chance your helpful spells and damage over time effects will be dispelled by 15% and reduces the threat caused by your Arcane spells by 20%.',
+        2: 'Reduces the chance your helpful spells and damage over time effects will be dispelled by 30% and reduces the threat caused by your Arcane spells by 40%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_dispelmagic.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }, {
+    title: 'fire',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/41.jpg',
+    talents: [{
+      id: 'mage_fire_improved_fire_blast',
+      title: 'Improved Fire Blast',
+      description: {
+        1: 'Reduces the cooldown of your Fire Blast spell by 1 sec.',
+        2: 'Reduces the cooldown of your Fire Blast spell by 2 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }, {
     title: 'frost',
     backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/61.jpg',
     talents: [{
@@ -388,5 +569,311 @@ export const talentsData: TalentsType = {
       range: 30,
     },
     ],
+  }],
+  paladin: [{
+    title: 'holy',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/382.jpg',
+    talents: [{
+      id: 'paladin_holy_spiritual_focus',
+      title: 'Spiritual Focus',
+      description: {
+        1: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 14%.',
+        2: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 28%.',
+        3: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 42%.',
+        4: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 56%.',
+        5: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 70%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_arcane_blink.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }, {
+    title: 'protection',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/383.jpg',
+    talents: [{
+      id: 'paladin_protection_divinity',
+      title: 'Divinity',
+      description: {
+        1: 'Increases all healing done by you and all healing effects on you by 1%.',
+        2: 'Increases all healing done by you and all healing effects on you by 2%.',
+        3: 'Increases all healing done by you and all healing effects on you by 3%.',
+        4: 'Increases all healing done by you and all healing effects on you by 4%.',
+        5: 'Increases all healing done by you and all healing effects on you by 5%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_blindingheal.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }, {
+    title: 'retribution',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/381.jpg',
+    talents: [{
+      id: 'paladin_retribution_deflection',
+      title: 'Deflection',
+      description: {
+        1: 'Increases your Parry chance by 1%.',
+        2: 'Increases your Parry chance by 2%.',
+        3: 'Increases your Parry chance by 3%.',
+        4: 'Increases your Parry chance by 4%.',
+        5: 'Increases your Parry chance by 5%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_parry.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }],
+  priest: [{
+    title: 'discipline',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/201.jpg',
+    talents: [{
+      id: 'priest_discipline_unbreakable_will',
+      title: 'Unbreakable Will',
+      description: {
+        1: 'Reduces the duration of Stun, Fear, and Silence effects done to you by an additional 6%.',
+        2: 'Reduces the duration of Stun, Fear, and Silence effects done to you by an additional 12%.',
+        3: 'Reduces the duration of Stun, Fear, and Silence effects done to you by an additional 18%.',
+        4: 'Reduces the duration of Stun, Fear, and Silence effects done to you by an additional 24%.',
+        5: 'Reduces the duration of Stun, Fear, and Silence effects done to you by an additional 30%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_magearmor.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }, {
+    title: 'holy',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/202.jpg',
+    talents: [{
+      id: 'priest_holy_healing_focus',
+      title: 'Healing Focus',
+      description: {
+        1: 'Reduces the pushback suffered from damaging attacks &nbsp;while casting any healing spell by 35%.',
+        2: 'Reduces the pushback suffered from damaging attacks &nbsp;while casting any healing spell by 70%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_holy_healingfocus.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }, {
+    title: 'shadow',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/203.jpg',
+    talents: [{
+      id: 'priest_shadow_spirit_tap',
+      title: 'Spirit Tap',
+      description: {
+        1: 'Gives you a 33% chance to gain a 100% bonus to your Spirit after killing a target that yields experience or honor. &nbsp;For the duration, your mana will regenerate at a 83% rate while casting. &nbsp;Lasts 15 sec.',
+        2: 'Gives you a 66% chance to gain a 100% bonus to your Spirit after killing a target that yields experience or honor. &nbsp;For the duration, your mana will regenerate at a 83% rate while casting. &nbsp;Lasts 15 sec.',
+        3: 'Gives you a 100% chance to gain a 100% bonus to your Spirit after killing a target that yields experience or honor. &nbsp;For the duration, your mana will regenerate at a 83% rate while casting. &nbsp;Lasts 15 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_requiem.jpg',
+      tier: 1,
+      column: 1,
+      max: 3,
+    }],
+  }],
+  rogue: [{
+    title: 'assasination',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/182.jpg',
+    talents: [{
+      id: 'rogue_assasination_improved_eviscerate',
+      title: 'Improved Eviscerate',
+      description: {
+        1: 'Increases the damage done by your Eviscerate ability by 7%.',
+        2: 'Increases the damage done by your Eviscerate ability by 14%.',
+        3: 'Increases the damage done by your Eviscerate ability by 20%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_rogue_eviscerate.jpg',
+      tier: 1,
+      column: 1,
+      max: 3,
+    }],
+  }, {
+    title: 'combat',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/181.jpg',
+    talents: [{
+      id: 'rogue_combat_improved_gouge',
+      title: 'Improved Gouge',
+      description: {
+        1: 'Increases the effect duration of your Gouge ability by 0.5 sec.',
+        2: 'Increases the effect duration of your Gouge ability by 1 sec.',
+        3: 'Increases the effect duration of your Gouge ability by 1.5 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_gouge.jpg',
+      tier: 1,
+      column: 1,
+      max: 3,
+    }],
+  }, {
+    title: 'subtlety',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/183.jpg',
+    talents: [{
+      id: 'rogue_subtlety_spirit_tap',
+      title: 'Relentless Strikes',
+      description: {
+        1: 'Your finishing moves have a 4% chance per combo point to restore 25 energy.',
+        2: 'Your finishing moves have a 8% chance per combo point to restore 25 energy.',
+        3: 'Your finishing moves have a 12% chance per combo point to restore 25 energy.',
+        4: 'Your finishing moves have a 16% chance per combo point to restore 25 energy.',
+        5: 'Your finishing moves have a 20% chance per combo point to restore 25 energy.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_warrior_decisivestrike.jpg',
+      tier: 1,
+      column: 1,
+      max: 5,
+    }],
+  }],
+  shaman: [{
+    title: 'elemental',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/261.jpg',
+    talents: [{
+      id: 'shaman_elemental_convection',
+      title: 'Convection',
+      description: {
+        1: 'Reduces the mana cost of your Shock, Lightning Bolt, Chain Lightning, Lava Burst, and Wind Shear spells by 2%.',
+        2: 'Reduces the mana cost of your Shock, Lightning Bolt, Chain Lightning, Lava Burst, and Wind Shear spells by 4%.',
+        3: 'Reduces the mana cost of your Shock, Lightning Bolt, Chain Lightning, Lava Burst, and Wind Shear spells by 6%.',
+        4: 'Reduces the mana cost of your Shock, Lightning Bolt, Chain Lightning, Lava Burst, and Wind Shear spells by 8%.',
+        5: 'Reduces the mana cost of your Shock, Lightning Bolt, Chain Lightning, Lava Burst, and Wind Shear spells by 10%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_wispsplode.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }, {
+    title: 'enhancement',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/263.jpg',
+    talents: [{
+      id: 'shaman_enhancement_enhancing_totems',
+      title: 'Enhancing Totems',
+      description: {
+        1: 'Increases the effect of your Strength of Earth and Flametongue Totems by 5%.',
+        2: 'Increases the effect of your Strength of Earth and Flametongue Totems by 10%.',
+        3: 'Increases the effect of your Strength of Earth and Flametongue Totems by 15%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg',
+      tier: 1,
+      column: 1,
+      max: 3,
+    }],
+  }, {
+    title: 'restoration',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/262.jpg',
+    talents: [{
+      id: 'shaman_restoration_improved_healing_wave',
+      title: 'Improved Healing Wave',
+      description: {
+        1: 'Reduces the casting time of your Healing Wave spell by 0.1 sec.',
+        2: 'Reduces the casting time of your Healing Wave spell by 0.2 sec.',
+        3: 'Reduces the casting time of your Healing Wave spell by 0.3 sec.',
+        4: 'Reduces the casting time of your Healing Wave spell by 0.4 sec.',
+        5: 'Reduces the casting time of your Healing Wave spell by 0.5 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_nature_magicimmunity.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }],
+  warlock: [{
+    title: 'affliction',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/302.jpg',
+    talents: [{
+      id: 'warlock_affliction_improved_curse_of_agony',
+      title: 'Improved Curse of Agony',
+      description: {
+        1: 'Increases the damage done by your Curse of Agony by 5%.',
+        2: 'Increases the damage done by your Curse of Agony by 10%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofsargeras.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }, {
+    title: 'demonology',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/303.jpg',
+    talents: [{
+      id: 'warlock_demonology_improved_healthstone',
+      title: 'Improved Healthstone',
+      description: {
+        1: 'Increases the amount of Health restored by your Healthstone by 10%.',
+        2: 'Increases the amount of Health restored by your Healthstone by 20%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/inv_stone_04.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
+  }, {
+    title: 'destruction',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/301.jpg',
+    talents: [{
+      id: 'warlock_destruction_improved_shadow_bolt',
+      title: 'Improved Shadow Bolt',
+      description: {
+        1: 'Increases the damage done by your Shadow Bolt spell by 2%, and your Shadow Bolt has a 20% chance to cause your target to be vulnerable to spell damage, increasing spell critical strike chance against that target by 5%. Effect lasts 30 sec.',
+        2: 'Increases the damage done by your Shadow Bolt spell by 4%, and your Shadow Bolt has a 40% chance to cause your target to be vulnerable to spell damage, increasing spell critical strike chance against that target by 5%. Effect lasts 30 sec.',
+        3: 'Increases the damage done by your Shadow Bolt spell by 6%, and your Shadow Bolt has a 60% chance to cause your target to be vulnerable to spell damage, increasing spell critical strike chance against that target by 5%. Effect lasts 30 sec.',
+        4: 'Increases the damage done by your Shadow Bolt spell by 8%, and your Shadow Bolt has a 80% chance to cause your target to be vulnerable to spell damage, increasing spell critical strike chance against that target by 5%. Effect lasts 30 sec.',
+        5: 'Increases the damage done by your Shadow Bolt spell by 10%, and your Shadow Bolt has a 100% chance to cause your target to be vulnerable to spell damage, increasing spell critical strike chance against that target by 5%. Effect lasts 30 sec.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowbolt.jpg',
+      tier: 1,
+      column: 2,
+      max: 5,
+    }],
+  }],
+  warrior: [{
+    title: 'arms',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/161.jpg',
+    talents: [{
+      id: 'warrior_arms_improved_heroic_strike',
+      title: 'Improved Heroic Strike',
+      description: {
+        1: 'Reduces the cost of your Heroic Strike ability by 1 rage point.',
+        2: 'Reduces the cost of your Heroic Strike ability by 2 rage points.',
+        3: 'Reduces the cost of your Heroic Strike ability by 3 rage points.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_rogue_ambush.jpg',
+      tier: 1,
+      column: 1,
+      max: 3,
+    }],
+  }, {
+    title: 'fury',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/164.jpg',
+    talents: [{
+      id: 'warrior_fury_armored_to_the_teeth',
+      title: 'Armored to the Teeth',
+      description: {
+        1: 'Increases your attack power by 1 for every 108 armor value you have.',
+        2: 'Increases your attack power by 2 for every 108 armor value you have.',
+        3: 'Increases your attack power by 3 for every 108 armor value you have.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/inv_shoulder_22.jpg',
+      tier: 1,
+      column: 1,
+      max: 3,
+    }],
+  }, {
+    title: 'protection',
+    backgroundImage: 'https://wow.zamimg.com/images/wow/talents/backgrounds/wrath/163.jpg',
+    talents: [{
+      id: 'warrior_protection_improved_bloodrage',
+      title: 'Improved Bloodrage',
+      description: {
+        1: 'Increases the rage generated by your Bloodrage ability by 25%.',
+        2: 'Increases the rage generated by your Bloodrage ability by 50%.',
+      },
+      icon: 'https://wow.zamimg.com/images/wow/icons/large/ability_racial_bloodrage.jpg',
+      tier: 1,
+      column: 1,
+      max: 2,
+    }],
   }],
 };
