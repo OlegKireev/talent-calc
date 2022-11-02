@@ -55,9 +55,9 @@ export const Tree = ({
                     return (
                       <Fragment key={`tier${row}-${talent.title}`}>
                         {emplyCells.map((cell) => (
-                          <td key={cell} />
+                          <td key={cell} className={styles.cell} />
                         ))}
-                        <td>
+                        <td className={styles.cell}>
                           <Talent
                             key={talent.title}
                             value={data[talent.id]}
