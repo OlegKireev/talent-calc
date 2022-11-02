@@ -1,6 +1,6 @@
 import { specs, CharacterClassType } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
-import { TalentType } from 'shared/constants/talentsData';
+import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { TalentsDataReturn, TalentsDataType } from './transform';
 
 export const getTreeTotal = (
@@ -10,7 +10,7 @@ export const getTreeTotal = (
   .reduce((acc, cur) => acc + cur, 0);
 
 export const getTierTotal = (
-  tier: number,
+  tier: TalentTierType,
   template: TalentType[],
   data: TalentsDataType,
 ): number => {
@@ -49,7 +49,7 @@ export const checkIsTalentsDataRefreshed = (
 export const getDeepestTierWithValue = (
   template: TalentType[],
   data: TalentsDataType,
-): number => {
+): TalentTierType => {
   const talentKeys = Object.keys(data) as CharacterTalentIdType[];
   const talentKeysWithValue = talentKeys.filter((key) => Boolean(data[key]));
 
@@ -62,5 +62,5 @@ export const getDeepestTierWithValue = (
 export const checkCanDecrease = (
   deepestTier: number,
   total: number,
-  tier: number,
+  tier: TalentTierType,
 ): boolean => (deepestTier - 1) * 5 < total || tier === deepestTier;
