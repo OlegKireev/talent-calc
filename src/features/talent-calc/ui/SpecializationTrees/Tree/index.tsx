@@ -12,7 +12,7 @@ export interface TreeProps {
   title: string
   talents: TalentType[]
   backgroundImage?: string
-  onTalentChange: ({ specialization, id, value }: HandleTalentChangeArgs) => void
+  onTalentChange: (args: HandleTalentChangeArgs) => void
 }
 
 export const Tree = ({
