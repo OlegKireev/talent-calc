@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { talentsData } from 'shared/constants/talentsData';
-import { useTalentCalc } from './model/useTalentCalc';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
 import { createTalentsState, TalentsDataReturn } from './lib/transform';
 import styles from './styles.module.scss';
+import { useTalentCalcContext } from './model/context';
 
-export type HandleTalentChangeArgs = { specialization: string, id: string, value: number };
+export type HandleTalentChangeArgs = {
+  specialization: string,
+  id: string,
+  value: number,
+};
 
 export const TalentCalc = () => {
-  const { currentClass, onClassChange } = useTalentCalc();
+  const { currentClass, onClassChange } = useTalentCalcContext();
   const [talents, setTalents] = useState<TalentsDataReturn>({});
 
   useEffect(() => {
@@ -40,11 +44,14 @@ export const TalentCalc = () => {
         currentClass={currentClass}
         onClassChange={onClassChange}
       />
-      <SpecializationTrees
-        currentClass={currentClass}
-        data={talents}
-        onTalentChange={handleTalentChange}
-      />
+      {currentClass && (
+        <SpecializationTrees
+          currentClass={currentClass}
+          data={talents}
+          talentsByClass={talentsData[currentClass]!}
+          onTalentChange={handleTalentChange}
+        />
+      )}
       <Controls />
     </div>
   );
