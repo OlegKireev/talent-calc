@@ -3,7 +3,7 @@ import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { checkCanDecrease } from 'features/talent-calc/lib/utils';
 import { CharacterSpecializationType } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
-import { TalentDescription, TalentMaxValueType } from 'shared/constants/talentsData';
+import { TalentDescription, TalentMaxValueType, TalentTierType } from 'shared/constants/talentsData';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 
 export interface TalentProps {
@@ -13,7 +13,7 @@ export interface TalentProps {
   value?: number
   max: TalentMaxValueType
   specialization: CharacterSpecializationType
-  tier: number
+  tier: TalentTierType
   description: TalentDescription
   deepestTierWithValue: number
   total: number
