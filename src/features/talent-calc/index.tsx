@@ -49,14 +49,14 @@ export const TalentCalc = () => {
         currentClass={currentClass}
         onClassChange={onClassChange}
       />
-      {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed && (
+      {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed ? (
         <SpecializationTrees
           currentClass={currentClass}
           data={talents}
           talentsByClass={TALENTS_TEMPLATE[currentClass]}
           onTalentChange={handleTalentChange}
         />
-      )}
+      ) : <div className={styles.placeholder} />}
       <Controls />
     </div>
   );
