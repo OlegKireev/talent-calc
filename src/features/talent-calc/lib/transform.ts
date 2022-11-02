@@ -1,4 +1,4 @@
-import { CharacterSpecsType } from 'shared/constants/global';
+import { CharacterSpecializationType } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TaletsOfClassType } from 'shared/constants/talentsData';
 
@@ -14,5 +14,5 @@ export const createTalentsState = (
 
 export type TalentsDataType = { [key in CharacterTalentIdType]: number };
 export type TalentsDataReturn = {
-  [key in CharacterSpecsType]?: TalentsDataType
+  [key in CharacterSpecializationType]?: TalentsDataType
 };

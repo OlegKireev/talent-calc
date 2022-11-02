@@ -15,10 +15,14 @@ export type CharacterClassType = typeof characterClasses[number];
 export const characteSpecs = [
   'blood', 'frost', 'unholy', 'balance', 'feral', 'restoration', 'beast_mastery', 'marksmanship', 'survival', 'arcane', 'fire', 'frost', 'holy', 'protection', 'retribution', 'discipline', 'holy', 'shadow', 'assasination', 'combat', 'subtlety', 'elemental', 'enhancement', 'restoration', 'affliction', 'demonology', 'destruction', 'arms', 'fury', 'protection',
 ] as const;
-export type CharacterSpecsType = typeof characteSpecs[number];
+export type CharacterSpecializationType = typeof characteSpecs[number];
 
 export const specs: {
-  [key in CharacterClassType]: [CharacterSpecsType, CharacterSpecsType, CharacterSpecsType]
+  [key in CharacterClassType]: [
+    CharacterSpecializationType,
+    CharacterSpecializationType,
+    CharacterSpecializationType,
+  ]
 } = {
   deathknight: ['blood', 'frost', 'unholy'],
   druid: ['balance', 'feral', 'restoration'],

@@ -1,5 +1,5 @@
 import { CharacterTalentIdType } from './talents';
-import { CharacterClassType, CharacterSpecsType } from './global';
+import { CharacterClassType, CharacterSpecializationType } from './global';
 
 export type TalentTierType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 export type TalentColumnType = 1 | 2 | 3 | 4;
@@ -32,7 +32,7 @@ export type TalentType = {
 };
 
 export type TaletsOfClassType = {
-  title: CharacterSpecsType,
+  title: CharacterSpecializationType,
   backgroundImage: string,
   talents: TalentType[]
 };

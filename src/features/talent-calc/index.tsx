@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TALENTS_TEMPLATE } from 'shared/constants/talentsData';
+import { CharacterSpecializationType } from 'shared/constants/global';
+import { CharacterTalentIdType } from 'shared/constants/talents';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
@@ -9,8 +11,8 @@ import { useTalentCalcContext } from './model/context';
 import { checkIsTalentsDataRefreshed } from './lib/utils';
 
 export type HandleTalentChangeArgs = {
-  specialization: string,
-  id: string,
+  specialization: CharacterSpecializationType,
+  id: CharacterTalentIdType,
   value: number,
 };
 
@@ -30,7 +32,7 @@ export const TalentCalc = () => {
     id,
     value,
   }: HandleTalentChangeArgs) => {
-    setTalents((prev: { [key: typeof specialization]: any }) => ({
+    setTalents((prev) => ({
       ...prev,
       [specialization]: {
         ...prev[specialization],

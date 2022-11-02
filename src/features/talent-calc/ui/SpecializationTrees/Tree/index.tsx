@@ -4,12 +4,13 @@ import { TalentsDataType } from 'features/talent-calc/lib/transform';
 import { getTierTotal } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
+import { CharacterSpecializationType } from 'shared/constants/global';
 import { Talent } from './Talent';
 import styles from './styles.module.scss';
 
 export interface TreeProps {
   data: TalentsDataType,
-  title: string
+  title: CharacterSpecializationType
   talents: TalentType[]
   backgroundImage?: string
   onTalentChange: (args: HandleTalentChangeArgs) => void
