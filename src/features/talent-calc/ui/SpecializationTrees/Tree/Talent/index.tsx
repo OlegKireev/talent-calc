@@ -1,5 +1,6 @@
-import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { MouseEvent } from 'react';
+import { HandleTalentChangeArgs } from 'features/talent-calc';
+import { checkCanDecrease } from 'features/talent-calc/lib/utils';
 import { CharacterSpecializationType } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentDescription, TalentMaxValueType } from 'shared/constants/talentsData';
@@ -12,7 +13,10 @@ export interface TalentProps {
   value?: number
   max: TalentMaxValueType
   specialization: CharacterSpecializationType
+  tier: number
   description: TalentDescription
+  deepestTierWithValue: number
+  total: number
   isAvailable: boolean
   onChange: (args: HandleTalentChangeArgs) => void
 }
@@ -24,6 +28,9 @@ export const Talent = ({
   value = 0,
   max,
   specialization,
+  tier,
+  deepestTierWithValue,
+  total,
   isAvailable,
   onChange,
 }: TalentProps) => {
@@ -38,7 +45,9 @@ export const Talent = ({
   };
   const handleRightClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (isAvailable && value > 0) {
+    const canDecrease = checkCanDecrease(deepestTierWithValue, total, tier);
+
+    if (isAvailable && canDecrease && value > 0) {
       onChange({
         specialization,
         id,
