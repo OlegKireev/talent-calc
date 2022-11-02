@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataType } from 'features/talent-calc/lib/transform';
-import { getTierTotal } from 'features/talent-calc/lib/utils';
+import { getDeepestTierWithValue, getTierTotal } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
 import { CharacterSpecializationType } from 'shared/constants/global';
@@ -26,6 +26,8 @@ export const Tree = ({
   const maxRows = talents.sort((a, b) => b.tier - a.tier)[0].tier;
   const rows = numberToArray(maxRows) as TalentTierType[];
   const total = Object.values(data).reduce((acc, cur) => acc + cur, 0);
+
+  const deepestTierWithValue = getDeepestTierWithValue(talents, data);
 
   return (
     <div
@@ -67,6 +69,9 @@ export const Tree = ({
                             id={talent.id}
                             icon={talent.icon}
                             specialization={title}
+                            tier={row}
+                            total={total}
+                            deepestTierWithValue={deepestTierWithValue}
                             isAvailable={isTierAvailable}
                             onChange={onTalentChange}
                           />
