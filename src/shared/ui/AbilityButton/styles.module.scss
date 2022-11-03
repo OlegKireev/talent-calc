@@ -25,7 +25,7 @@
   }
   
   &:active::after {
-    background-image: url('https://wow.zamimg.com/images/Icon/medium/hilite/default.png');
+    filter: brightness(0.5);
   }
 
   &:not(:disabled) {
