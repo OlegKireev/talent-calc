@@ -1,10 +1,12 @@
 import { MouseEvent } from 'react';
+import cx from 'classnames';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { checkCanDecrease } from 'features/talent-calc/lib/utils';
 import { CharacterSpecializationType } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentDescription, TalentMaxValueType, TalentTierType } from 'shared/constants/talentsData';
 import { AbilityButton } from 'shared/ui/AbilityButton';
+import styles from './styles.module.scss';
 
 export interface TalentProps {
   title: string;
@@ -60,13 +62,20 @@ export const Talent = ({
   };
 
   return (
-    <AbilityButton
-      background={icon}
-      isDisabled={!isAvailable}
-      onClick={handleClick}
-      onRightClick={handleRightClick}
+    <div
+      className={cx(styles.wrapper, {
+        [styles.available]: isAvailable,
+        [styles.max]: value === max,
+      })}
     >
-      {`${value}/${max}`}
-    </AbilityButton>
+      <AbilityButton
+        background={icon}
+        isDisabled={!isAvailable}
+        onClick={handleClick}
+        onRightClick={handleRightClick}
+      >
+        {`${value}/${max}`}
+      </AbilityButton>
+    </div>
   );
 };

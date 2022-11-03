@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  --border-color: transparent;
+
+  &.available::before {
+    --border-color: rgba(64,191,64,0.8);
+  }
+
+  &.max::before {
+    --border-color: rgba(255,209,0,0.8);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--border-color, transparent);
+    border-radius: .25rem;
+    pointer-events: none;
+  }
+}
