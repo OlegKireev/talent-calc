@@ -23,6 +23,10 @@
     background-repeat: no-repeat;
     background-image: url('https://wow.zamimg.com/images/Icon/large/hilite/default.png');
   }
+  
+  &:active::after {
+    background-image: url('https://wow.zamimg.com/images/Icon/medium/hilite/default.png');
+  }
 
   &:not(:disabled) {
     cursor: pointer;
