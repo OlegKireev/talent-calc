@@ -3,16 +3,16 @@
   width: 3rem;
   overflow: hidden;
   padding: 0;
-  line-height: .5;
+  line-height: 0.5;
   border: 0;
   position: relative;
   color: white;
   font-weight: 900;
-  text-shadow: 0 0 3px rgba(0,0,0,1);
+  text-shadow: 0 0 3px rgb(0 0 0 / 100%);
 
   &:hover::after,
   &:focus-visible::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 4px;
     left: 4px;
@@ -21,9 +21,9 @@
     height: 100%;
     background-size: 40px;
     background-repeat: no-repeat;
-    background-image: url('https://wow.zamimg.com/images/Icon/large/hilite/default.png');
+    background-image: url("https://wow.zamimg.com/images/Icon/large/hilite/default.png");
   }
-  
+
   &:active::after {
     filter: brightness(0.5);
   }
