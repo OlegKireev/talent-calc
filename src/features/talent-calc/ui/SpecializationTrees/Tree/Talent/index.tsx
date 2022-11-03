@@ -18,6 +18,7 @@ export interface TalentProps {
   deepestTierWithValue: number
   total: number
   isAvailable: boolean
+  canDecreaseByNextTier: boolean
   onChange: (args: HandleTalentChangeArgs) => void
 }
 
@@ -29,9 +30,11 @@ export const Talent = ({
   max,
   specialization,
   tier,
+  description,
   deepestTierWithValue,
   total,
   isAvailable,
+  canDecreaseByNextTier,
   onChange,
 }: TalentProps) => {
   const handleClick = () => {
@@ -47,7 +50,7 @@ export const Talent = ({
     e.preventDefault();
     const canDecrease = checkCanDecrease(deepestTierWithValue, total, tier);
 
-    if (isAvailable && canDecrease && value > 0) {
+    if (isAvailable && canDecrease && canDecreaseByNextTier && value > 0) {
       onChange({
         specialization,
         id,
@@ -55,6 +58,7 @@ export const Talent = ({
       });
     }
   };
+
   return (
     <AbilityButton
       background={icon}
