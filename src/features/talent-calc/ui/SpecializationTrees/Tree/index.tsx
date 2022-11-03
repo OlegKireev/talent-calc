@@ -40,7 +40,7 @@ export const Tree = ({
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <table>
+      <table className={styles.table}>
         <tbody>
           {rows.map((row) => {
             let spaceBetweenCells = 0;

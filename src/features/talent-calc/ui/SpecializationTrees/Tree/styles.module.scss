@@ -6,6 +6,11 @@
   padding: 1rem 2rem;
 }
 
+.table {
+  border-collapse: separate;
+  border-spacing: 0.75em;
+}
+
 .cell {
   min-width: 50px;
 }
