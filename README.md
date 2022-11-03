@@ -1,4 +1,4 @@
-# World of Warcraft - Wraith of the Lich King Talent Calculator
+# World of Warcraft - Wrath of the Lich King Talent Calculator
 
 The web application allows gamers to create a character talant build and share it to each other. 
 
