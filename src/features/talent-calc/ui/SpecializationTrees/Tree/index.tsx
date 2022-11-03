@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataType } from 'features/talent-calc/lib/transform';
 import {
+  checkCanDecreaseByNextTier,
   checkIsTierAvailable, getDeepestTierWithValue, getTierTotal, getTreeTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
@@ -44,6 +45,10 @@ export const Tree = ({
           {rows.map((row) => {
             let spaceBetweenCells = 0;
             const tierTotal = getTierTotal(row, talents, data);
+            const hasNextTierValue = Boolean(
+              getTierTotal(row + 1 as TalentTierType, talents, data),
+            );
+            const canDecreaseByNextTier = checkCanDecreaseByNextTier(hasNextTierValue, tierTotal);
 
             return (
               <tr key={`row-${row}`}>
@@ -76,6 +81,7 @@ export const Tree = ({
                             total={total - deepestTierTotal}
                             deepestTierWithValue={deepestTierWithValue}
                             isAvailable={isTierAvailable}
+                            canDecreaseByNextTier={canDecreaseByNextTier}
                             onChange={onTalentChange}
                           />
                         </td>
