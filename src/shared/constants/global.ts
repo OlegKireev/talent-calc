@@ -35,3 +35,5 @@ export const specs: {
   warlock: ['affliction', 'demonology', 'destruction'],
   warrior: ['arms', 'fury', 'protection'],
 };
+
+export const TALENTS_TO_NEXT_TIER = 5;
