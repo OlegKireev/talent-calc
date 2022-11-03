@@ -1,7 +1,9 @@
 import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataType } from 'features/talent-calc/lib/transform';
-import { getDeepestTierWithValue, getTierTotal, getTreeTotal } from 'features/talent-calc/lib/utils';
+import {
+  checkIsTierAvailable, getDeepestTierWithValue, getTierTotal, getTreeTotal,
+} from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
 import { CharacterSpecializationType } from 'shared/constants/global';
@@ -53,7 +55,7 @@ export const Tree = ({
                       spaceBetweenCells += 1;
                     }
                     const emplyCells = numberToArray(cellOffset);
-                    const isTierAvailable = total - tierTotal > (talent.tier - 1) * 5 - 1;
+                    const isTierAvailable = checkIsTierAvailable(total, tierTotal, talent.tier);
 
                     return (
                       <Fragment key={`tier${row}-${talent.title}`}>
