@@ -1,4 +1,4 @@
-import { specs, CharacterClassType } from 'shared/constants/global';
+import { specs, CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { TalentsDataReturn, TalentsDataType } from './transform';
@@ -63,4 +63,10 @@ export const checkCanDecrease = (
   deepestTier: number,
   total: number,
   tier: TalentTierType,
-): boolean => (deepestTier - 1) * 5 < total || tier === deepestTier;
+): boolean => (deepestTier - 1) * TALENTS_TO_NEXT_TIER < total || tier === deepestTier;
+
+export const checkIsTierAvailable = (
+  total: number,
+  tierTotal: number,
+  tier: TalentTierType,
+) => total - tierTotal > (tier - 1) * TALENTS_TO_NEXT_TIER - 1;
