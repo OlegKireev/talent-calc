@@ -73,9 +73,8 @@ export const Talent = ({
         isDisabled={!isAvailable}
         onClick={handleClick}
         onRightClick={handleRightClick}
-      >
-        {`${value}/${max}`}
-      </AbilityButton>
+      />
+      <span className={styles.value}>{`${value}/${max}`}</span>
     </div>
   );
 };

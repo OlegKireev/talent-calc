@@ -1,14 +1,15 @@
 .wrapper {
   position: relative;
+  line-height: 0;
 
-  --border-color: transparent;
-
+  &.available,
   &.available::before {
-    --border-color: rgb(64 191 64 / 80%);
+    --color: rgb(64 191 64 / 80%);
   }
 
+  &.max,
   &.max::before {
-    --border-color: rgb(255 209 0 / 80%);
+    --color: rgb(255 209 0 / 80%);
   }
 
   &::before {
@@ -21,8 +22,26 @@
     bottom: 2px;
     border-width: 1px;
     border-style: solid;
-    border-color: var(--border-color, transparent);
+    border-color: var(--color, transparent);
     border-radius: 0.25rem;
     pointer-events: none;
+  }
+}
+
+.value {
+  position: absolute;
+  z-index: 2;
+  bottom: -5px;
+  right: -5px;
+  padding: 0.25em;
+  font-size: 0.6875rem;
+  color: var(--color, #787878);
+  line-height: 1;
+  background-color: #000;
+  border-radius: 0.25em;
+  pointer-events: none;
+
+  &::selection {
+    background-color: transparent;
   }
 }
