@@ -1,7 +1,9 @@
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState } from 'mocks/talentsState';
 import { TalentsDataType } from './transform';
-import { getTierTotal, getTotalToUnblockNextTier, getTreeTotal } from './utils';
+import {
+  getPreviousTiersTotal, getTierTotal, getTotalToUnblockNextTier, getTreeTotal,
+} from './utils';
 
 describe('features/talent-calc/lib/utils:getTotalToUnblockNextTier()', () => {
   it('should return "5" with input "1"', () => {
@@ -76,5 +78,38 @@ describe('features/talent-calc/lib/utils:getTierTotal()', () => {
 
   it('should return 0 on input a negative tier value', () => {
     expect(getTierTotal(-1, frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+});
+
+describe('features/talent-calc/lib/utils:getPreviousTiersTotal()', () => {
+  const frostMageTalents = TALENTS_TEMPLATE.mage[2].talents;
+  let mockFrostMageState: TalentsDataType = {};
+  beforeEach(() => {
+    mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
+  });
+
+  it('should return 0 on initial state', () => {
+    expect(getPreviousTiersTotal(1, frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+
+  it('should count talents only in a previous tiers', () => {
+    mockFrostMageState.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.mage_frost_precision = 3;
+    mockFrostMageState.mage_frost_permafrost = 3;
+    expect(getPreviousTiersTotal(1, frostMageTalents, mockFrostMageState)).toBe(0);
+    expect(getPreviousTiersTotal(2, frostMageTalents, mockFrostMageState)).toBe(5);
+    mockFrostMageState.mage_frost_frostbite = 3;
+    expect(getPreviousTiersTotal(2, frostMageTalents, mockFrostMageState)).toBe(8);
+    mockFrostMageState.mage_frost_arctic_reach = 2;
+    expect(getPreviousTiersTotal(3, frostMageTalents, mockFrostMageState)).toBe(14);
+    expect(getPreviousTiersTotal(11, frostMageTalents, mockFrostMageState)).toBe(16);
+  });
+
+  it('should return 0 on input a not existed tier value', () => {
+    expect(getPreviousTiersTotal(-1, frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+
+  it('should return 0 on input a negative tier value', () => {
+    expect(getPreviousTiersTotal(-1, frostMageTalents, mockFrostMageState)).toBe(0);
   });
 });
