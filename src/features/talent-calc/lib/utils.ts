@@ -1,6 +1,7 @@
 import { specs, CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
+import { numberToArray } from 'shared/lib/transform';
 import { TalentsDataReturn, TalentsDataType } from './transform';
 
 export const getTreeTotal = (
@@ -31,6 +32,13 @@ export const getTierTotal = (
     return acc;
   }, 0);
 };
+
+export const getPreviousTiersTotal = (
+  tier: TalentTierType,
+  template: TalentType[],
+  data: TalentsDataType,
+) => numberToArray(tier - 1)
+  .reduce((acc, cur) => getTierTotal(cur, template, data) + acc, 0);
 
 export const checkIsTalentsDataRefreshed = (
   characterClass: CharacterClassType | null,
