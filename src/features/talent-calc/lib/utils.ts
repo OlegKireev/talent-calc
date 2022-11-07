@@ -34,7 +34,7 @@ export const getTierTotal = (
 };
 
 export const getPreviousTiersTotal = (
-  tier: TalentTierType,
+  tier: TalentTierType | number,
   template: TalentType[],
   data: TalentsDataType,
 ) => numberToArray(tier - 1)
