@@ -50,6 +50,11 @@ export const Tree = ({
             const canDecreaseByNextTier = checkCanDecreaseByNextTier(hasNextTierValue, tierTotal);
             const isTierAvailable = checkIsTierAvailable(total, tierTotal, tier);
             const previousTiersTotal = getPreviousTiersTotal(tier, talents, data);
+            const getPreviousTotal = (prevTier: TalentTierType | number) => getPreviousTiersTotal(
+              prevTier,
+              talents,
+              data,
+            );
 
             return (
               <tr key={`row-${tier}`}>
@@ -81,7 +86,7 @@ export const Tree = ({
                             previousTiersTotal={previousTiersTotal}
                             deepestTierWithValue={deepestTierWithValue}
                             isAvailable={isTierAvailable}
-                            canDecreaseByNextTier={canDecreaseByNextTier}
+                            getPreviousTotal={getPreviousTotal}
                             onChange={onTalentChange}
                           />
                         </td>

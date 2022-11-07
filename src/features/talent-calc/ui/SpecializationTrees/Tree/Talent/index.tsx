@@ -20,8 +20,8 @@ export interface TalentProps {
   deepestTierWithValue: number
   previousTiersTotal: number
   isAvailable: boolean
-  canDecreaseByNextTier: boolean
   onChange: (args: HandleTalentChangeArgs) => void
+  getPreviousTotal: (tier: TalentTierType | number) => number
 }
 
 export const Talent = ({
@@ -36,8 +36,8 @@ export const Talent = ({
   deepestTierWithValue,
   previousTiersTotal,
   isAvailable,
-  canDecreaseByNextTier,
   onChange,
+  getPreviousTotal,
 }: TalentProps) => {
   const handleClick = () => {
     if (isAvailable && value < max) {
@@ -50,9 +50,15 @@ export const Talent = ({
   };
   const handleRightClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const canDecrease = checkCanDecrease(deepestTierWithValue, previousTiersTotal, tier);
+    const canDecrease = checkCanDecrease(deepestTierWithValue, previousTiersTotal);
+    const prePreviousDeepestTierTotal = getPreviousTotal(deepestTierWithValue);
 
-    if (isAvailable && canDecrease && canDecreaseByNextTier && value > 0) {
+    const willNextTierAvailable = prePreviousDeepestTierTotal > (deepestTierWithValue - 1) * 5;
+
+    if (isAvailable
+      && ((canDecrease && willNextTierAvailable) || tier === deepestTierWithValue)
+      && value > 0
+    ) {
       onChange({
         specialization,
         id,
