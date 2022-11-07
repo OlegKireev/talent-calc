@@ -18,6 +18,7 @@ export interface TalentProps {
   tier: TalentTierType
   description: TalentDescription
   deepestTierWithValue: number
+  tierTotal: number
   previousTiersTotal: number
   isAvailable: boolean
   onChange: (args: HandleTalentChangeArgs) => void
@@ -34,6 +35,7 @@ export const Talent = ({
   tier,
   description,
   deepestTierWithValue,
+  tierTotal,
   previousTiersTotal,
   isAvailable,
   onChange,
@@ -54,9 +56,12 @@ export const Talent = ({
     const prePreviousDeepestTierTotal = getPreviousTotal(deepestTierWithValue);
 
     const willNextTierAvailable = prePreviousDeepestTierTotal > (deepestTierWithValue - 1) * 5;
+    const willCurrentTierAvailble = previousTiersTotal + tierTotal > tier * 5;
 
     if (isAvailable
-      && ((canDecrease && willNextTierAvailable) || tier === deepestTierWithValue)
+      && (
+        (canDecrease && willNextTierAvailable && willCurrentTierAvailble)
+        || tier === deepestTierWithValue)
       && value > 0
     ) {
       onChange({

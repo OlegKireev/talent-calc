@@ -83,6 +83,7 @@ export const Tree = ({
                             icon={talent.icon}
                             specialization={title}
                             tier={tier}
+                            tierTotal={tierTotal}
                             previousTiersTotal={previousTiersTotal}
                             deepestTierWithValue={deepestTierWithValue}
                             isAvailable={isTierAvailable}
