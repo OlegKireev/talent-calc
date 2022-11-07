@@ -1,6 +1,7 @@
+import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState } from 'mocks/talentsState';
 import { TalentsDataType } from './transform';
-import { getTotalToUnblockNextTier, getTreeTotal } from './utils';
+import { getTierTotal, getTotalToUnblockNextTier, getTreeTotal } from './utils';
 
 describe('features/talent-calc/lib/utils:getTotalToUnblockNextTier()', () => {
   it('should return "5" with input "1"', () => {
@@ -44,5 +45,36 @@ describe('features/talent-calc/lib/utils:getTreeTotal()', () => {
     mockFrostMageState.mage_frost_icy_veins = 1;
     mockFrostMageState.mage_frost_improved_blizzard = 3;
     expect(getTreeTotal(mockFrostMageState)).toBe(15);
+  });
+});
+
+describe('features/talent-calc/lib/utils:getTierTotal()', () => {
+  const frostMageTalents = TALENTS_TEMPLATE.mage[2].talents;
+  let mockFrostMageState: TalentsDataType = {};
+  beforeEach(() => {
+    mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
+  });
+
+  it('should return 0 on initial state', () => {
+    expect(getTierTotal(1, frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+
+  it('should count talents only in a selected tier', () => {
+    mockFrostMageState.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.mage_frost_precision = 3;
+    mockFrostMageState.mage_frost_permafrost = 3;
+    expect(getTierTotal(1, frostMageTalents, mockFrostMageState)).toBe(5);
+    mockFrostMageState.mage_frost_frostbite = 3;
+    expect(getTierTotal(1, frostMageTalents, mockFrostMageState)).toBe(8);
+    expect(getTierTotal(2, frostMageTalents, mockFrostMageState)).toBe(6);
+    expect(getTierTotal(3, frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+
+  it('should return 0 on input a not existed tier value', () => {
+    expect(getTierTotal(15, frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+
+  it('should return 0 on input a negative tier value', () => {
+    expect(getTierTotal(-1, frostMageTalents, mockFrostMageState)).toBe(0);
   });
 });
