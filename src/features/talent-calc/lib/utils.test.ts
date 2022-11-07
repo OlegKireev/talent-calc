@@ -3,6 +3,7 @@ import { mageTalentsState } from 'mocks/talentsState';
 import { TalentsStateType } from './transform';
 import {
   checkIsTalentsDataRefreshed,
+  getDeepestTierWithValue,
   getPreviousTiersTotal, getTierTotal, getTotalToUnblockNextTier, getTreeTotal,
 } from './utils';
 
@@ -126,5 +127,29 @@ describe('features/talent-calc/lib/utils:checkIsTalentsDataRefreshed()', () => {
 
   it('should return "false" if currentClass and talentState has the different data keys', () => {
     expect(checkIsTalentsDataRefreshed('mage', mageTalentsState)).toBe(true);
+  });
+});
+
+describe('features/talent-calc/lib/utils:getDeepestTierWithValue()', () => {
+  const frostMageTalents = TALENTS_TEMPLATE.mage[2].talents;
+  let mockFrostMageState: TalentsStateType = {};
+  beforeEach(() => {
+    mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
+  });
+
+  it('should return 0 on initial state', () => {
+    expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+
+  it('should find the deepest talant correctly', () => {
+    mockFrostMageState.mage_frost_imporved_frostbolt = 5;
+    expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(1);
+    mockFrostMageState.mage_frost_precision = 3;
+    mockFrostMageState.mage_frost_permafrost = 3;
+    expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(2);
+    mockFrostMageState.mage_frost_improved_blizzard = 3;
+    expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(3);
+    mockFrostMageState.mage_frost_arctic_reach = 2;
+    expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(4);
   });
 });
