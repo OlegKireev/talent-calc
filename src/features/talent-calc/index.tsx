@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { TALENTS_TEMPLATE } from 'shared/constants/talentsData';
+import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { CharacterSpecializationType } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
 import { createTalentsState, TalentsDataReturn } from './lib/transform';
-import styles from './styles.module.scss';
 import { useTalentCalcContext } from './model/context';
 import { checkIsTalentsDataRefreshed } from './lib/utils';
+import styles from './styles.module.scss';
 
 export type HandleTalentChangeArgs = {
   specialization: CharacterSpecializationType,
