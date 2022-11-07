@@ -11,7 +11,7 @@ export const getTreeTotal = (
   .reduce((acc, cur) => acc + cur, 0);
 
 export const getTierTotal = (
-  tier: TalentTierType,
+  tier: TalentTierType | number,
   template: TalentType[],
   data: TalentsDataType,
 ): number => {
