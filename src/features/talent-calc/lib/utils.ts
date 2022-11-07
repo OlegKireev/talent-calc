@@ -82,4 +82,4 @@ export const checkIsTierAvailable = (
   total: number,
   tierTotal: number,
   tier: TalentTierType,
-) => total - tierTotal > (tier - 1) * TALENTS_TO_NEXT_TIER - 1;
+) => total - tierTotal >= (tier - 1) * TALENTS_TO_NEXT_TIER;
