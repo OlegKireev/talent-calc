@@ -4,9 +4,9 @@ import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
 import { TalentsDataReturn, TalentsDataType } from './transform';
 
-export const getMinTierTotal = (
+export const getTotalToUnblockNextTier = (
   tier: TalentTierType | number,
-) => tier * TALENTS_TO_NEXT_TIER;
+) => Math.max(tier, 0) * TALENTS_TO_NEXT_TIER;
 
 export const getTreeTotal = (
   data: TalentsDataType,
@@ -74,21 +74,21 @@ export const getDeepestTierWithValue = (
 export const checkCanDecreaseByPreviousTiersTotal = (
   deepestTier: number,
   previousTiersTotal: number,
-): boolean => previousTiersTotal <= getMinTierTotal(deepestTier);
+): boolean => previousTiersTotal <= getTotalToUnblockNextTier(deepestTier);
 
 export const checkIsTierAvailable = (
   total: number,
   tierTotal: number,
   tier: TalentTierType,
-) => total - tierTotal >= getMinTierTotal(tier - 1);
+) => total - tierTotal >= getTotalToUnblockNextTier(tier - 1);
 
 export const checkWillNextTierAvailable = (
   preDeepestTierTotal: number,
   deepestTierWithValue: number,
-) => preDeepestTierTotal > getMinTierTotal(deepestTierWithValue - 1);
+) => preDeepestTierTotal > getTotalToUnblockNextTier(deepestTierWithValue - 1);
 
 export const checkWillCurrentTierAvailble = (
   previousTiersTotal: number,
   tierTotal: number,
   tier: TalentTierType | number,
-) => previousTiersTotal + tierTotal > getMinTierTotal(tier);
+) => previousTiersTotal + tierTotal > getTotalToUnblockNextTier(tier);
