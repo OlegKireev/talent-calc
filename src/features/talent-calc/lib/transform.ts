@@ -12,7 +12,7 @@ export const createTalentsState = (
   }), {}),
 }), {});
 
-export type TalentsDataType = { [key in CharacterTalentIdType]: number };
+export type TalentsDataType = { [key in CharacterTalentIdType]?: number };
 export type TalentsDataReturn = {
   [key in CharacterSpecializationType]?: TalentsDataType
 };
