@@ -49,6 +49,7 @@ export const Tree = ({
             );
             const canDecreaseByNextTier = checkCanDecreaseByNextTier(hasNextTierValue, tierTotal);
             const isTierAvailable = checkIsTierAvailable(total, tierTotal, tier);
+            const previousTiersTotal = getPreviousTiersTotal(tier, talents, data);
 
             return (
               <tr key={`row-${tier}`}>
@@ -60,7 +61,6 @@ export const Tree = ({
                       spaceBetweenCells += 1;
                     }
                     const emplyCells = numberToArray(cellOffset);
-                    const previousTiersTotal = getPreviousTiersTotal(talent.tier, talents, data);
 
                     return (
                       <Fragment key={`tier${tier}-${talent.title}`}>
