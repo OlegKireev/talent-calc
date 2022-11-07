@@ -81,7 +81,7 @@ export const Tree = ({
                             tierTotal={tierTotal}
                             previousTiersTotal={previousTiersTotal}
                             deepestTierWithValue={deepestTierWithValue}
-                            isAvailable={isTierAvailable}
+                            isTierAvailable={isTierAvailable}
                             getPreviousTotal={getPreviousTotal}
                             onChange={onTalentChange}
                           />

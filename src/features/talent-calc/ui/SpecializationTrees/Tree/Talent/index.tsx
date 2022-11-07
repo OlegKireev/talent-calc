@@ -1,11 +1,11 @@
 import { MouseEvent } from 'react';
 import cx from 'classnames';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
-import { checkCanDecrease } from 'features/talent-calc/lib/utils';
 import { CharacterSpecializationType } from 'shared/constants/global';
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentDescription, TalentMaxValueType, TalentTierType } from 'shared/constants/talentsData';
 import { AbilityButton } from 'shared/ui/AbilityButton';
+import { useTalentPermissions } from './useTalentPermissions';
 import styles from './styles.module.scss';
 
 export interface TalentProps {
@@ -20,7 +20,7 @@ export interface TalentProps {
   deepestTierWithValue: number
   tierTotal: number
   previousTiersTotal: number
-  isAvailable: boolean
+  isTierAvailable: boolean
   onChange: (args: HandleTalentChangeArgs) => void
   getPreviousTotal: (tier: TalentTierType | number) => number
 }
@@ -37,12 +37,23 @@ export const Talent = ({
   deepestTierWithValue,
   tierTotal,
   previousTiersTotal,
-  isAvailable,
+  isTierAvailable,
   onChange,
   getPreviousTotal,
 }: TalentProps) => {
+  const { canIncrease, canDecrease } = useTalentPermissions({
+    tier,
+    value,
+    max,
+    tierTotal,
+    deepestTierWithValue,
+    getPreviousTotal,
+    previousTiersTotal,
+    isTierAvailable,
+  });
+
   const handleClick = () => {
-    if (isAvailable && value < max) {
+    if (canIncrease) {
       onChange({
         specialization,
         id,
@@ -50,20 +61,10 @@ export const Talent = ({
       });
     }
   };
+
   const handleRightClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const canDecrease = checkCanDecrease(deepestTierWithValue, previousTiersTotal);
-    const prePreviousDeepestTierTotal = getPreviousTotal(deepestTierWithValue);
-
-    const willNextTierAvailable = prePreviousDeepestTierTotal > (deepestTierWithValue - 1) * 5;
-    const willCurrentTierAvailble = previousTiersTotal + tierTotal > tier * 5;
-
-    if (isAvailable
-      && (
-        (canDecrease && willNextTierAvailable && willCurrentTierAvailble)
-        || tier === deepestTierWithValue)
-      && value > 0
-    ) {
+    if (canDecrease) {
       onChange({
         specialization,
         id,
@@ -75,13 +76,13 @@ export const Talent = ({
   return (
     <div
       className={cx(styles.wrapper, {
-        [styles.available]: isAvailable,
+        [styles.available]: isTierAvailable,
         [styles.max]: value === max,
       })}
     >
       <AbilityButton
         background={icon}
-        isDisabled={!isAvailable}
+        isDisabled={!isTierAvailable}
         onClick={handleClick}
         onRightClick={handleRightClick}
       />
