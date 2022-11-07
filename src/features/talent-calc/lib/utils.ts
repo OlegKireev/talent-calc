@@ -77,3 +77,14 @@ export const checkIsTierAvailable = (
   tierTotal: number,
   tier: TalentTierType,
 ) => total - tierTotal >= (tier - 1) * TALENTS_TO_NEXT_TIER;
+
+export const checkWillNextTierAvailable = (
+  preDeepestTierTotal: number,
+  deepestTierWithValue: number,
+) => preDeepestTierTotal > (deepestTierWithValue - 1) * TALENTS_TO_NEXT_TIER;
+
+export const checkWillCurrentTierAvailble = (
+  previousTiersTotal: number,
+  tierTotal: number,
+  tier: TalentTierType | number,
+) => previousTiersTotal + tierTotal > tier * TALENTS_TO_NEXT_TIER;
