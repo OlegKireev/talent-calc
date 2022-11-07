@@ -67,10 +67,10 @@ export const getDeepestTierWithValue = (
   return talentsWithValue.sort((a, b) => b.tier - a.tier)[0]?.tier || 0;
 };
 
-export const checkCanDecrease = (
+export const checkCanDecreaseByPreviousTiersTotal = (
   deepestTier: number,
   previousTiersTotal: number,
-): boolean => deepestTier * TALENTS_TO_NEXT_TIER >= previousTiersTotal;
+): boolean => previousTiersTotal <= deepestTier * TALENTS_TO_NEXT_TIER;
 
 export const checkIsTierAvailable = (
   total: number,
