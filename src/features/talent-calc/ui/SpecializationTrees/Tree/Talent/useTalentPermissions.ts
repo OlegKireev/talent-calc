@@ -34,10 +34,12 @@ export const useTalentPermissions = ({
   );
   const willCurrentTierAvailble = checkWillCurrentTierAvailble(previousTiersTotal, tierTotal, tier);
 
-  const canDecrease = Boolean(isTierAvailable && (
-    (canDecreaseByPreviousTierTotal && willNextTierAvailable && willCurrentTierAvailble)
-    || tier === deepestTierWithValue)
-  && value > 0);
+  const canDecrease = Boolean(
+    isTierAvailable && (
+      (canDecreaseByPreviousTierTotal && willNextTierAvailable && willCurrentTierAvailble)
+      || tier === deepestTierWithValue)
+    && value > 0,
+  );
   const canIncrease = isTierAvailable && value < max;
 
   return {
