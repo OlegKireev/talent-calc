@@ -2,6 +2,7 @@ import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState } from 'mocks/talentsState';
 import { TalentsDataType } from './transform';
 import {
+  checkIsTalentsDataRefreshed,
   getPreviousTiersTotal, getTierTotal, getTotalToUnblockNextTier, getTreeTotal,
 } from './utils';
 
@@ -111,5 +112,19 @@ describe('features/talent-calc/lib/utils:getPreviousTiersTotal()', () => {
 
   it('should return 0 on input a negative tier value', () => {
     expect(getPreviousTiersTotal(-1, frostMageTalents, mockFrostMageState)).toBe(0);
+  });
+});
+
+describe('features/talent-calc/lib/utils:checkIsTalentsDataRefreshed()', () => {
+  it('should process "null" value', () => {
+    expect(checkIsTalentsDataRefreshed(null, mageTalentsState)).toBe(false);
+  });
+
+  it('should return "true" if currentClass and talentState has the same data keys', () => {
+    expect(checkIsTalentsDataRefreshed('mage', mageTalentsState)).toBe(true);
+  });
+
+  it('should return "false" if currentClass and talentState has the different data keys', () => {
+    expect(checkIsTalentsDataRefreshed('mage', mageTalentsState)).toBe(true);
   });
 });
