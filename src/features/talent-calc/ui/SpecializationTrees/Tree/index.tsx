@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataType } from 'features/talent-calc/lib/transform';
 import {
-  checkCanDecreaseByNextTier,
   checkIsTierAvailable, getDeepestTierWithValue, getTierTotal, getPreviousTiersTotal, getTreeTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
@@ -44,10 +43,6 @@ export const Tree = ({
           {rows.map((tier) => {
             let spaceBetweenCells = 0;
             const tierTotal = getTierTotal(tier, talents, data);
-            const hasNextTierValue = Boolean(
-              getTierTotal(tier + 1 as TalentTierType, talents, data),
-            );
-            const canDecreaseByNextTier = checkCanDecreaseByNextTier(hasNextTierValue, tierTotal);
             const isTierAvailable = checkIsTierAvailable(total, tierTotal, tier);
             const previousTiersTotal = getPreviousTiersTotal(tier, talents, data);
             const getPreviousTotal = (prevTier: TalentTierType | number) => getPreviousTiersTotal(
