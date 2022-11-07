@@ -2,24 +2,24 @@ import { specs, CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constant
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
-import { TalentsDataReturn, TalentsDataType } from './transform';
+import { CreateTaletsStateReturn, TalentsStateType } from './transform';
 
 export const getTotalToUnblockNextTier = (
   tier: TalentTierType | number,
 ) => Math.max(tier, 0) * TALENTS_TO_NEXT_TIER;
 
 export const getTreeTotal = (
-  data: TalentsDataType,
+  state: TalentsStateType,
 ) => Object
-  .values(data)
+  .values(state)
   .reduce((acc, cur) => acc + cur, 0);
 
 export const getTierTotal = (
   tier: TalentTierType | number,
-  template: TalentType[],
-  data: TalentsDataType,
+  talents: TalentType[],
+  state: TalentsStateType,
 ): number => {
-  const tierTalentKeys = template.reduce((acc: CharacterTalentIdType[], cur) => {
+  const tierTalentKeys = talents.reduce((acc: CharacterTalentIdType[], cur) => {
     if (cur.tier === tier) {
       return [...acc, cur.id];
     }
@@ -30,8 +30,8 @@ export const getTierTotal = (
     acc,
     key,
   ) => {
-    if (tierTalentKeys.includes(key) && Object.hasOwn(data, key)) {
-      return acc + (data?.[key] || 0);
+    if (tierTalentKeys.includes(key) && Object.hasOwn(state, key)) {
+      return acc + (state?.[key] || 0);
     }
     return acc;
   }, 0);
@@ -39,14 +39,14 @@ export const getTierTotal = (
 
 export const getPreviousTiersTotal = (
   tier: TalentTierType | number,
-  template: TalentType[],
-  data: TalentsDataType,
+  talents: TalentType[],
+  state: TalentsStateType,
 ) => numberToArray(tier - 1)
-  .reduce((acc, cur) => getTierTotal(cur, template, data) + acc, 0);
+  .reduce((acc, cur) => getTierTotal(cur, talents, state) + acc, 0);
 
 export const checkIsTalentsDataRefreshed = (
   characterClass: CharacterClassType | null,
-  talentsData: TalentsDataReturn,
+  talentsData: CreateTaletsStateReturn,
 ): boolean => {
   if (!characterClass) {
     return false;
@@ -59,13 +59,13 @@ export const checkIsTalentsDataRefreshed = (
 };
 
 export const getDeepestTierWithValue = (
-  template: TalentType[],
-  data: TalentsDataType,
+  talents: TalentType[],
+  state: TalentsStateType,
 ): TalentTierType => {
-  const talentKeys = Object.keys(data) as CharacterTalentIdType[];
-  const talentKeysWithValue = talentKeys.filter((key) => Boolean(data[key]));
+  const talentKeys = Object.keys(state) as CharacterTalentIdType[];
+  const talentKeysWithValue = talentKeys.filter((key) => Boolean(state[key]));
 
-  const talentsWithValue = template
+  const talentsWithValue = talents
     .filter(({ id }) => talentKeysWithValue.includes(id));
 
   return talentsWithValue.sort((a, b) => b.tier - a.tier)[0]?.tier || 0;

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
-import { TalentsDataType } from 'features/talent-calc/lib/transform';
+import { TalentsStateType } from 'features/talent-calc/lib/transform';
 import {
   checkIsTierAvailable, getDeepestTierWithValue, getTierTotal, getPreviousTiersTotal, getTreeTotal,
 } from 'features/talent-calc/lib/utils';
@@ -11,7 +11,7 @@ import { Talent } from './Talent';
 import styles from './styles.module.scss';
 
 export interface TreeProps {
-  data: TalentsDataType,
+  state: TalentsStateType,
   title: CharacterSpecializationType
   talents: TalentType[]
   backgroundImage?: string
@@ -19,7 +19,7 @@ export interface TreeProps {
 }
 
 export const Tree = ({
-  data,
+  state,
   title,
   talents,
   backgroundImage,
@@ -28,8 +28,8 @@ export const Tree = ({
   const maxRows = talents.sort((a, b) => b.tier - a.tier)[0].tier;
   const rows = numberToArray(maxRows) as TalentTierType[];
 
-  const deepestTierWithValue = getDeepestTierWithValue(talents, data);
-  const total = getTreeTotal(data);
+  const deepestTierWithValue = getDeepestTierWithValue(talents, state);
+  const total = getTreeTotal(state);
 
   return (
     <div
@@ -42,13 +42,13 @@ export const Tree = ({
         <tbody>
           {rows.map((tier) => {
             let spaceBetweenCells = 0;
-            const tierTotal = getTierTotal(tier, talents, data);
+            const tierTotal = getTierTotal(tier, talents, state);
             const isTierAvailable = checkIsTierAvailable(total, tierTotal, tier);
-            const previousTiersTotal = getPreviousTiersTotal(tier, talents, data);
+            const previousTiersTotal = getPreviousTiersTotal(tier, talents, state);
             const getPreviousTotal = (prevTier: TalentTierType | number) => getPreviousTiersTotal(
               prevTier,
               talents,
-              data,
+              state,
             );
 
             return (
@@ -70,7 +70,7 @@ export const Tree = ({
                         <td className={styles.cell}>
                           <Talent
                             key={talent.title}
-                            value={data[talent.id]}
+                            value={state[talent.id]}
                             title={talent.title}
                             description={talent.description}
                             max={talent.max}

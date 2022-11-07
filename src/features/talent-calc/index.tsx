@@ -5,7 +5,7 @@ import { CharacterTalentIdType } from 'shared/constants/talents';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
-import { createTalentsState, TalentsDataReturn } from './lib/transform';
+import { createTalentsState, CreateTaletsStateReturn } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
 import { checkIsTalentsDataRefreshed } from './lib/utils';
 import styles from './styles.module.scss';
@@ -18,13 +18,13 @@ export type HandleTalentChangeArgs = {
 
 export const TalentCalc = () => {
   const { currentClass, onClassChange } = useTalentCalcContext();
-  const [talents, setTalents] = useState<TalentsDataReturn>({});
+  const [state, setState] = useState<CreateTaletsStateReturn>({});
 
   useEffect(() => {
     if (!currentClass || !TALENTS_TEMPLATE[currentClass]) {
       return;
     }
-    setTalents(createTalentsState(TALENTS_TEMPLATE[currentClass]));
+    setState(createTalentsState(TALENTS_TEMPLATE[currentClass]));
   }, [currentClass]);
 
   const handleTalentChange = ({
@@ -32,7 +32,7 @@ export const TalentCalc = () => {
     id,
     value,
   }: HandleTalentChangeArgs) => {
-    setTalents((prev) => ({
+    setState((prev) => ({
       ...prev,
       [specialization]: {
         ...prev[specialization],
@@ -41,7 +41,7 @@ export const TalentCalc = () => {
     }));
   };
 
-  const isDataRefreshed = checkIsTalentsDataRefreshed(currentClass, talents);
+  const isDataRefreshed = checkIsTalentsDataRefreshed(currentClass, state);
 
   return (
     <div className={styles.wrapper}>
@@ -52,7 +52,7 @@ export const TalentCalc = () => {
       {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed ? (
         <SpecializationTrees
           currentClass={currentClass}
-          data={talents}
+          state={state}
           talentsByClass={TALENTS_TEMPLATE[currentClass]}
           onTalentChange={handleTalentChange}
         />

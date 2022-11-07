@@ -4,7 +4,7 @@ import { TaletsOfClassType } from 'shared/constants/talentsData';
 
 export const createTalentsState = (
   obj: TaletsOfClassType[],
-): TalentsDataReturn => obj.reduce((acc, cur) => ({
+): CreateTaletsStateReturn => obj.reduce((acc, cur) => ({
   ...acc,
   [cur.title]: cur.talents.reduce((innerAcc, innerCur) => ({
     ...innerAcc,
@@ -12,7 +12,7 @@ export const createTalentsState = (
   }), {}),
 }), {});
 
-export type TalentsDataType = { [key in CharacterTalentIdType]?: number };
-export type TalentsDataReturn = {
-  [key in CharacterSpecializationType]?: TalentsDataType
+export type TalentsStateType = { [key in CharacterTalentIdType]?: number };
+export type CreateTaletsStateReturn = {
+  [key in CharacterSpecializationType]?: TalentsStateType
 };

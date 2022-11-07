@@ -1,27 +1,27 @@
 import { CharacterClassType } from 'shared/constants/global';
 import { TaletsOfClassType } from 'shared/constants/talentsData';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
-import { TalentsDataReturn } from 'features/talent-calc/lib/transform';
+import { CreateTaletsStateReturn } from 'features/talent-calc/lib/transform';
 import { Tree } from './Tree';
 import styles from './styles.module.scss';
 
 interface SpecializationTreesProps {
   currentClass: CharacterClassType | null
   talentsByClass: TaletsOfClassType[],
-  data: TalentsDataReturn,
+  state: CreateTaletsStateReturn,
   onTalentChange: (args: HandleTalentChangeArgs) => void
 }
 export const SpecializationTrees = ({
   currentClass,
   talentsByClass,
-  data,
+  state,
   onTalentChange,
 }: SpecializationTreesProps) => {
   if (!currentClass) {
     return null;
   }
 
-  if (!data || !Object.keys(data).length || !talentsByClass?.length) {
+  if (!state || !Object.keys(state).length || !talentsByClass?.length) {
     return null;
   }
 
@@ -29,7 +29,7 @@ export const SpecializationTrees = ({
     <div className={styles.wrapper}>
       {talentsByClass.map((specializationData) => (
         <Tree
-          data={data[specializationData.title]!}
+          state={state[specializationData.title]!}
           title={specializationData.title}
           talents={specializationData.talents}
           backgroundImage={specializationData.backgroundImage}

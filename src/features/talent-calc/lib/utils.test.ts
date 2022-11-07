@@ -1,6 +1,6 @@
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState } from 'mocks/talentsState';
-import { TalentsDataType } from './transform';
+import { TalentsStateType } from './transform';
 import {
   checkIsTalentsDataRefreshed,
   getPreviousTiersTotal, getTierTotal, getTotalToUnblockNextTier, getTreeTotal,
@@ -25,7 +25,7 @@ describe('features/talent-calc/lib/utils:getTotalToUnblockNextTier()', () => {
 });
 
 describe('features/talent-calc/lib/utils:getTreeTotal()', () => {
-  let mockFrostMageState: TalentsDataType = {};
+  let mockFrostMageState: TalentsStateType = {};
   beforeEach(() => {
     mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
   });
@@ -53,7 +53,7 @@ describe('features/talent-calc/lib/utils:getTreeTotal()', () => {
 
 describe('features/talent-calc/lib/utils:getTierTotal()', () => {
   const frostMageTalents = TALENTS_TEMPLATE.mage[2].talents;
-  let mockFrostMageState: TalentsDataType = {};
+  let mockFrostMageState: TalentsStateType = {};
   beforeEach(() => {
     mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
   });
@@ -84,7 +84,7 @@ describe('features/talent-calc/lib/utils:getTierTotal()', () => {
 
 describe('features/talent-calc/lib/utils:getPreviousTiersTotal()', () => {
   const frostMageTalents = TALENTS_TEMPLATE.mage[2].talents;
-  let mockFrostMageState: TalentsDataType = {};
+  let mockFrostMageState: TalentsStateType = {};
   beforeEach(() => {
     mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
   });
