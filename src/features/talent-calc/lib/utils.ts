@@ -69,9 +69,9 @@ export const getDeepestTierWithValue = (
 
 export const checkCanDecrease = (
   deepestTier: number,
-  total: number,
+  previousTiersTotal: number,
   tier: TalentTierType,
-): boolean => (deepestTier - 1) * TALENTS_TO_NEXT_TIER < total || tier === deepestTier;
+): boolean => deepestTier * TALENTS_TO_NEXT_TIER >= previousTiersTotal || tier === deepestTier;
 
 export const checkCanDecreaseByNextTier = (
   hasNextTierValue: boolean,
