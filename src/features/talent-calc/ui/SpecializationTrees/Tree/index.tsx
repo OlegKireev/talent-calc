@@ -3,7 +3,7 @@ import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsDataType } from 'features/talent-calc/lib/transform';
 import {
   checkCanDecreaseByNextTier,
-  checkIsTierAvailable, getDeepestTierWithValue, getTierTotal, getTreeTotal,
+  checkIsTierAvailable, getDeepestTierWithValue, getTierTotal, getPreviousTiersTotal, getTreeTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
@@ -31,7 +31,6 @@ export const Tree = ({
 
   const deepestTierWithValue = getDeepestTierWithValue(talents, data);
   const total = getTreeTotal(data);
-  const deepestTierTotal = getTierTotal(deepestTierWithValue, talents, data);
 
   return (
     <div
@@ -42,28 +41,29 @@ export const Tree = ({
     >
       <table className={styles.table}>
         <tbody>
-          {rows.map((row) => {
+          {rows.map((tier) => {
             let spaceBetweenCells = 0;
-            const tierTotal = getTierTotal(row, talents, data);
+            const tierTotal = getTierTotal(tier, talents, data);
             const hasNextTierValue = Boolean(
-              getTierTotal(row + 1 as TalentTierType, talents, data),
+              getTierTotal(tier + 1 as TalentTierType, talents, data),
             );
             const canDecreaseByNextTier = checkCanDecreaseByNextTier(hasNextTierValue, tierTotal);
+            const isTierAvailable = checkIsTierAvailable(total, tierTotal, tier);
 
             return (
-              <tr key={`row-${row}`}>
+              <tr key={`row-${tier}`}>
                 {talents
-                  .filter((talent) => talent.tier === row)
+                  .filter((talent) => talent.tier === tier)
                   .map((talent, i) => {
                     const cellOffset = talent.column - (i + 1 + spaceBetweenCells);
                     if (cellOffset > 0) {
                       spaceBetweenCells += 1;
                     }
                     const emplyCells = numberToArray(cellOffset);
-                    const isTierAvailable = checkIsTierAvailable(total, tierTotal, talent.tier);
+                    const previousTiersTotal = getPreviousTiersTotal(talent.tier, talents, data);
 
                     return (
-                      <Fragment key={`tier${row}-${talent.title}`}>
+                      <Fragment key={`tier${tier}-${talent.title}`}>
                         {emplyCells.map((cell) => (
                           <td key={cell} className={styles.cell} />
                         ))}
@@ -77,8 +77,8 @@ export const Tree = ({
                             id={talent.id}
                             icon={talent.icon}
                             specialization={title}
-                            tier={row}
-                            total={total - deepestTierTotal}
+                            tier={tier}
+                            previousTiersTotal={previousTiersTotal}
                             deepestTierWithValue={deepestTierWithValue}
                             isAvailable={isTierAvailable}
                             canDecreaseByNextTier={canDecreaseByNextTier}
