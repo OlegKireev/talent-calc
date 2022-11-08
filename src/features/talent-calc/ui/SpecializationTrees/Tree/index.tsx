@@ -2,7 +2,11 @@ import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsStateType } from 'features/talent-calc/lib/transform';
 import {
-  checkIsTierAvailable, getDeepestTierWithValue, getPreviousTiersTotal, getTreeTotal,
+  checkIsTierAvailable,
+  checkRequiredTalent,
+  getDeepestTierWithValue,
+  getPreviousTiersTotal,
+  getTreeTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
@@ -60,6 +64,7 @@ export const Tree = ({
                       spaceBetweenCells += 1;
                     }
                     const emplyCells = numberToArray(cellOffset);
+                    const isRequiredTalentHasValue = checkRequiredTalent(talent.required, state);
 
                     return (
                       <Fragment key={`tier${tier}-${talent.title}`}>
@@ -78,7 +83,7 @@ export const Tree = ({
                             specialization={title}
                             tier={tier}
                             deepestTierWithValue={deepestTierWithValue}
-                            isTierAvailable={isTierAvailable}
+                            isAvailable={isTierAvailable && isRequiredTalentHasValue}
                             getPreviousTotal={getPreviousTotal}
                             onChange={onTalentChange}
                           />
