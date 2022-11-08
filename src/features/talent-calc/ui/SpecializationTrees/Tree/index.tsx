@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsStateType } from 'features/talent-calc/lib/transform';
 import {
-  checkIsTierAvailable, getDeepestTierWithValue, getTierTotal, getPreviousTiersTotal, getTreeTotal,
+  checkIsTierAvailable, getDeepestTierWithValue, getPreviousTiersTotal, getTreeTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
@@ -42,9 +42,8 @@ export const Tree = ({
         <tbody>
           {rows.map((tier) => {
             let spaceBetweenCells = 0;
-            const tierTotal = getTierTotal(tier, talents, state);
-            const isTierAvailable = checkIsTierAvailable(total, tierTotal, tier);
             const previousTiersTotal = getPreviousTiersTotal(tier, talents, state);
+            const isTierAvailable = checkIsTierAvailable(tier, previousTiersTotal);
             const getPreviousTotal = (prevTier: TalentTierType | number) => getPreviousTiersTotal(
               prevTier,
               talents,
@@ -78,8 +77,6 @@ export const Tree = ({
                             icon={talent.icon}
                             specialization={title}
                             tier={tier}
-                            tierTotal={tierTotal}
-                            previousTiersTotal={previousTiersTotal}
                             deepestTierWithValue={deepestTierWithValue}
                             isTierAvailable={isTierAvailable}
                             getPreviousTotal={getPreviousTotal}
