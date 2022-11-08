@@ -3,7 +3,6 @@ import {
 } from 'react';
 import { CharacterClassType } from 'shared/constants/global';
 
-// Что возвращает контекс
 type TalentCalcContextType = {
   currentClass: CharacterClassType | null,
   onClassChange: (newClass: CharacterClassType) => void,
