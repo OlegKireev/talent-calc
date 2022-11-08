@@ -3,6 +3,7 @@ import { mageTalentsState } from 'mocks/talentsState';
 import { TalentsStateType } from './transform';
 import {
   checkIsTalentsDataRefreshed,
+  checkIsTierAvailable,
   getDeepestTierWithValue,
   getPreviousTiersTotal, getTierTotal, getTotalToUnblockNextTier, getTreeTotal,
 } from './utils';
@@ -151,5 +152,35 @@ describe('features/talent-calc/lib/utils:getDeepestTierWithValue()', () => {
     expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(3);
     mockFrostMageState.mage_frost_arctic_reach = 2;
     expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(4);
+  });
+});
+
+describe('features/talent-calc/lib/utils:checkIsTierAvailable()', () => {
+  it('should the first tier is available on initial', () => {
+    expect(checkIsTierAvailable(1, 0)).toBe(true);
+  });
+
+  it('should the second tier isn\'t available with a zero total value', () => {
+    expect(checkIsTierAvailable(2, 0)).toBe(false);
+  });
+
+  it('should the second tier isn\'t available with total value equals "4"', () => {
+    expect(checkIsTierAvailable(2, 4)).toBe(false);
+  });
+
+  it('should the second tier is available with total value equals "5"', () => {
+    expect(checkIsTierAvailable(2, 5)).toBe(true);
+  });
+
+  it('should the third tier is available with total value >= "10"', () => {
+    expect(checkIsTierAvailable(3, 10)).toBe(true);
+    expect(checkIsTierAvailable(3, 20)).toBe(true);
+    expect(checkIsTierAvailable(3, 30)).toBe(true);
+    expect(checkIsTierAvailable(3, 40)).toBe(true);
+  });
+
+  it('should the last tier is available with total value >= "50"', () => {
+    expect(checkIsTierAvailable(11, 49)).toBe(false);
+    expect(checkIsTierAvailable(11, 50)).toBe(true);
   });
 });
