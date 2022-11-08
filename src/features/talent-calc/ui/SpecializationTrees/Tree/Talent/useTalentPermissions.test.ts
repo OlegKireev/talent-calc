@@ -11,7 +11,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 5,
       value: 0,
       deepestTierWithValue: 1,
-      isTierAvailable: true,
+      isAvailable: true,
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canIncrease).toBe(true);
@@ -23,19 +23,19 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 5,
       value: 5,
       deepestTierWithValue: 1,
-      isTierAvailable: true,
+      isAvailable: true,
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canIncrease).toBe(false);
   });
 
-  it('shouldn\'t be able to increase/decrease when "isTierAvailable" is "false"', () => {
+  it('shouldn\'t be able to increase/decrease when "isAvailable" is "false"', () => {
     const { canIncrease, canDecrease } = useTalentPermissions({
       tier: 1,
       max: 5,
       value: 0,
       deepestTierWithValue: 1,
-      isTierAvailable: false,
+      isAvailable: false,
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canIncrease).toBe(false);
@@ -48,7 +48,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 1,
       deepestTierWithValue: 4,
-      isTierAvailable: true,
+      isAvailable: true,
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canDecrease).toBe(true);
@@ -60,7 +60,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 0,
       deepestTierWithValue: 4,
-      isTierAvailable: true,
+      isAvailable: true,
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canDecrease).toBe(false);
@@ -72,7 +72,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 2,
       deepestTierWithValue: 5,
-      isTierAvailable: true,
+      isAvailable: true,
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canDecrease).toBe(true);
@@ -86,7 +86,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 1,
       deepestTierWithValue: 4,
-      isTierAvailable: true,
+      isAvailable: true,
       getPreviousTotal: mockGetPreviousTotalNotEnough,
     });
     expect(canDecrease).toBe(false);
@@ -100,7 +100,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 1,
       deepestTierWithValue: 4,
-      isTierAvailable: true,
+      isAvailable: true,
       getPreviousTotal: mockGetPreviousTotalEnough,
     });
     expect(canDecrease).toBe(true);

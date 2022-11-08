@@ -18,7 +18,7 @@ export interface TalentProps {
   tier: TalentTierType
   description: TalentDescription
   deepestTierWithValue: TalentTierType
-  isTierAvailable: boolean
+  isAvailable: boolean
   onChange: (args: HandleTalentChangeArgs) => void
   getPreviousTotal: (tier: TalentTierType | number) => number
 }
@@ -33,7 +33,7 @@ export const Talent = ({
   tier,
   description,
   deepestTierWithValue,
-  isTierAvailable,
+  isAvailable,
   onChange,
   getPreviousTotal,
 }: TalentProps) => {
@@ -43,7 +43,7 @@ export const Talent = ({
     max,
     deepestTierWithValue,
     getPreviousTotal,
-    isTierAvailable,
+    isAvailable,
   });
 
   const handleClick = () => {
@@ -70,13 +70,13 @@ export const Talent = ({
   return (
     <div
       className={cx(styles.wrapper, {
-        [styles.available]: isTierAvailable,
+        [styles.available]: isAvailable,
         [styles.max]: value === max,
       })}
     >
       <AbilityButton
         background={icon}
-        isDisabled={!isTierAvailable}
+        isDisabled={!isAvailable}
         onClick={handleClick}
         onRightClick={handleRightClick}
       />
