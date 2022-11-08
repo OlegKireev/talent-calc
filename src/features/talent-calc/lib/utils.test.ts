@@ -4,6 +4,7 @@ import { TalentsStateType } from './transform';
 import {
   checkIsTalentsDataRefreshed,
   checkIsTierAvailable,
+  checkRequiredTalent,
   getDeepestTierWithValue,
   getPreviousTiersTotal, getTierTotal, getTotalToUnblockNextTier, getTreeTotal,
 } from './utils';
@@ -182,5 +183,25 @@ describe('features/talent-calc/lib/utils:checkIsTierAvailable()', () => {
   it('should the last tier is available with total value >= "50"', () => {
     expect(checkIsTierAvailable(11, 49)).toBe(false);
     expect(checkIsTierAvailable(11, 50)).toBe(true);
+  });
+});
+
+describe('features/talent-calc/lib/utils:checkRequiredTalent()', () => {
+  let mockFrostMageState: TalentsStateType = {};
+  beforeEach(() => {
+    mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
+  });
+
+  it('should a child to be disabled if a parent has "0" value', () => {
+    expect(checkRequiredTalent('mage_frost_cold_snap', mockFrostMageState)).toBe(false);
+  });
+
+  it('should a child to be available if a parent has "1" value', () => {
+    mockFrostMageState.mage_frost_cold_snap = 1;
+    expect(checkRequiredTalent('mage_frost_cold_snap', mockFrostMageState)).toBe(true);
+  });
+
+  it('should a talent to be available if it doesn\'t have a "required" param', () => {
+    expect(checkRequiredTalent(undefined, mockFrostMageState)).toBe(true);
   });
 });
