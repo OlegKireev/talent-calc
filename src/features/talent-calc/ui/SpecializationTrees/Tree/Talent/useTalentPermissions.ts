@@ -1,14 +1,12 @@
-import { checkCanDecreaseByPreviousTiersTotal, checkWillCurrentTierAvailble, checkWillNextTierAvailable } from 'features/talent-calc/lib/utils';
+import { checkIsTierAvailable } from 'features/talent-calc/lib/utils';
 import { TalentTierType } from 'shared/constants/talentsData';
 
 interface UseTalentPermissionsArgs {
-  tier: number | TalentTierType,
-  tierTotal: number
+  tier: TalentTierType,
   value: number
   max: number
   isTierAvailable: boolean
-  deepestTierWithValue: TalentTierType | number
-  previousTiersTotal: number,
+  deepestTierWithValue: TalentTierType
   getPreviousTotal: (tier: TalentTierType | number) => number,
 }
 
@@ -16,28 +14,20 @@ export const useTalentPermissions = ({
   tier,
   value,
   max,
-  tierTotal,
   isTierAvailable,
   deepestTierWithValue,
-  previousTiersTotal,
   getPreviousTotal,
 }: UseTalentPermissionsArgs) => {
-  const canDecreaseByPreviousTierTotal = checkCanDecreaseByPreviousTiersTotal(
-    deepestTierWithValue,
-    previousTiersTotal,
-  );
   const preDeepestTierTotal = getPreviousTotal(deepestTierWithValue);
 
-  const willNextTierAvailable = checkWillNextTierAvailable(
-    preDeepestTierTotal,
+  const willNextTierBeAvailable = checkIsTierAvailable(
     deepestTierWithValue,
+    preDeepestTierTotal - 1,
   );
-  const willCurrentTierAvailble = checkWillCurrentTierAvailble(previousTiersTotal, tierTotal, tier);
 
   const canDecrease = Boolean(
     isTierAvailable && (
-      (canDecreaseByPreviousTierTotal && willNextTierAvailable && willCurrentTierAvailble)
-      || tier === deepestTierWithValue)
+      willNextTierBeAvailable || tier === deepestTierWithValue)
     && value > 0,
   );
   const canIncrease = isTierAvailable && value < max;
