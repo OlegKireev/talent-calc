@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsStateType } from 'features/talent-calc/lib/transform';
 import {
+  checkHasChildrenTalentsNoValue,
   checkIsTierAvailable,
   checkRequiredTalent,
   getDeepestTierWithValue,
@@ -73,6 +74,12 @@ export const Tree = ({
                       talents,
                     );
 
+                    const isChildrenTalentsEmpty = checkHasChildrenTalentsNoValue(
+                      talent.id,
+                      talents,
+                      state,
+                    );
+
                     return (
                       <Fragment key={`tier${tier}-${talent.title}`}>
                         {emptyCells.map((cell) => (
@@ -83,7 +90,7 @@ export const Tree = ({
                             <Arrow
                               from={arrowPosition.from}
                               to={arrowPosition.to}
-                              isAvailable={isRequiredTalentHasValue}
+                              isAvailable={isTierAvailable && isRequiredTalentHasValue}
                             />
                           )}
                           <Talent
@@ -98,6 +105,7 @@ export const Tree = ({
                             tier={tier}
                             deepestTierWithValue={deepestTierWithValue}
                             isAvailable={isTierAvailable && isRequiredTalentHasValue}
+                            isChildrenTalentsEmpty={isChildrenTalentsEmpty}
                             getPreviousTotal={getPreviousTotal}
                             onChange={onTalentChange}
                           />
