@@ -29,6 +29,7 @@ export type TalentType = {
   cooldown?: AbilityCooldown,
   costs?: AbilityCosts,
   range?: AbilityRange,
+  required?: CharacterTalentIdType,
 };
 
 export type TaletsOfClassType = {
