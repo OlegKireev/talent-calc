@@ -2,6 +2,7 @@ import { specs, CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constant
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
+import { ArrowPositionType } from '../ui/SpecializationTrees/Tree/Arrow';
 import { CreateTaletsStateReturn, TalentsStateType } from './transform';
 
 export const getTotalToUnblockNextTier = (
@@ -84,4 +85,61 @@ export const checkRequiredTalent = (
     return true;
   }
   return Boolean(state[requiredTalentId]);
+};
+
+export const getRequiredTalantPositions = (
+  talentId: CharacterTalentIdType,
+  requiredTalentId: CharacterTalentIdType | undefined,
+  talents: TalentType[],
+) => {
+  if (!requiredTalentId) {
+    return false;
+  }
+
+  const talent = talents.find((tal) => talentId === tal.id);
+  if (!talent) {
+    return false;
+  }
+
+  const requiredTalent = talents.find((tal) => tal.id === talent.required);
+  if (!requiredTalent) {
+    return false;
+  }
+
+  const { tier, column } = requiredTalent;
+
+  return {
+    from: {
+      tier,
+      column,
+    },
+    to: {
+      tier: talent.tier,
+      column: talent.column,
+    },
+  };
+};
+
+export const generateArrowClass = ({
+  from,
+  to,
+}: {
+  from: ArrowPositionType,
+  to: ArrowPositionType,
+}) => {
+  let x = '';
+  let y = '';
+
+  if (from.column > to.column) {
+    x = 'left';
+  }
+  if (from.column < to.column) {
+    x = 'right';
+  }
+
+  if (from.tier < to.tier) {
+    y = 'down';
+  }
+
+  return `${x}${x && y ? '-' : ''}${y}`;
 };
