@@ -71,24 +71,7 @@ export const getDeepestTierWithValue = (
   return talentsWithValue.sort((a, b) => b.tier - a.tier)[0]?.tier || 0;
 };
 
-export const checkCanDecreaseByPreviousTiersTotal = (
-  deepestTier: number,
-  previousTiersTotal: number,
-): boolean => previousTiersTotal <= getTotalToUnblockNextTier(deepestTier);
-
 export const checkIsTierAvailable = (
-  total: number,
-  tierTotal: number,
   tier: TalentTierType,
-) => total - tierTotal >= getTotalToUnblockNextTier(tier - 1);
-
-export const checkWillNextTierAvailable = (
-  preDeepestTierTotal: number,
-  deepestTierWithValue: number,
-) => preDeepestTierTotal > getTotalToUnblockNextTier(deepestTierWithValue - 1);
-
-export const checkWillCurrentTierAvailble = (
   previousTiersTotal: number,
-  tierTotal: number,
-  tier: TalentTierType | number,
-) => previousTiersTotal + tierTotal > getTotalToUnblockNextTier(tier);
+) => previousTiersTotal >= getTotalToUnblockNextTier(tier - 1);
