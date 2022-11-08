@@ -113,4 +113,19 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
     });
     expect(canDecrease).toBe(true);
   });
+
+  it('shouldn\'t be able to decrease if parent talent has a value', () => {
+    const mockGetPreviousTotalEnough = (tier: number) => 16;
+
+    const { canDecrease } = useTalentPermissions({
+      tier: 2,
+      max: 3,
+      value: 1,
+      deepestTierWithValue: 4,
+      isAvailable: true,
+      isChildrenTalentsEmpty: false,
+      getPreviousTotal: mockGetPreviousTotalEnough,
+    });
+    expect(canDecrease).toBe(false);
+  });
 });
