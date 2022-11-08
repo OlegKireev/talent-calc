@@ -143,3 +143,15 @@ export const generateArrowClass = ({
 
   return `${x}${x && y ? '-' : ''}${y}`;
 };
+
+export const checkHasChildrenTalentsNoValue = (
+  talentId: CharacterTalentIdType,
+  talents: TalentType[],
+  state: TalentsStateType,
+) => {
+  const childrenTalents = talents
+    .filter((talent) => talent.required === talentId)
+    .map((talent) => talent.id);
+
+  return childrenTalents.every((id) => !state[id]);
+};
