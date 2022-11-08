@@ -5,8 +5,9 @@ interface UseTalentPermissionsArgs {
   tier: TalentTierType,
   value: number
   max: number
-  isAvailable: boolean
   deepestTierWithValue: TalentTierType
+  isAvailable: boolean
+  isChildrenTalentsEmpty: boolean
   getPreviousTotal: (tier: TalentTierType | number) => number,
 }
 
@@ -14,8 +15,9 @@ export const useTalentPermissions = ({
   tier,
   value,
   max,
-  isAvailable,
   deepestTierWithValue,
+  isAvailable,
+  isChildrenTalentsEmpty,
   getPreviousTotal,
 }: UseTalentPermissionsArgs) => {
   const preDeepestTierTotal = getPreviousTotal(deepestTierWithValue);
@@ -26,9 +28,10 @@ export const useTalentPermissions = ({
   );
 
   const canDecrease = Boolean(
-    isAvailable && (
-      willNextTierBeAvailable || tier === deepestTierWithValue
-    ) && value > 0,
+    isAvailable
+      && isChildrenTalentsEmpty
+      && (willNextTierBeAvailable || tier === deepestTierWithValue)
+      && value > 0,
   );
   const canIncrease = isAvailable && value < max;
 
