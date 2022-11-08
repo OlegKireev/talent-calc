@@ -27,8 +27,8 @@ export const useTalentPermissions = ({
 
   const canDecrease = Boolean(
     isTierAvailable && (
-      willNextTierBeAvailable || tier === deepestTierWithValue)
-    && value > 0,
+      willNextTierBeAvailable || tier === deepestTierWithValue
+    ) && value > 0,
   );
   const canIncrease = isTierAvailable && value < max;
 
