@@ -17,9 +17,7 @@ export interface TalentProps {
   specialization: CharacterSpecializationType
   tier: TalentTierType
   description: TalentDescription
-  deepestTierWithValue: number
-  tierTotal: number
-  previousTiersTotal: number
+  deepestTierWithValue: TalentTierType
   isTierAvailable: boolean
   onChange: (args: HandleTalentChangeArgs) => void
   getPreviousTotal: (tier: TalentTierType | number) => number
@@ -35,8 +33,6 @@ export const Talent = ({
   tier,
   description,
   deepestTierWithValue,
-  tierTotal,
-  previousTiersTotal,
   isTierAvailable,
   onChange,
   getPreviousTotal,
@@ -45,10 +41,8 @@ export const Talent = ({
     tier,
     value,
     max,
-    tierTotal,
     deepestTierWithValue,
     getPreviousTotal,
-    previousTiersTotal,
     isTierAvailable,
   });
 
