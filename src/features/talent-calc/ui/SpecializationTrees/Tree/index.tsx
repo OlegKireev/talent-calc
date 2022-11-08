@@ -6,6 +6,7 @@ import {
   checkRequiredTalent,
   getDeepestTierWithValue,
   getPreviousTiersTotal,
+  getRequiredTalantPositions,
   getTreeTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
@@ -13,6 +14,7 @@ import { numberToArray } from 'shared/lib/transform';
 import { CharacterSpecializationType } from 'shared/constants/global';
 import { Talent } from './Talent';
 import styles from './styles.module.scss';
+import { Arrow } from './Arrow';
 
 export interface TreeProps {
   state: TalentsStateType,
@@ -65,6 +67,11 @@ export const Tree = ({
                     }
                     const emptyCells = numberToArray(cellOffset);
                     const isRequiredTalentHasValue = checkRequiredTalent(talent.required, state);
+                    const arrowPosition = getRequiredTalantPositions(
+                      talent.id,
+                      talent.required,
+                      talents,
+                    );
 
                     return (
                       <Fragment key={`tier${tier}-${talent.title}`}>
@@ -72,6 +79,13 @@ export const Tree = ({
                           <td key={cell} className={styles.cell} />
                         ))}
                         <td className={styles.cell}>
+                          {arrowPosition !== false && (
+                            <Arrow
+                              from={arrowPosition.from}
+                              to={arrowPosition.to}
+                              isAvailable={isRequiredTalentHasValue}
+                            />
+                          )}
                           <Talent
                             key={talent.title}
                             value={state[talent.id]}
