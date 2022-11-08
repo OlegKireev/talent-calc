@@ -63,12 +63,12 @@ export const Tree = ({
                     if (cellOffset > 0) {
                       spaceBetweenCells += 1;
                     }
-                    const emplyCells = numberToArray(cellOffset);
+                    const emptyCells = numberToArray(cellOffset);
                     const isRequiredTalentHasValue = checkRequiredTalent(talent.required, state);
 
                     return (
                       <Fragment key={`tier${tier}-${talent.title}`}>
-                        {emplyCells.map((cell) => (
+                        {emptyCells.map((cell) => (
                           <td key={cell} className={styles.cell} />
                         ))}
                         <td className={styles.cell}>
