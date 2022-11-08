@@ -75,3 +75,13 @@ export const checkIsTierAvailable = (
   tier: TalentTierType,
   previousTiersTotal: number,
 ) => previousTiersTotal >= getTotalToUnblockNextTier(tier - 1);
+
+export const checkRequiredTalent = (
+  requiredTalentId: CharacterTalentIdType | undefined,
+  state: TalentsStateType,
+) => {
+  if (!requiredTalentId) {
+    return true;
+  }
+  return Boolean(state[requiredTalentId]);
+};
