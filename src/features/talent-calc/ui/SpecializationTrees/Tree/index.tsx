@@ -9,6 +9,7 @@ import {
   getPreviousTiersTotal,
   gerArrowPosition,
   getTreeTotal,
+  getTierTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
@@ -49,6 +50,7 @@ export const Tree = ({
         <tbody>
           {rows.map((tier) => {
             let spaceBetweenCells = 0;
+            const currentTierTotal = getTierTotal(tier, talents, state);
             const previousTiersTotal = getPreviousTiersTotal(tier, talents, state);
             const isTierAvailable = checkIsTierAvailable(tier, previousTiersTotal);
             const getPreviousTotal = (prevTier: TalentTierType | number) => getPreviousTiersTotal(
@@ -104,6 +106,7 @@ export const Tree = ({
                             specialization={title}
                             tier={tier}
                             deepestTierWithValue={deepestTierWithValue}
+                            includeTierTotal={previousTiersTotal + currentTierTotal}
                             isAvailable={isTierAvailable && isRequiredTalentHasValue}
                             isChildrenTalentsEmpty={isChildrenTalentsEmpty}
                             getPreviousTotal={getPreviousTotal}

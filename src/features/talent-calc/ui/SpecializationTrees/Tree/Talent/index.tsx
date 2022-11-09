@@ -19,6 +19,7 @@ export interface TalentProps {
   tier: TalentTierType
   description: TalentDescription
   deepestTierWithValue: TalentTierType
+  includeTierTotal: number
   isAvailable: boolean
   isChildrenTalentsEmpty: boolean
   onChange: (args: HandleTalentChangeArgs) => void
@@ -35,6 +36,7 @@ export const Talent = ({
   tier,
   description,
   deepestTierWithValue,
+  includeTierTotal,
   isAvailable,
   isChildrenTalentsEmpty,
   onChange,
@@ -45,9 +47,10 @@ export const Talent = ({
     value,
     max,
     deepestTierWithValue,
-    getPreviousTotal,
+    includeTierTotal,
     isAvailable,
     isChildrenTalentsEmpty,
+    getPreviousTotal,
   });
 
   const handleClick = () => {
