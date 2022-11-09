@@ -10,7 +10,7 @@ interface LayoutProps {
 export const Layout = ({
   children,
 }: LayoutProps) => {
-  const { isOpen, data } = useTooltipContext();
+  const { isOpen, data, coords } = useTooltipContext();
 
   return (
     <div className={styles.wrapper}>
@@ -20,7 +20,7 @@ export const Layout = ({
       </main>
       <footer className={styles.footer} />
       {isOpen && (
-        <Tooltip data={data} />
+        <Tooltip data={data} coords={coords} />
       )}
     </div>
   );
