@@ -1,13 +1,15 @@
 import {
-  createContext, useCallback, useContext, useMemo, useState,
+  createContext, MouseEvent, useCallback, useContext, useMemo, useState,
 } from 'react';
 import { useDisclosure } from 'shared/hooks/useDisclosure';
-import { TooltipType } from 'shared/ui/Tooltip/types';
+import { getTooltipCoords } from 'shared/lib/utils';
+import { TooltipCoordsType, TooltipType } from 'shared/ui/Tooltip/types';
 
 type TooltipContextType = {
   isOpen: boolean,
   data: TooltipType,
-  openTooltip: (args: TooltipType) => void,
+  coords: TooltipCoordsType,
+  openTooltip: (tooltipData: TooltipType, event: MouseEvent<HTMLElement>) => void,
   closeTooltip: () => void,
 };
 
@@ -16,9 +18,15 @@ const initalData: TooltipType = {
   title: '',
 };
 
+const initialCoords: TooltipCoordsType = {
+  x: 0,
+  y: 0,
+};
+
 const initialState: TooltipContextType = {
   isOpen: false,
   data: initalData,
+  coords: initialCoords,
   openTooltip: () => {},
   closeTooltip: () => {},
 };
@@ -32,9 +40,14 @@ export const TooltipProvider = ({
 }: { children: React.ReactNode }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [data, setData] = useState<TooltipType>(initalData);
+  const [coords, setCoords] = useState<TooltipCoordsType>(initialCoords);
 
-  const openTooltip = useCallback((args: TooltipType) => {
-    setData(args);
+  const openTooltip = useCallback((
+    tooltipData: TooltipType,
+    event: MouseEvent<HTMLElement>,
+  ) => {
+    setCoords(getTooltipCoords(event.currentTarget));
+    setData(tooltipData);
     onOpen();
   }, [onOpen]);
 
@@ -46,9 +59,10 @@ export const TooltipProvider = ({
   const value = useMemo(() => ({
     isOpen,
     data,
+    coords: { x: coords.x, y: coords.y },
     openTooltip,
     closeTooltip,
-  }), [closeTooltip, data, isOpen, openTooltip]);
+  }), [closeTooltip, data, isOpen, openTooltip, coords]);
 
   return (
     <TooltipContext.Provider value={value}>
