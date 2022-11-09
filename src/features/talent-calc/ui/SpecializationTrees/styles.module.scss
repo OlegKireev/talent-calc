@@ -2,4 +2,5 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-top: 1em;
+  column-gap: 0.375rem;
 }
