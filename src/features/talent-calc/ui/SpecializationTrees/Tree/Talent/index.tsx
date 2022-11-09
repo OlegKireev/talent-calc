@@ -58,31 +58,41 @@ export const Talent = ({
 
   const { openTooltip, closeTooltip } = useTooltipContext();
 
-  const handleClick = () => {
+  const handleOpenTooltip = (rank: number, event: MouseEvent<HTMLElement>) => {
+    openTooltip({
+      type: 'talent',
+      title,
+      description: description[1],
+      rank,
+    }, event);
+  };
+
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
     if (canIncrease) {
+      const newValue = value + 1;
       onChange({
         specialization,
         id,
-        value: value + 1,
+        value: newValue,
       });
+      handleOpenTooltip(newValue, event);
     }
   };
 
-  const handleRightClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleRightClick = (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault();
     if (canDecrease) {
+      const newValue = value - 1;
       onChange({
         specialization,
         id,
-        value: value - 1,
+        value: newValue,
       });
+      handleOpenTooltip(newValue, event);
     }
   };
 
-  const hanldeMouseOver = (event: MouseEvent<HTMLElement>) => openTooltip({
-    type: 'talent',
-    title,
-  }, event);
+  const hanldeMouseOver = (event: MouseEvent<HTMLElement>) => handleOpenTooltip(value, event);
   const handleMouseOut = () => closeTooltip();
 
   return (
