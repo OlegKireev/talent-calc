@@ -6,7 +6,7 @@
   pointer-events: none;
 
   &.disabled {
-    filter: grayscale(100%);
+    filter: grayscale(100%) brightness(0.625);
   }
 
   &::before,
