@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MouseEvent } from 'react';
 import cx from 'classnames';
@@ -6,6 +7,7 @@ import { type CharacterSpecializationType } from 'shared/constants/global';
 import { type CharacterTalentIdType } from 'shared/constants/talents';
 import type { TalentDescriptionType, TalentMaxValueType, TalentTierType } from 'shared/constants/talentsData';
 import { type HandleTalentChange } from 'features/talent-calc/types';
+import { useTooltipContext } from 'shared/context/tooltip';
 import { type GetPreviousTotal } from '../types';
 import { useTalentPermissions } from './useTalentPermissions';
 import styles from './styles.module.scss';
@@ -54,6 +56,8 @@ export const Talent = ({
     getPreviousTotal,
   });
 
+  const { openTooltip, closeTooltip } = useTooltipContext();
+
   const handleClick = () => {
     if (canIncrease) {
       onChange({
@@ -81,6 +85,11 @@ export const Talent = ({
         [styles.available]: isAvailable,
         [styles.max]: value === max,
       })}
+      onMouseOver={() => openTooltip({
+        type: 'talent',
+        title,
+      })}
+      onMouseOut={closeTooltip}
     >
       <AbilityButton
         background={icon}

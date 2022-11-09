@@ -26,6 +26,11 @@
     border-radius: 0.25rem;
     pointer-events: none;
   }
+
+  /** without this tooltips not work on disabled talents */
+  &:not(.available)::before {
+    pointer-events: all;
+  }
 }
 
 .value {
