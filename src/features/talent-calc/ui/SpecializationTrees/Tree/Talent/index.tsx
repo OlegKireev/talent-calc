@@ -79,17 +79,20 @@ export const Talent = ({
     }
   };
 
+  const hanldeMouseOver = (event: MouseEvent<HTMLElement>) => openTooltip({
+    type: 'talent',
+    title,
+  }, event);
+  const handleMouseOut = () => closeTooltip();
+
   return (
     <div
       className={cx(styles.wrapper, {
         [styles.available]: isAvailable,
         [styles.max]: value === max,
       })}
-      onMouseOver={() => openTooltip({
-        type: 'talent',
-        title,
-      })}
-      onMouseOut={closeTooltip}
+      onMouseOver={hanldeMouseOver}
+      onMouseOut={handleMouseOut}
     >
       <AbilityButton
         background={icon}
