@@ -7,7 +7,7 @@ import {
   checkRequiredTalent,
   getDeepestTierWithValue,
   getPreviousTiersTotal,
-  getRequiredTalantPositions,
+  gerArrowPosition,
   getTreeTotal,
 } from 'features/talent-calc/lib/utils';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
@@ -68,7 +68,7 @@ export const Tree = ({
                     }
                     const emptyCells = numberToArray(cellOffset);
                     const isRequiredTalentHasValue = checkRequiredTalent(talent.required, state);
-                    const arrowPosition = getRequiredTalantPositions(
+                    const arrowPosition = gerArrowPosition(
                       talent.id,
                       talent.required,
                       talents,

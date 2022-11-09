@@ -87,7 +87,7 @@ export const checkRequiredTalent = (
   return Boolean(state[requiredTalentId]);
 };
 
-export const getRequiredTalantPositions = (
+export const gerArrowPosition = (
   talentId: CharacterTalentIdType,
   requiredTalentId: CharacterTalentIdType | undefined,
   talents: TalentType[],
