@@ -1,4 +1,4 @@
-import { characterClasses, type CharacterClassType } from 'shared/constants/global';
+import { characterClasses, RESOURCE_URI, type CharacterClassType } from 'shared/constants/global';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 import styles from './styles.module.scss';
 
@@ -17,7 +17,7 @@ export const ClassChoser = ({
         key={characterClass}
         isActive={characterClass === currentClass}
         isDisabled={false}
-        background={`https://wow.zamimg.com/images/wow/icons/large/class_${characterClass}.jpg`}
+        background={`${RESOURCE_URI}/icons/large/class_${characterClass}.jpg`}
         onClick={() => onClassChange(characterClass)}
       />
     ))}
