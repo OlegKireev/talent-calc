@@ -11,6 +11,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 5,
       value: 0,
       deepestTierWithValue: 1,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotal,
@@ -24,6 +25,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 5,
       value: 5,
       deepestTierWithValue: 1,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotal,
@@ -37,6 +39,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 5,
       value: 0,
       deepestTierWithValue: 1,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: false,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotal,
@@ -51,6 +54,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 1,
       deepestTierWithValue: 4,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotal,
@@ -64,6 +68,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 0,
       deepestTierWithValue: 4,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotal,
@@ -77,6 +82,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 2,
       deepestTierWithValue: 5,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotal,
@@ -92,6 +98,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 1,
       deepestTierWithValue: 4,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotalNotEnough,
@@ -107,6 +114,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 1,
       deepestTierWithValue: 4,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotalEnough,
@@ -120,8 +128,37 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       max: 3,
       value: 1,
       deepestTierWithValue: 4,
+      includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
       isChildrenTalentsEmpty: false,
+      getPreviousTotal: mockGetPreviousTotal,
+    });
+    expect(canDecrease).toBe(false);
+  });
+
+  it('should be able to decrease if "includeTierTotal" > current tier total requirement', () => {
+    const { canDecrease } = useTalentPermissions({
+      tier: 2,
+      max: 3,
+      value: 1,
+      deepestTierWithValue: 3,
+      includeTierTotal: 11,
+      isAvailable: true,
+      isChildrenTalentsEmpty: true,
+      getPreviousTotal: mockGetPreviousTotal,
+    });
+    expect(canDecrease).toBe(true);
+  });
+
+  it('shouldn\'t be able to decrease if "includeTierTotal" <= current tier total requirement', () => {
+    const { canDecrease } = useTalentPermissions({
+      tier: 2,
+      max: 3,
+      value: 1,
+      deepestTierWithValue: 3,
+      includeTierTotal: 10,
+      isAvailable: true,
+      isChildrenTalentsEmpty: true,
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canDecrease).toBe(false);
