@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MouseEvent } from 'react';
 import cx from 'classnames';
 import { HandleTalentChangeArgs } from 'features/talent-calc';
