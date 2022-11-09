@@ -9,5 +9,21 @@
   border-radius: 0.25rem;
   box-shadow: 0 0 0.5rem rgba($color: #000, $alpha: 20%);
   border: 1px solid #676767;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
+  min-width: 20rem;
+  max-width: 30rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rank {
+  color: #9d9d9d;
 }
