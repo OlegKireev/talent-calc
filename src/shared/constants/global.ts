@@ -1,3 +1,5 @@
+export const RESOURCE_URI = process.env.REACT_APP_RESOURCE_URI;
+
 export const characterClasses = [
   'deathknight',
   'druid',
