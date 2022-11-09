@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { useTooltipContext } from 'shared/context/tooltip';
+import { Tooltip } from 'shared/ui/Tooltip';
 import styles from './styles.module.scss';
 
 interface LayoutProps {
@@ -7,12 +9,19 @@ interface LayoutProps {
 
 export const Layout = ({
   children,
-}: LayoutProps) => (
-  <div className={styles.wrapper}>
-    <header className={styles.header} />
-    <main className={styles.main}>
-      {children}
-    </main>
-    <footer className={styles.footer} />
-  </div>
-);
+}: LayoutProps) => {
+  const { isOpen, data } = useTooltipContext();
+
+  return (
+    <div className={styles.wrapper}>
+      <header className={styles.header} />
+      <main className={styles.main}>
+        {children}
+      </main>
+      <footer className={styles.footer} />
+      {isOpen && (
+        <Tooltip data={data} />
+      )}
+    </div>
+  );
+};
