@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { HandleTalentChangeArgs } from 'features/talent-calc';
 import { TalentsStateType } from 'features/talent-calc/lib/transform';
 import {
   checkHasChildrenTalentsNoValue,
@@ -11,19 +10,21 @@ import {
   getTreeTotal,
   getTierTotal,
 } from 'features/talent-calc/lib/utils';
-import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
 import { CharacterSpecializationType } from 'shared/constants/global';
+import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
+import { type HandleTalentChange } from 'features/talent-calc/types';
+import { type GetPreviousTotal } from './types';
 import { Talent } from './Talent';
-import styles from './styles.module.scss';
 import { Arrow } from './Arrow';
+import styles from './styles.module.scss';
 
 export interface TreeProps {
   state: TalentsStateType,
   title: CharacterSpecializationType
   talents: TalentType[]
   backgroundImage?: string
-  onTalentChange: (args: HandleTalentChangeArgs) => void
+  onTalentChange: HandleTalentChange
 }
 
 export const Tree = ({
@@ -53,7 +54,7 @@ export const Tree = ({
             const currentTierTotal = getTierTotal(tier, talents, state);
             const previousTiersTotal = getPreviousTiersTotal(tier, talents, state);
             const isTierAvailable = checkIsTierAvailable(tier, previousTiersTotal);
-            const getPreviousTotal = (prevTier: TalentTierType | number) => getPreviousTiersTotal(
+            const getPreviousTotal: GetPreviousTotal = (prevTier) => getPreviousTiersTotal(
               prevTier,
               talents,
               state,

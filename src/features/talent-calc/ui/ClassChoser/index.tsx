@@ -1,4 +1,4 @@
-import { characterClasses, CharacterClassType } from 'shared/constants/global';
+import { characterClasses, type CharacterClassType } from 'shared/constants/global';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 import styles from './styles.module.scss';
 

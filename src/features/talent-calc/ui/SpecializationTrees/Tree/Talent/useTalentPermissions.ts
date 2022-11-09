@@ -1,5 +1,6 @@
 import { checkIsTierAvailable } from 'features/talent-calc/lib/utils';
-import { TalentTierType } from 'shared/constants/talentsData';
+import { type TalentTierType } from 'shared/constants/talentsData';
+import { type GetPreviousTotal } from '../types';
 
 interface UseTalentPermissionsArgs {
   tier: TalentTierType,
@@ -9,7 +10,7 @@ interface UseTalentPermissionsArgs {
   includeTierTotal: number
   isAvailable: boolean
   isChildrenTalentsEmpty: boolean
-  getPreviousTotal: (tier: TalentTierType | number) => number,
+  getPreviousTotal: GetPreviousTotal,
 }
 
 export const useTalentPermissions = ({

@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import { generateArrowClass } from 'features/talent-calc/lib/utils';
-import { ArrowPositionType } from 'features/talent-calc/types';
+import { type ArrowPositionType } from 'features/talent-calc/types';
 import styles from './styles.module.scss';
 
 export interface ArrowProps {

@@ -1,6 +1,6 @@
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState } from 'mocks/talentsState';
-import { CharacterClassType } from 'shared/constants/global';
+import { type CharacterClassType } from 'shared/constants/global';
 import { createTalentsState } from './transform';
 
 describe('features/talent-calc/lib/transform/createTalentsState()', () => {

@@ -1,9 +1,9 @@
-import { specs, CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constants/global';
-import { CharacterTalentIdType } from 'shared/constants/talents';
-import { TalentTierType, TalentType } from 'shared/constants/talentsData';
+import { specs, type CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constants/global';
+import { type CharacterTalentIdType } from 'shared/constants/talents';
+import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
-import { CreateTaletsStateReturn, TalentsStateType } from './transform';
-import { ArrowPositionType } from '../types';
+import type { CreateTaletsStateReturn, TalentsStateType } from './transform';
+import { type ArrowPositionType } from '../types';
 
 export const getTotalToUnblockNextTier = (
   tier: TalentTierType | number,

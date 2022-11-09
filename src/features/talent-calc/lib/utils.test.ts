@@ -1,7 +1,7 @@
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState } from 'mocks/talentsState';
-import { ArrowPositionType } from '../types';
-import { TalentsStateType } from './transform';
+import { type ArrowPositionType } from '../types';
+import { type TalentsStateType } from './transform';
 import {
   checkHasChildrenTalentsNoValue,
   checkIsTalentsDataRefreshed,

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MouseEvent } from 'react';
 import cx from 'classnames';
-import { HandleTalentChangeArgs } from 'features/talent-calc';
-import { CharacterSpecializationType } from 'shared/constants/global';
-import { CharacterTalentIdType } from 'shared/constants/talents';
-import { TalentDescription, TalentMaxValueType, TalentTierType } from 'shared/constants/talentsData';
 import { AbilityButton } from 'shared/ui/AbilityButton';
+import { type CharacterSpecializationType } from 'shared/constants/global';
+import { type CharacterTalentIdType } from 'shared/constants/talents';
+import type { TalentDescriptionType, TalentMaxValueType, TalentTierType } from 'shared/constants/talentsData';
+import { type HandleTalentChange } from 'features/talent-calc/types';
+import { type GetPreviousTotal } from '../types';
 import { useTalentPermissions } from './useTalentPermissions';
 import styles from './styles.module.scss';
 
@@ -17,13 +18,13 @@ export interface TalentProps {
   max: TalentMaxValueType
   specialization: CharacterSpecializationType
   tier: TalentTierType
-  description: TalentDescription
+  description: TalentDescriptionType
   deepestTierWithValue: TalentTierType
   includeTierTotal: number
   isAvailable: boolean
   isChildrenTalentsEmpty: boolean
-  onChange: (args: HandleTalentChangeArgs) => void
-  getPreviousTotal: (tier: TalentTierType | number) => number
+  onChange: HandleTalentChange
+  getPreviousTotal: GetPreviousTotal
 }
 
 export const Talent = ({

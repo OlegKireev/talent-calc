@@ -1,6 +1,6 @@
-import { CharacterSpecializationType } from 'shared/constants/global';
-import { CharacterTalentIdType } from 'shared/constants/talents';
-import { TaletsOfClassType } from 'shared/constants/talentsData';
+import { type CharacterSpecializationType } from 'shared/constants/global';
+import { type CharacterTalentIdType } from 'shared/constants/talents';
+import { type TaletsOfClassType } from 'shared/constants/talentsData';
 
 export const createTalentsState = (
   obj: TaletsOfClassType[],
