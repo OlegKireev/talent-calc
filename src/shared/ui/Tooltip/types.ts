@@ -1,8 +1,15 @@
-export type TooltipType = {
-  type: 'talent' | 'default',
+export type TooltipType = TooltipDefaultType | TooltipTalentType;
+
+type TooltipDefaultType = {
+  type: 'default',
   title: string,
-  description?: string,
-  rank?: number,
+};
+
+type TooltipTalentType = {
+  type: 'talent',
+  title: string,
+  description: string,
+  rank: number,
 };
 
 export type TooltipCoordsType = {
