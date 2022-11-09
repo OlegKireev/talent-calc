@@ -12,12 +12,14 @@ The current version of the app is placed [here](https://wow-talent.netlify.app/)
 
 ## Development
 
-First of all install the packages:
+1. First of all install the packages:
 ```
 yarn
 ```
 
-Start development:
+2. Rename `.env.sample` file to `.env`
+
+3. Start development:
 ```
 yarn start
 ```
