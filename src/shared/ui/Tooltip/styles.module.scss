@@ -2,5 +2,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: red;
+  background-color: rgb(0 0 50 / 75%);
+  z-index: 10;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.5rem rgba($color: #000, $alpha: 20%);
+  border: 1px solid #676767;
+  font-size: 0.75rem;
 }
