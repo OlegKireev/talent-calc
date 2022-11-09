@@ -4,3 +4,8 @@ export type TooltipType = {
   description?: string,
   rank?: number,
 };
+
+export type TooltipCoordsType = {
+  x: number,
+  y: number,
+};
