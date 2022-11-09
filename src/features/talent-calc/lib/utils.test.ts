@@ -1,6 +1,6 @@
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState } from 'mocks/talentsState';
-import { ArrowPositionType } from '../ui/SpecializationTrees/Tree/Arrow';
+import { ArrowPositionType } from '../types';
 import { TalentsStateType } from './transform';
 import {
   checkHasChildrenTalentsNoValue,

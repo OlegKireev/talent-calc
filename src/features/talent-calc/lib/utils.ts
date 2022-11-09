@@ -2,8 +2,8 @@ import { specs, CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constant
 import { CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
-import { ArrowPositionType } from '../ui/SpecializationTrees/Tree/Arrow';
 import { CreateTaletsStateReturn, TalentsStateType } from './transform';
+import { ArrowPositionType } from '../types';
 
 export const getTotalToUnblockNextTier = (
   tier: TalentTierType | number,

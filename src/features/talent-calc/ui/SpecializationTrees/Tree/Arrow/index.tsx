@@ -1,12 +1,7 @@
 import cx from 'classnames';
 import { generateArrowClass } from 'features/talent-calc/lib/utils';
-import { TalentColumnType, TalentTierType } from 'shared/constants/talentsData';
+import { ArrowPositionType } from 'features/talent-calc/types';
 import styles from './styles.module.scss';
-
-export type ArrowPositionType = {
-  tier: TalentTierType,
-  column: TalentColumnType,
-};
 
 export interface ArrowProps {
   from: ArrowPositionType,
