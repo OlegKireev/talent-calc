@@ -115,8 +115,6 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
   });
 
   it('shouldn\'t be able to decrease if parent talent has a value', () => {
-    const mockGetPreviousTotalEnough = (tier: number) => 16;
-
     const { canDecrease } = useTalentPermissions({
       tier: 2,
       max: 3,
@@ -124,7 +122,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       deepestTierWithValue: 4,
       isAvailable: true,
       isChildrenTalentsEmpty: false,
-      getPreviousTotal: mockGetPreviousTotalEnough,
+      getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canDecrease).toBe(false);
   });
