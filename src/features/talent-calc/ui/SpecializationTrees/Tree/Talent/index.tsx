@@ -62,7 +62,7 @@ export const Talent = ({
     openTooltip({
       type: 'talent',
       title,
-      description: description[1],
+      description,
       rank,
     }, event);
   };
