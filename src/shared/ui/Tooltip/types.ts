@@ -1,3 +1,5 @@
+import { TalentDescriptionType } from 'shared/constants/talentsData';
+
 export type TooltipType = TooltipDefaultType | TooltipTalentType;
 
 type TooltipDefaultType = {
@@ -8,7 +10,7 @@ type TooltipDefaultType = {
 type TooltipTalentType = {
   type: 'talent',
   title: string,
-  description: string,
+  description: TalentDescriptionType,
   rank: number,
 };
 
