@@ -2,14 +2,17 @@ import {
   createContext, useCallback, useContext, useMemo, useState,
 } from 'react';
 import { type CharacterClassType } from 'shared/constants/global';
+import { CharacterTalentIdType } from 'shared/constants/talents';
 import type { TalentType, TalentsType } from 'shared/constants/talentsData';
-import { generateAllTalents, type CreateTaletsStateReturn } from '../lib/transform';
+import { generateAllTalentsMap, type CreateTaletsStateReturn } from '../lib/transform';
+
+type AllTalentsMapType = { [key in CharacterTalentIdType]?: TalentType };
 
 type TalentCalcContextType = {
   currentClass: CharacterClassType | null,
   state: CreateTaletsStateReturn,
   talentsByClass: TalentsType,
-  allTalents: TalentType[],
+  allTalents: AllTalentsMapType,
   setClass: (newClass: CharacterClassType) => void,
   setState: (newState: CreateTaletsStateReturn) => void,
   setTalents: (newTalents: TalentsType) => void
@@ -30,7 +33,7 @@ const initialState: TalentCalcContextType = {
     warlock: [],
     warrior: [],
   },
-  allTalents: [],
+  allTalents: {},
   setClass: () => {},
   setState: () => {},
   setTalents: () => {},
@@ -44,7 +47,7 @@ export type TalentState = {
   class: CharacterClassType | null,
   state: CreateTaletsStateReturn,
   talentsByClass: TalentsType,
-  allTalents: TalentType[]
+  allTalents: AllTalentsMapType
 };
 
 export const TalentCalcProvider = ({
@@ -55,7 +58,7 @@ export const TalentCalcProvider = ({
   );
   const [state, setState] = useState<CreateTaletsStateReturn>(initialState.state);
   const [talentsByClass, setTalentsByClass] = useState<TalentsType>(initialState.talentsByClass);
-  const [allTalents, setAllTalents] = useState<TalentType[]>(initialState.allTalents);
+  const [allTalents, setAllTalents] = useState<AllTalentsMapType>(initialState.allTalents);
 
   const handleClassUpdate = useCallback((newClass: CharacterClassType) => {
     setCurrentClass(newClass);
@@ -67,7 +70,7 @@ export const TalentCalcProvider = ({
 
   const handleTalentsUpdate = useCallback((newTalents: TalentsType) => {
     setTalentsByClass(newTalents);
-    setAllTalents(generateAllTalents(newTalents));
+    setAllTalents(generateAllTalentsMap(newTalents));
   }, [setTalentsByClass, setAllTalents]);
 
   const value = useMemo(() => ({
