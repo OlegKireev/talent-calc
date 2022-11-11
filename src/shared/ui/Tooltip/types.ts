@@ -14,9 +14,15 @@ type TooltipTalentType = {
   rank: number,
   canIncrease: boolean,
   canDecrease: boolean,
+  errors: TooltipErrorsType,
 };
 
 export type TooltipCoordsType = {
   x: number,
   y: number,
+};
+
+export type TooltipErrorsType = {
+  isDisabledByTotal: string,
+  isDisabledByParent: string,
 };
