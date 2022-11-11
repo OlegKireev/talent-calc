@@ -20,6 +20,7 @@ export const Tooltip = ({
   const [description, setDescription] = useState<TalentDescriptionType>({ 1: '' });
   const [canIncrease, setCanIncrease] = useState<boolean>(false);
   const [canDecrease, setCanDecrease] = useState<boolean>(false);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const { type, title } = data;
   const { x, y } = coords;
@@ -27,7 +28,7 @@ export const Tooltip = ({
   const isTalentType = type === 'talent';
   const nextRankDescription = description[rank + 1 as TalentMaxValueType];
   const shouldDisplayNextRankDescription = isTalentType && level > 0 && nextRankDescription;
-  const shouldDisplayTip = canIncrease || canDecrease;
+  const shouldDisplayTip = canIncrease || canDecrease || Boolean(errors.length);
 
   useEffect(() => {
     if ('rank' in data) {
@@ -36,6 +37,7 @@ export const Tooltip = ({
       setDescription(data.description);
       setCanIncrease(data.canIncrease);
       setCanDecrease(data.canDecrease);
+      setErrors(Object.values(data.errors).filter((err) => Boolean(err)));
     }
   }, [data]);
 
@@ -96,6 +98,13 @@ export const Tooltip = ({
               <span className={styles.action}>
                 Right-click to unlearn
               </span>
+            )}
+            {Boolean(errors.length) && (
+              errors.map((error) => (
+                <span className={styles.error} key={error}>
+                  {error}
+                </span>
+              ))
             )}
           </div>
         )}
