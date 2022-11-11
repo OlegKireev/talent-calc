@@ -18,6 +18,8 @@ export const Tooltip = ({
   const [level, setLevel] = useState<number>(0);
   const [rank, setRank] = useState<TalentMaxValueType>(1);
   const [description, setDescription] = useState<TalentDescriptionType>({ 1: '' });
+  const [canIncrease, setCanIncrease] = useState<boolean>(false);
+  const [canDecrease, setCanDecrease] = useState<boolean>(false);
 
   const { type, title } = data;
   const { x, y } = coords;
@@ -31,6 +33,8 @@ export const Tooltip = ({
       setRank(Math.max(data.rank, MIN_RANK_VALUE) as TalentMaxValueType);
       setLevel(data.rank);
       setDescription(data.description);
+      setCanIncrease(data.canIncrease);
+      setCanDecrease(data.canDecrease);
     }
   }, [data]);
 

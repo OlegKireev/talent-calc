@@ -12,6 +12,8 @@ type TooltipTalentType = {
   title: string,
   description: TalentDescriptionType,
   rank: number,
+  canIncrease: boolean,
+  canDecrease: boolean,
 };
 
 export type TooltipCoordsType = {
