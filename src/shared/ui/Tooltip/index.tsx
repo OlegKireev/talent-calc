@@ -27,6 +27,7 @@ export const Tooltip = ({
   const isTalentType = type === 'talent';
   const nextRankDescription = description[rank + 1 as TalentMaxValueType];
   const shouldDisplayNextRankDescription = isTalentType && level > 0 && nextRankDescription;
+  const shouldDisplayTip = canIncrease || canDecrease;
 
   useEffect(() => {
     if ('rank' in data) {
@@ -83,6 +84,22 @@ export const Tooltip = ({
             </p>
           </>
         )}
+
+        {shouldDisplayTip && (
+          <div className={styles.tip}>
+            {canIncrease && (
+              <span className={styles.action}>
+                Click to learn
+              </span>
+            )}
+            {!canIncrease && canDecrease && (
+              <span className={styles.action}>
+                Right-click to unlearn
+              </span>
+            )}
+          </div>
+        )}
+
       </div>
     ),
     document.body,

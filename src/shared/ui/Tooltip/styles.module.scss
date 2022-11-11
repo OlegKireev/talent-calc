@@ -7,7 +7,7 @@
   color: white;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  box-shadow: 0 0 10px rgba($color: #000, $alpha: 100%);
+  box-shadow: 0 0 1rem rgba($color: #000, $alpha: 25%);
   border: 1px solid #676767;
   font-size: 0.75rem;
   max-width: 20rem;
@@ -35,4 +35,12 @@
 .desc {
   color: #ffd100;
   margin: 0;
+}
+
+.tip {
+  margin-top: 0.5rem;
+}
+
+.action {
+  color: #1eff00;
 }
