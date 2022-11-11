@@ -99,15 +99,9 @@ export const Tree = ({
                           )}
                           <Talent
                             key={talent.title}
+                            data={talent}
                             value={state[talent.id]}
-                            title={talent.title}
-                            description={talent.description}
-                            max={talent.max}
-                            id={talent.id}
-                            requiredTalentId={talent.required}
-                            icon={talent.icon}
                             specialization={title}
-                            tier={tier}
                             deepestTierWithValue={deepestTierWithValue}
                             includeTierTotal={previousTiersTotal + currentTierTotal}
                             isTierAvailable={isTierAvailable}

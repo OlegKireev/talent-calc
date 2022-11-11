@@ -2,8 +2,7 @@ import { MouseEvent, useEffect, useState } from 'react';
 import cx from 'classnames';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 import { type CharacterSpecializationType } from 'shared/constants/global';
-import { type CharacterTalentIdType } from 'shared/constants/talents';
-import type { TalentDescriptionType, TalentMaxValueType, TalentTierType } from 'shared/constants/talentsData';
+import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { type HandleTalentChange } from 'features/talent-calc/types';
 import { useTooltipContext } from 'shared/context/tooltip';
 import { type TooltipErrorsType } from 'shared/ui/Tooltip/types';
@@ -14,49 +13,46 @@ import { useTalentPermissions } from './useTalentPermissions';
 import styles from './styles.module.scss';
 
 export interface TalentProps {
-  title: string;
-  icon: string
-  id: CharacterTalentIdType
+  data: TalentType
   value?: number
-  max: TalentMaxValueType
-  requiredTalentId?: CharacterTalentIdType
   specialization: CharacterSpecializationType
-  tier: TalentTierType
-  description: TalentDescriptionType
   deepestTierWithValue: TalentTierType
   includeTierTotal: number
   isTierAvailable: boolean
   isRequiredTalentHasValue: boolean
   isChildrenTalentsEmpty: boolean
-  onChange: HandleTalentChange
   getPreviousTotal: GetPreviousTotal
+  onChange: HandleTalentChange
 }
 
 export const Talent = ({
-  title,
-  icon,
-  id,
+  data,
   value = 0,
-  max,
-  requiredTalentId,
   specialization,
-  tier,
-  description,
   deepestTierWithValue,
   includeTierTotal,
   isTierAvailable,
   isRequiredTalentHasValue,
   isChildrenTalentsEmpty,
-  onChange,
   getPreviousTotal,
+  onChange,
 }: TalentProps) => {
+  const {
+    title,
+    id,
+    icon,
+    max,
+    tier,
+    description,
+    required,
+  } = data;
   const [errors, setErrors] = useState<TooltipErrorsType>({
     isDisabledByTotal: '',
     isDisabledByParent: '',
   });
   const { allTalents } = useTalentCalcContext();
 
-  const requiredTalentTitle = requiredTalentId ? allTalents[requiredTalentId]?.title : '';
+  const requiredTalentTitle = required ? allTalents[required]?.title : '';
   const isAvailable = isTierAvailable && isRequiredTalentHasValue;
 
   useEffect(() => {
@@ -82,11 +78,11 @@ export const Talent = ({
   });
 
   const {
-    openTooltip, closeTooltip, refreshLastTooltip, data,
+    openTooltip, closeTooltip, refreshLastTooltip, data: tooltipData,
   } = useTooltipContext();
 
   useEffect(() => {
-    if (data.title === title) {
+    if (tooltipData.title === title) {
       refreshLastTooltip({
         type: 'talent',
         title,
@@ -98,7 +94,7 @@ export const Talent = ({
       });
     }
   }, [
-    data.title,
+    tooltipData.title,
     title,
     value,
     description,
