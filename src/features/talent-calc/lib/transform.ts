@@ -17,6 +17,7 @@ export type CreateTaletsStateReturn = {
   [key in CharacterSpecializationType]?: TalentsStateType
 };
 
+// TODO: add tests
 export const generateAllTalentsMap = (talents: TalentsType) => {
   const classes = Object.keys(talents) as CharacterClassType[];
 
