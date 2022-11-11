@@ -1,16 +1,39 @@
 import {
-  createContext, useContext, useMemo, useState,
+  createContext, useCallback, useContext, useMemo, useState,
 } from 'react';
-import { CharacterClassType } from 'shared/constants/global';
+import { type CharacterClassType } from 'shared/constants/global';
+import type { TalentType, TalentsType } from 'shared/constants/talentsData';
+import { generateAllTalents, type CreateTaletsStateReturn } from '../lib/transform';
 
 type TalentCalcContextType = {
   currentClass: CharacterClassType | null,
-  onClassChange: (newClass: CharacterClassType) => void,
+  state: CreateTaletsStateReturn,
+  talentsByClass: TalentsType,
+  allTalents: TalentType[],
+  setClass: (newClass: CharacterClassType) => void,
+  setState: (newState: CreateTaletsStateReturn) => void,
+  setTalents: (newTalents: TalentsType) => void
 };
 
-const initialState = {
+const initialState: TalentCalcContextType = {
   currentClass: null,
-  onClassChange: () => {},
+  state: {},
+  talentsByClass: {
+    deathknight: [],
+    druid: [],
+    hunter: [],
+    mage: [],
+    paladin: [],
+    priest: [],
+    rogue: [],
+    shaman: [],
+    warlock: [],
+    warrior: [],
+  },
+  allTalents: [],
+  setClass: () => {},
+  setState: () => {},
+  setTalents: () => {},
 };
 
 const TalentCalcContext = createContext<TalentCalcContextType | undefined>(
@@ -19,30 +42,51 @@ const TalentCalcContext = createContext<TalentCalcContextType | undefined>(
 
 export type TalentState = {
   class: CharacterClassType | null,
-  talents: {
-    [key in string]?: string
-  }
+  state: CreateTaletsStateReturn,
+  talentsByClass: TalentsType,
+  allTalents: TalentType[]
 };
 
 export const TalentCalcProvider = ({
   children,
 }: { children: React.ReactNode }) => {
-  const [state, setState] = useState<TalentState>({
-    class: null,
-    talents: {},
-  });
+  const [currentClass, setCurrentClass] = useState<CharacterClassType | null>(
+    initialState.currentClass,
+  );
+  const [state, setState] = useState<CreateTaletsStateReturn>(initialState.state);
+  const [talentsByClass, setTalentsByClass] = useState<TalentsType>(initialState.talentsByClass);
+  const [allTalents, setAllTalents] = useState<TalentType[]>(initialState.allTalents);
 
-  const handleClassChange = (newClass: CharacterClassType) => {
-    setState((prev) => ({
-      ...prev,
-      class: newClass,
-    }));
-  };
+  const handleClassUpdate = useCallback((newClass: CharacterClassType) => {
+    setCurrentClass(newClass);
+  }, [setCurrentClass]);
+
+  const handleStateUpdate = useCallback((newState: CreateTaletsStateReturn) => {
+    setState(newState);
+  }, [setState]);
+
+  const handleTalentsUpdate = useCallback((newTalents: TalentsType) => {
+    setTalentsByClass(newTalents);
+    setAllTalents(generateAllTalents(newTalents));
+  }, [setTalentsByClass, setAllTalents]);
 
   const value = useMemo(() => ({
-    currentClass: state.class,
-    onClassChange: handleClassChange,
-  }), [state.class]);
+    currentClass,
+    state,
+    talentsByClass,
+    allTalents,
+    setClass: handleClassUpdate,
+    setState: handleStateUpdate,
+    setTalents: handleTalentsUpdate,
+  }), [
+    currentClass,
+    state,
+    talentsByClass,
+    allTalents,
+    handleClassUpdate,
+    handleStateUpdate,
+    handleTalentsUpdate,
+  ]);
 
   return (
     <TalentCalcContext.Provider value={value}>
