@@ -17,12 +17,16 @@ export type CreateTaletsStateReturn = {
   [key in CharacterSpecializationType]?: TalentsStateType
 };
 
-export const generateAllTalents = (talents: TalentsType) => {
+export const generateAllTalentsMap = (talents: TalentsType) => {
   const classes = Object.keys(talents) as CharacterClassType[];
 
   return classes
     .map((characterClass) => talents[characterClass])
     .flat()
     .map((t) => t.talents)
-    .flat();
+    .flat()
+    .reduce((acc, cur) => ({
+      ...acc,
+      [cur.id]: cur,
+    }), {});
 };
