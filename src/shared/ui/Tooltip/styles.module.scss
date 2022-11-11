@@ -37,6 +37,18 @@
   margin: 0;
 }
 
+.row {
+  display: flex;
+}
+
+.left {
+  margin-right: auto;
+}
+
+.right {
+  margin-left: auto;
+}
+
 .tip {
   margin-top: 0.5rem;
 }

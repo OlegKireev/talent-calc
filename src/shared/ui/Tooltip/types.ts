@@ -1,4 +1,10 @@
-import { TalentDescriptionType } from 'shared/constants/talentsData';
+import type {
+  AbilityCastDurationType,
+  AbilityCooldownType,
+  AbilityCostsType,
+  AbilityRangeType,
+  TalentDescriptionType,
+} from 'shared/constants/talentsData';
 
 export type TooltipType = TooltipDefaultType | TooltipTalentType;
 
@@ -12,6 +18,10 @@ type TooltipTalentType = {
   title: string,
   description: TalentDescriptionType,
   rank: number,
+  cooldown?: AbilityCooldownType,
+  castDuration?: AbilityCastDurationType,
+  range?: AbilityRangeType,
+  costs?: AbilityCostsType,
   canIncrease: boolean,
   canDecrease: boolean,
   errors: TooltipErrorsType,

@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import type { TalentDescriptionType, TalentMaxValueType } from 'shared/constants/talentsData';
+import type {
+  AbilityCastDurationType,
+  AbilityCooldownType,
+  AbilityCostsType,
+  AbilityRangeType,
+  TalentDescriptionType,
+  TalentMaxValueType,
+} from 'shared/constants/talentsData';
 import type { TooltipCoordsType, TooltipType } from './types';
 import styles from './styles.module.scss';
 
@@ -20,6 +27,11 @@ export const Tooltip = ({
   const [description, setDescription] = useState<TalentDescriptionType>({ 1: '' });
   const [canIncrease, setCanIncrease] = useState<boolean>(false);
   const [canDecrease, setCanDecrease] = useState<boolean>(false);
+  const [cooldown, setCooldown] = useState<AbilityCooldownType | undefined>(0);
+  const [costs, setCosts] = useState<AbilityCostsType | undefined>('');
+  const [range, setRange] = useState<AbilityRangeType | undefined>(0);
+  const [castDuration, setCastDuration] = useState<AbilityCastDurationType | undefined>(0);
+
   const [errors, setErrors] = useState<string[]>([]);
 
   const { type, title } = data;
@@ -38,6 +50,10 @@ export const Tooltip = ({
       setCanIncrease(data.canIncrease);
       setCanDecrease(data.canDecrease);
       setErrors(Object.values(data.errors).filter((err) => Boolean(err)));
+      setCosts(data.costs);
+      setRange(data.range);
+      setCastDuration(data.castDuration);
+      setCooldown(data.cooldown);
     }
   }, [data]);
 
@@ -65,6 +81,35 @@ export const Tooltip = ({
         {isTalentType && (
           <span className={styles.type}>Talent</span>
         )}
+        {(costs || range) && (
+          <div className={styles.row}>
+            {costs && (
+              <span className={styles.left}>
+                {costs}
+              </span>
+            )}
+            {range && (
+              <span className={styles.right}>
+                {`${range} yd range`}
+              </span>
+            )}
+          </div>
+        )}
+        {(castDuration || cooldown) && (
+          <div className={styles.row}>
+            {castDuration && (
+              <span className={styles.left}>
+                {castDuration}
+              </span>
+            )}
+            {cooldown && (
+              <span className={styles.right}>
+                {`${cooldown} sec cooldown`}
+              </span>
+            )}
+          </div>
+        )}
+
         {isTalentType && (
           <p className={styles.desc}>
             {description[rank]}
