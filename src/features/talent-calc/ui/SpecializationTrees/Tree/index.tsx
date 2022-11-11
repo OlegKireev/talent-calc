@@ -54,6 +54,7 @@ export const Tree = ({
             const currentTierTotal = getTierTotal(tier, talents, state);
             const previousTiersTotal = getPreviousTiersTotal(tier, talents, state);
             const isTierAvailable = checkIsTierAvailable(tier, previousTiersTotal);
+
             const getPreviousTotal: GetPreviousTotal = (prevTier) => getPreviousTiersTotal(
               prevTier,
               talents,
@@ -103,12 +104,14 @@ export const Tree = ({
                             description={talent.description}
                             max={talent.max}
                             id={talent.id}
+                            requiredTalentId={talent.required}
                             icon={talent.icon}
                             specialization={title}
                             tier={tier}
                             deepestTierWithValue={deepestTierWithValue}
                             includeTierTotal={previousTiersTotal + currentTierTotal}
-                            isAvailable={isTierAvailable && isRequiredTalentHasValue}
+                            isTierAvailable={isTierAvailable}
+                            isRequiredTalentHasValue={isRequiredTalentHasValue}
                             isChildrenTalentsEmpty={isChildrenTalentsEmpty}
                             getPreviousTotal={getPreviousTotal}
                             onChange={onTalentChange}
