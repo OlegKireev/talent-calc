@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import cx from 'classnames';
 import { AbilityButton } from 'shared/ui/AbilityButton';
 import { type CharacterSpecializationType } from 'shared/constants/global';
@@ -56,7 +54,18 @@ export const Talent = ({
     getPreviousTotal,
   });
 
-  const { openTooltip, closeTooltip } = useTooltipContext();
+  const { openTooltip, closeTooltip, refreshLastTooltip } = useTooltipContext();
+
+  useEffect(() => {
+    refreshLastTooltip({
+      type: 'talent',
+      title,
+      rank: value,
+      description,
+      canIncrease,
+      canDecrease,
+    });
+  }, [canDecrease, canIncrease, title, value, description, refreshLastTooltip]);
 
   const handleOpenTooltip = (rank: number, event: MouseEvent<HTMLElement>) => {
     openTooltip({
@@ -64,6 +73,8 @@ export const Talent = ({
       title,
       description,
       rank,
+      canIncrease,
+      canDecrease,
     }, event);
   };
 
@@ -96,6 +107,7 @@ export const Talent = ({
   const handleMouseOut = () => closeTooltip();
 
   return (
+    // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
     <div
       className={cx(styles.wrapper, {
         [styles.available]: isAvailable,
