@@ -54,18 +54,22 @@ export const Talent = ({
     getPreviousTotal,
   });
 
-  const { openTooltip, closeTooltip, refreshLastTooltip } = useTooltipContext();
+  const {
+    openTooltip, closeTooltip, refreshLastTooltip, data,
+  } = useTooltipContext();
 
   useEffect(() => {
-    refreshLastTooltip({
-      type: 'talent',
-      title,
-      rank: value,
-      description,
-      canIncrease,
-      canDecrease,
-    });
-  }, [canDecrease, canIncrease, title, value, description, refreshLastTooltip]);
+    if (data.title === title) {
+      refreshLastTooltip({
+        type: 'talent',
+        title,
+        rank: value,
+        description,
+        canIncrease,
+        canDecrease,
+      });
+    }
+  }, [data.title, title, value, description, canDecrease, canIncrease, refreshLastTooltip]);
 
   const handleOpenTooltip = (rank: number, event: MouseEvent<HTMLElement>) => {
     openTooltip({
