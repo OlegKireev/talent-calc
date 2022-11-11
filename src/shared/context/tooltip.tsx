@@ -6,11 +6,12 @@ import { getTooltipCoords } from 'shared/lib/utils';
 import { TooltipCoordsType, TooltipType } from 'shared/ui/Tooltip/types';
 
 type TooltipContextType = {
-  isOpen: boolean,
   data: TooltipType,
   coords: TooltipCoordsType,
+  isOpen: boolean,
   openTooltip: (tooltipData: TooltipType, event: MouseEvent<HTMLElement>) => void,
   closeTooltip: () => void,
+  refreshLastTooltip: (tooltipData: TooltipType) => void,
 };
 
 const initalData: TooltipType = {
@@ -24,11 +25,12 @@ const initialCoords: TooltipCoordsType = {
 };
 
 const initialState: TooltipContextType = {
-  isOpen: false,
   data: initalData,
   coords: initialCoords,
+  isOpen: false,
   openTooltip: () => {},
   closeTooltip: () => {},
+  refreshLastTooltip: () => {},
 };
 
 const TooltipContext = createContext<TooltipContextType | undefined>(
@@ -56,13 +58,21 @@ export const TooltipProvider = ({
     [onClose],
   );
 
+  const refreshLastTooltip = useCallback(
+    (tooltipData: TooltipType) => {
+      setData(tooltipData);
+    },
+    [],
+  );
+
   const value = useMemo(() => ({
     isOpen,
     data,
     coords: { x: coords.x, y: coords.y },
     openTooltip,
     closeTooltip,
-  }), [closeTooltip, data, isOpen, openTooltip, coords]);
+    refreshLastTooltip,
+  }), [data, coords, isOpen, openTooltip, closeTooltip, refreshLastTooltip]);
 
   return (
     <TooltipContext.Provider value={value}>
