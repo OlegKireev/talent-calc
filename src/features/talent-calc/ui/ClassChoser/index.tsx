@@ -10,16 +10,20 @@ interface ClassChoserProps {
 export const ClassChoser = ({
   currentClass,
 }: ClassChoserProps) => (
-  <div className={styles.wrapper}>
-    {characterClasses.map((characterClass) => (
-      <Link to={`/${characterClass}`}>
-        <AbilityButton
-          key={characterClass}
-          isSelected={characterClass === currentClass}
-          isDimmed={characterClass !== currentClass}
-          background={`${RESOURCE_URI}/icons/large/class_${characterClass}.jpg`}
-        />
-      </Link>
-    ))}
-  </div>
+  <>
+    {!currentClass && (
+    <h2 className={styles.title}>Choose a class:</h2>
+    )}
+    <div className={styles.classList}>
+      {characterClasses.map((characterClass) => (
+        <Link to={`/${characterClass}`} key={characterClass}>
+          <AbilityButton
+            isSelected={characterClass === currentClass}
+            isDimmed={characterClass !== currentClass}
+            background={`${RESOURCE_URI}/icons/large/class_${characterClass}.jpg`}
+          />
+        </Link>
+      ))}
+    </div>
+  </>
 );

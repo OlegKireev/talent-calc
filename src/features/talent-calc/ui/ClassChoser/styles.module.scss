@@ -1,3 +1,13 @@
-.wrapper {
+.title {
+  text-align: center;
+  margin: 0;
+  color: #ccc;
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+
+.classList {
   display: flex;
+  justify-content: center;
+  gap: 0.375rem;
 }
