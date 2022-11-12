@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { CharacterClassType } from 'shared/constants/global';
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
@@ -11,12 +13,13 @@ import styles from './styles.module.scss';
 
 export const TalentCalc = () => {
   const {
-    currentClass,
     state,
     setState,
-    setClass,
     setTalents,
   } = useTalentCalcContext();
+
+  const { characterClass } = useParams();
+  const currentClass = characterClass as CharacterClassType | null;
 
   const isDataRefreshed = checkIsTalentsDataRefreshed(currentClass, state);
 
@@ -51,7 +54,6 @@ export const TalentCalc = () => {
     <div className={styles.wrapper}>
       <ClassChoser
         currentClass={currentClass}
-        onClassChange={setClass}
       />
       {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed ? (
         <SpecializationTrees
