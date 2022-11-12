@@ -19,7 +19,7 @@ export const characteSpecs = [
 ] as const;
 export type CharacterSpecializationType = typeof characteSpecs[number];
 
-export const specs: {
+export const SPECS: {
   [key in CharacterClassType]: [
     CharacterSpecializationType,
     CharacterSpecializationType,
