@@ -3,13 +3,15 @@ import { type CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentsType, type TaletsOfClassType } from 'shared/constants/talentsData';
 
 export const createTalentsState = (
-  obj: TaletsOfClassType[],
-): CreateTaletsStateReturn => obj.reduce((acc, cur) => ({
+  talents: TaletsOfClassType[],
+): CreateTaletsStateReturn => talents.reduce((acc, cur) => ({
   ...acc,
-  [cur.title]: cur.talents.reduce((innerAcc, innerCur) => ({
-    ...innerAcc,
-    [innerCur.id]: 0,
-  }), {}),
+  [cur.title]: cur.talents
+    .sort((a, b) => a.tier - b.tier)
+    .reduce((innerAcc, innerCur) => ({
+      ...innerAcc,
+      [innerCur.id]: 0,
+    }), {}),
 }), {});
 
 export type TalentsStateType = { [key in CharacterTalentIdType]?: number };
