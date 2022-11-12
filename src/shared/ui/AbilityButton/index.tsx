@@ -5,7 +5,8 @@ import styles from './styles.module.scss';
 interface AbilityButtonProps {
   children?: ReactNode
   background?: string,
-  isActive?: boolean
+  isSelected?: boolean
+  isDimmed?: boolean
   isDisabled?: boolean
   onClick?: (e: MouseEvent<HTMLButtonElement>) => any
   onRightClick?: (e: MouseEvent<HTMLButtonElement>) => any
@@ -14,24 +15,37 @@ interface AbilityButtonProps {
 export const AbilityButton = ({
   children,
   background,
-  isActive,
+  isSelected,
+  isDimmed,
   isDisabled,
   onClick,
   onRightClick,
-}: AbilityButtonProps) => (
-  <button
-    type="button"
-    className={cx(styles.wrapper, {
-      [styles.active]: isActive,
-      [styles.withBackground]: Boolean(background),
-    })}
-    style={{
-      backgroundImage: `url("https://wow.zamimg.com/images/Icon/large/border/default.png"), url("${background}")`,
-    }}
-    disabled={isDisabled}
-    onClick={onClick}
-    onContextMenu={onRightClick}
-  >
-    {children}
-  </button>
-);
+}: AbilityButtonProps) => {
+  const Tag = (Boolean(onClick) || Boolean(onRightClick)) ? 'button' : 'div';
+
+  const handlerProps = {
+    onClick,
+    onContextMenu: onRightClick,
+  };
+
+  const restProps = Tag === 'button' ? handlerProps : {};
+
+  return (
+    <Tag
+      type="button"
+      className={cx(styles.wrapper, {
+        [styles.dimmed]: isDimmed,
+        [styles.selected]: isSelected,
+        [styles.withBackground]: Boolean(background),
+      })}
+      style={{
+        backgroundImage: `url("https://wow.zamimg.com/images/Icon/large/border/default.png"), url("${background}")`,
+      }}
+      disabled={isDisabled}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...restProps}
+    >
+      {children}
+    </Tag>
+  );
+};

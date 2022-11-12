@@ -10,7 +10,8 @@
   font-weight: 900;
   text-shadow: 0 0 3px rgb(0 0 0 / 100%);
 
-  &:active::after {
+  &:active::after,
+  &.dimmed {
     filter: brightness(0.5);
   }
 
@@ -18,7 +19,8 @@
     cursor: pointer;
 
     &:hover::after,
-    &:focus-visible::after {
+    &:focus-visible::after,
+    &.selected::after {
       content: "";
       position: absolute;
       top: 4px;
@@ -34,10 +36,6 @@
 
   &:disabled {
     filter: grayscale(100%);
-  }
-
-  &.active {
-    border-color: red;
   }
 
   &.withBackground {
