@@ -158,17 +158,23 @@ export const checkHasChildrenTalentsNoValue = (
   return childrenTalents.every((id) => !state[id]);
 };
 
-// TODO: add tests
 export const generateStateString = (state: CreateTaletsStateReturn) => {
   const specs = Object.keys(state) as CharacterSpecializationType[];
-
   const statesBySpec = specs.map((spec) => state[spec]);
 
-  return statesBySpec
+  const classTalentsString = statesBySpec
     .reduce(
-      (acc, specState) => `${acc}${acc ? '-' : ''}${Object.values(specState || '')}`,
+      (acc, specState, i) => {
+        const specString = Object
+          .values(specState || [])
+          .join('')
+          .replace(/0*$/, '');
+        return `${acc}${i ? '-' : ''}${specString}`;
+      },
       '',
-    )
-    .replaceAll(',', '')
-    .replace(/0*$/, '');
+    );
+
+  return classTalentsString === '--'
+    ? ''
+    : classTalentsString;
 };
