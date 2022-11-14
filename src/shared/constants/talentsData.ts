@@ -36,6 +36,7 @@ export type TaletsOfClassType = {
   title: CharacterSpecializationType,
   backgroundImage: string,
   talents: TalentType[]
+  icon: string,
 };
 
 export type TalentsType = {
