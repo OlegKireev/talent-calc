@@ -55,3 +55,4 @@ export const CHARACTER_COLORS: {
 
 export const TALENTS_TO_NEXT_TIER = 5;
 export const MAX_TALENTS_POINTS = 71;
+export const FIRST_TALTNT_CHARACTER_LEVEL = 10;
