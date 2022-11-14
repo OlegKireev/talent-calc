@@ -15,6 +15,7 @@ import { CharacterSpecializationType } from 'shared/constants/global';
 import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { type HandleTalentChange } from 'features/talent-calc/types';
 import { type GetPreviousTotal } from './types';
+import { Header } from './Header';
 import { Talent } from './Talent';
 import { Arrow } from './Arrow';
 import styles from './styles.module.scss';
@@ -22,6 +23,7 @@ import styles from './styles.module.scss';
 export interface TreeProps {
   state: TalentsStateType,
   title: CharacterSpecializationType
+  icon: string,
   talents: TalentType[]
   backgroundImage?: string
   onTalentChange: HandleTalentChange
@@ -30,6 +32,7 @@ export interface TreeProps {
 export const Tree = ({
   state,
   title,
+  icon,
   talents,
   backgroundImage,
   onTalentChange,
@@ -43,85 +46,87 @@ export const Tree = ({
   return (
     <div
       className={styles.wrapper}
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-      }}
     >
-      <table className={styles.table}>
-        <tbody>
-          {rows.map((tier) => {
-            let spaceBetweenCells = 0;
-            const currentTierTotal = getTierTotal(tier, talents, state);
-            const previousTiersTotal = getPreviousTiersTotal(tier, talents, state);
-            const isTierAvailable = checkIsTierAvailable(tier, previousTiersTotal);
+      <Header title={title} total={total} icon={icon} />
+      <div
+        className={styles.tree}
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
+      >
+        <table className={styles.table}>
+          <tbody>
+            {rows.map((tier) => {
+              let spaceBetweenCells = 0;
+              const currentTierTotal = getTierTotal(tier, talents, state);
+              const previousTiersTotal = getPreviousTiersTotal(tier, talents, state);
+              const isTierAvailable = checkIsTierAvailable(tier, previousTiersTotal);
 
-            const getPreviousTotal: GetPreviousTotal = (prevTier) => getPreviousTiersTotal(
-              prevTier,
-              talents,
-              state,
-            );
+              const getPreviousTotal: GetPreviousTotal = (prevTier) => getPreviousTiersTotal(
+                prevTier,
+                talents,
+                state,
+              );
 
-            return (
-              <tr key={`row-${tier}`}>
-                {talents
-                  .filter((talent) => talent.tier === tier)
-                  .map((talent, i) => {
-                    const cellOffset = talent.column - (i + 1 + spaceBetweenCells);
-                    if (cellOffset > 0) {
-                      spaceBetweenCells += 1;
-                    }
-                    const emptyCells = numberToArray(cellOffset);
-                    const isRequiredTalentHasValue = checkRequiredTalent(talent.required, state);
-                    const arrowPosition = gerArrowPosition(
-                      talent.id,
-                      talent.required,
-                      talents,
-                    );
+              return (
+                <tr key={`row-${tier}`}>
+                  {talents
+                    .filter((talent) => talent.tier === tier)
+                    .map((talent, i) => {
+                      const cellOffset = talent.column - (i + 1 + spaceBetweenCells);
+                      if (cellOffset > 0) {
+                        spaceBetweenCells += 1;
+                      }
+                      const emptyCells = numberToArray(cellOffset);
+                      const isRequiredTalentHasValue = checkRequiredTalent(talent.required, state);
+                      const arrowPosition = gerArrowPosition(
+                        talent.id,
+                        talent.required,
+                        talents,
+                      );
 
-                    const isChildrenTalentsEmpty = checkHasChildrenTalentsNoValue(
-                      talent.id,
-                      talents,
-                      state,
-                    );
+                      const isChildrenTalentsEmpty = checkHasChildrenTalentsNoValue(
+                        talent.id,
+                        talents,
+                        state,
+                      );
 
-                    return (
-                      <Fragment key={`tier${tier}-${talent.title}`}>
-                        {emptyCells.map((cell) => (
-                          <td key={cell} className={styles.cell} />
-                        ))}
-                        <td className={styles.cell}>
-                          {arrowPosition !== false && (
+                      return (
+                        <Fragment key={`tier${tier}-${talent.title}`}>
+                          {emptyCells.map((cell) => (
+                            <td key={cell} className={styles.cell} />
+                          ))}
+                          <td className={styles.cell}>
+                            {arrowPosition !== false && (
                             <Arrow
                               from={arrowPosition.from}
                               to={arrowPosition.to}
                               isAvailable={isTierAvailable && isRequiredTalentHasValue}
                             />
-                          )}
-                          <Talent
-                            key={talent.title}
-                            data={talent}
-                            value={state[talent.id]}
-                            specialization={title}
-                            deepestTierWithValue={deepestTierWithValue}
-                            includeTierTotal={previousTiersTotal + currentTierTotal}
-                            isTierAvailable={isTierAvailable}
-                            isRequiredTalentHasValue={isRequiredTalentHasValue}
-                            isChildrenTalentsEmpty={isChildrenTalentsEmpty}
-                            getPreviousTotal={getPreviousTotal}
-                            onChange={onTalentChange}
-                          />
-                        </td>
-                      </Fragment>
-                    );
-                  })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <h4>
-        {`${title} (${total})`}
-      </h4>
+                            )}
+                            <Talent
+                              key={talent.title}
+                              data={talent}
+                              value={state[talent.id]}
+                              specialization={title}
+                              deepestTierWithValue={deepestTierWithValue}
+                              includeTierTotal={previousTiersTotal + currentTierTotal}
+                              isTierAvailable={isTierAvailable}
+                              isRequiredTalentHasValue={isRequiredTalentHasValue}
+                              isChildrenTalentsEmpty={isChildrenTalentsEmpty}
+                              getPreviousTotal={getPreviousTotal}
+                              onChange={onTalentChange}
+                            />
+                          </td>
+                        </Fragment>
+                      );
+                    })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -31,6 +31,7 @@ export const SpecializationTrees = ({
         <Tree
           state={state[specializationData.title]!}
           title={specializationData.title}
+          icon={specializationData.icon}
           talents={specializationData.talents}
           backgroundImage={specializationData.backgroundImage}
           key={specializationData.title}
