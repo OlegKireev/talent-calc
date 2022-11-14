@@ -2,12 +2,14 @@ import { CharacterClassType, type CharacterSpecializationType } from 'shared/con
 import { type CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentsType, type TaletsOfClassType } from 'shared/constants/talentsData';
 
+const SPEC_SEPARATOR = '-';
+
 export const generateTalentsState = (
   talents: TaletsOfClassType[],
   stateFromParams?: string,
 ): CreateTaletsStateReturn => {
   const DEFAULT_VALUE = 0;
-  const states = stateFromParams?.split('-') || [];
+  const states = stateFromParams?.split(SPEC_SEPARATOR) || [];
   return talents.reduce((acc, cur, specIndex) => {
     const state = states[specIndex];
     return {
@@ -53,12 +55,12 @@ export const generateStateString = (state: CreateTaletsStateReturn) => {
           .values(specState || [])
           .join('')
           .replace(/0*$/, '');
-        return `${acc}${i ? '-' : ''}${specString}`;
+        return `${acc}${i ? SPEC_SEPARATOR : ''}${specString}`;
       },
       '',
     );
 
-  return classTalentsString === '--'
+  return classTalentsString === `${SPEC_SEPARATOR}${SPEC_SEPARATOR}`
     ? ''
     : classTalentsString;
 };
