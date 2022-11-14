@@ -4,7 +4,7 @@ import { CharacterClassType } from 'shared/constants/global';
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { STATE_SEARCH_PARAM } from 'shared/constants/searchParams';
 import { ClassChoser } from './ui/ClassChoser';
-import { Controls } from './ui/Controls';
+import { Status } from './ui/Status';
 import { SpecializationTrees } from './ui/SpecializationTrees';
 import { generateTalentsState, generateStateString } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
@@ -66,6 +66,9 @@ export const TalentCalc = () => {
       <ClassChoser
         currentClass={currentClass}
       />
+      {currentClass && (
+        <Status currentClass={currentClass} />
+      )}
       {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed ? (
         <SpecializationTrees
           currentClass={currentClass}
@@ -74,7 +77,6 @@ export const TalentCalc = () => {
           onTalentChange={handleTalentChange}
         />
       ) : <div className={styles.placeholder} />}
-      <Controls />
     </div>
   );
 };
