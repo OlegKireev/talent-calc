@@ -38,5 +38,20 @@ export const SPECS: {
   warrior: ['arms', 'fury', 'protection'],
 };
 
+export const CHARACTER_COLORS: {
+  [key in CharacterClassType]: string
+} = {
+  deathknight: '#c41e3a',
+  druid: '#ff7c0a',
+  hunter: '#aad372',
+  mage: '#3fc7eb',
+  paladin: '#f48cba',
+  priest: '#fff',
+  rogue: '#fff468',
+  shaman: '#0070dd',
+  warlock: '#8788ee',
+  warrior: '#c69b6d',
+};
+
 export const TALENTS_TO_NEXT_TIER = 5;
 export const MAX_TALENTS_POINTS = 71;
