@@ -8,7 +8,7 @@ import { Status } from './ui/Status';
 import { SpecializationTrees } from './ui/SpecializationTrees';
 import { generateTalentsState, generateStateString } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
-import { checkIsTalentsDataRefreshed } from './lib/utils';
+import { checkIsTalentsDataRefreshed, getSpecsTotal } from './lib/utils';
 import { type HandleTalentChange } from './types';
 import styles from './styles.module.scss';
 
@@ -25,6 +25,7 @@ export const TalentCalc = () => {
 
   const stateFromSearchParams = searchParams.get(STATE_SEARCH_PARAM);
 
+  const totalBySpecs = getSpecsTotal(state);
   const isDataRefreshed = checkIsTalentsDataRefreshed(currentClass, state);
 
   useEffect(() => {
@@ -67,7 +68,10 @@ export const TalentCalc = () => {
         currentClass={currentClass}
       />
       {currentClass && (
-        <Status currentClass={currentClass} />
+        <Status
+          currentClass={currentClass}
+          specsTotal={totalBySpecs}
+        />
       )}
       {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed ? (
         <SpecializationTrees
