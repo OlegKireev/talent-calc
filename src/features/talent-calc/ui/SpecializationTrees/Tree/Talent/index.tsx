@@ -54,7 +54,7 @@ export const Talent = ({
     isDisabledByTotal: '',
     isDisabledByParent: '',
   });
-  const { allTalents } = useTalentCalcContext();
+  const { allTalents, total } = useTalentCalcContext();
 
   const requiredTalentTitle = required ? allTalents[required]?.title : '';
   const isAvailable = isTierAvailable && isRequiredTalentHasValue;
@@ -74,6 +74,7 @@ export const Talent = ({
     tier,
     value,
     max,
+    total,
     deepestTierWithValue,
     includeTierTotal,
     isAvailable,
