@@ -39,3 +39,4 @@ export const SPECS: {
 };
 
 export const TALENTS_TO_NEXT_TIER = 5;
+export const MAX_TALENTS_POINTS = 71;
