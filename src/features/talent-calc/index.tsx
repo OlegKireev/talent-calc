@@ -6,9 +6,9 @@ import { STATE_SEARCH_PARAM } from 'shared/constants/searchParams';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
-import { generateTalentsState } from './lib/transform';
+import { generateTalentsState, generateStateString } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
-import { checkIsTalentsDataRefreshed, generateStateString } from './lib/utils';
+import { checkIsTalentsDataRefreshed } from './lib/utils';
 import { type HandleTalentChange } from './types';
 import styles from './styles.module.scss';
 

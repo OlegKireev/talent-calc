@@ -41,3 +41,24 @@ export const generateAllTalentsMap = (talents: TalentsType) => {
       [cur.id]: cur,
     }), {});
 };
+
+export const generateStateString = (state: CreateTaletsStateReturn) => {
+  const specs = Object.keys(state) as CharacterSpecializationType[];
+  const statesBySpec = specs.map((spec) => state[spec]);
+
+  const classTalentsString = statesBySpec
+    .reduce(
+      (acc, specState, i) => {
+        const specString = Object
+          .values(specState || [])
+          .join('')
+          .replace(/0*$/, '');
+        return `${acc}${i ? '-' : ''}${specString}`;
+      },
+      '',
+    );
+
+  return classTalentsString === '--'
+    ? ''
+    : classTalentsString;
+};
