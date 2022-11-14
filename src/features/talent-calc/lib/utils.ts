@@ -1,5 +1,5 @@
 import {
-  SPECS, type CharacterClassType, TALENTS_TO_NEXT_TIER,
+  SPECS, type CharacterClassType, TALENTS_TO_NEXT_TIER, type CharacterSpecializationType,
 } from 'shared/constants/global';
 import { type CharacterTalentIdType } from 'shared/constants/talents';
 import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
@@ -156,4 +156,15 @@ export const checkHasChildrenTalentsNoValue = (
     .map((talent) => talent.id);
 
   return childrenTalents.every((id) => !state[id]);
+};
+
+// TODO: add tests
+export const getSpecsTotal = (
+  state: CreateTaletsStateReturn,
+) => {
+  const specs = Object.keys(state) as CharacterSpecializationType[];
+  const valuesBySpecs = specs
+    .map((spec) => Object.values(state[spec] || {}));
+  return valuesBySpecs
+    .map((specValues) => specValues.reduce((acc, value) => acc + value, 0));
 };
