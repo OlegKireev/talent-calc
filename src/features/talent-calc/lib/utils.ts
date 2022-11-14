@@ -1,4 +1,6 @@
-import { specs, type CharacterClassType, TALENTS_TO_NEXT_TIER } from 'shared/constants/global';
+import {
+  SPECS, type CharacterClassType, TALENTS_TO_NEXT_TIER, CharacterSpecializationType,
+} from 'shared/constants/global';
 import { type CharacterTalentIdType } from 'shared/constants/talents';
 import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { numberToArray } from 'shared/lib/transform';
@@ -55,7 +57,7 @@ export const checkIsTalentsDataRefreshed = (
   const currentDataKeys = Object.keys(talentsData);
 
   return currentDataKeys.every(
-    (key: any) => specs[characterClass].includes(key),
+    (key: any) => SPECS[characterClass].includes(key),
   );
 };
 
@@ -154,4 +156,17 @@ export const checkHasChildrenTalentsNoValue = (
     .map((talent) => talent.id);
 
   return childrenTalents.every((id) => !state[id]);
+};
+
+// TODO: add tests
+export const generateStateString = (state: CreateTaletsStateReturn) => {
+  const specs = Object.keys(state) as CharacterSpecializationType[];
+
+  const statesBySpec = specs.map((spec) => state[spec]);
+
+  return statesBySpec
+    .reduce(
+      (acc, specState) => `${acc}${acc ? '-' : ''}${Object.values(specState || '')}`,
+      '',
+    ).replaceAll(',', '');
 };
