@@ -6,7 +6,7 @@ import { STATE_SEARCH_PARAM } from 'shared/constants/searchParams';
 import { ClassChoser } from './ui/ClassChoser';
 import { Controls } from './ui/Controls';
 import { SpecializationTrees } from './ui/SpecializationTrees';
-import { createTalentsState } from './lib/transform';
+import { generateTalentsState } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
 import { checkIsTalentsDataRefreshed, generateStateString } from './lib/utils';
 import { type HandleTalentChange } from './types';
@@ -23,7 +23,7 @@ export const TalentCalc = () => {
   const currentClass = characterClass as CharacterClassType | null;
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(searchParams.get(STATE_SEARCH_PARAM));
+  const stateFromSearchParams = searchParams.get(STATE_SEARCH_PARAM);
 
   const isDataRefreshed = checkIsTalentsDataRefreshed(currentClass, state);
 
@@ -35,8 +35,13 @@ export const TalentCalc = () => {
     if (!currentClass || !TALENTS_TEMPLATE[currentClass]) {
       return;
     }
-    setState(createTalentsState(TALENTS_TEMPLATE[currentClass]));
-  }, [currentClass, setState]);
+
+    if (stateFromSearchParams) {
+      setState(generateTalentsState(TALENTS_TEMPLATE[currentClass], stateFromSearchParams));
+    } else {
+      setState(generateTalentsState(TALENTS_TEMPLATE[currentClass]));
+    }
+  }, [currentClass, setState, stateFromSearchParams]);
 
   const handleTalentChange: HandleTalentChange = ({
     specialization,
