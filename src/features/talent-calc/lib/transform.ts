@@ -2,17 +2,24 @@ import { CharacterClassType, type CharacterSpecializationType } from 'shared/con
 import { type CharacterTalentIdType } from 'shared/constants/talents';
 import { TalentsType, type TaletsOfClassType } from 'shared/constants/talentsData';
 
-export const createTalentsState = (
+export const generateTalentsState = (
   talents: TaletsOfClassType[],
-): CreateTaletsStateReturn => talents.reduce((acc, cur) => ({
-  ...acc,
-  [cur.title]: cur.talents
-    .sort((a, b) => a.tier - b.tier)
-    .reduce((innerAcc, innerCur) => ({
-      ...innerAcc,
-      [innerCur.id]: 0,
-    }), {}),
-}), {});
+  stateFromParams?: string,
+): CreateTaletsStateReturn => {
+  const states = stateFromParams?.split('-') || [];
+  return talents.reduce((acc, cur, specIndex) => {
+    const state = states[specIndex];
+    return {
+      ...acc,
+      [cur.title]: cur.talents
+        .sort((a, b) => a.tier - b.tier)
+        .reduce((innerAcc, innerCur, talentIndex) => ({
+          ...innerAcc,
+          [innerCur.id]: state ? Number(state[talentIndex]) : 0,
+        }), {}),
+    };
+  }, {});
+};
 
 export type TalentsStateType = { [key in CharacterTalentIdType]?: number };
 export type CreateTaletsStateReturn = {
