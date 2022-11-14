@@ -11,8 +11,10 @@ type TalentCalcContextType = {
   state: CreateTaletsStateReturn,
   talentsByClass: TalentsType,
   allTalents: AllTalentsMapType,
+  total: number,
   setState: (newState: CreateTaletsStateReturn) => void,
   setTalents: (newTalents: TalentsType) => void
+  setTotal: (newTotal: number) => void
 };
 
 const initialState: TalentCalcContextType = {
@@ -30,8 +32,10 @@ const initialState: TalentCalcContextType = {
     warrior: [],
   },
   allTalents: {},
+  total: 0,
   setState: () => {},
   setTalents: () => {},
+  setTotal: () => {},
 };
 
 const TalentCalcContext = createContext<TalentCalcContextType | undefined>(
@@ -41,6 +45,7 @@ const TalentCalcContext = createContext<TalentCalcContextType | undefined>(
 export type TalentState = {
   state: CreateTaletsStateReturn,
   talentsByClass: TalentsType,
+  total: number,
   allTalents: AllTalentsMapType
 };
 
@@ -50,6 +55,7 @@ export const TalentCalcProvider = ({
   const [state, setState] = useState<CreateTaletsStateReturn>(initialState.state);
   const [talentsByClass, setTalentsByClass] = useState<TalentsType>(initialState.talentsByClass);
   const [allTalents, setAllTalents] = useState<AllTalentsMapType>(initialState.allTalents);
+  const [total, setTotal] = useState<number>(initialState.total);
 
   const handleStateUpdate = useCallback((newState: CreateTaletsStateReturn) => {
     setState(newState);
@@ -60,18 +66,26 @@ export const TalentCalcProvider = ({
     setAllTalents(generateAllTalentsMap(newTalents));
   }, [setTalentsByClass, setAllTalents]);
 
+  const handleTotalUpdate = useCallback((newTotal: number) => {
+    setTotal(newTotal);
+  }, [setTotal]);
+
   const value = useMemo(() => ({
     state,
     talentsByClass,
     allTalents,
+    total,
     setState: handleStateUpdate,
     setTalents: handleTalentsUpdate,
+    setTotal: handleTotalUpdate,
   }), [
     state,
     talentsByClass,
     allTalents,
+    total,
     handleStateUpdate,
     handleTalentsUpdate,
+    handleTotalUpdate,
   ]);
 
   return (
