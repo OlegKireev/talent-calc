@@ -1,12 +1,20 @@
 import { TALENTS_TEMPLATE } from 'mocks/talents';
 import { mageTalentsState, MockMageTalentType } from 'mocks/talentsState';
 import { type CharacterClassType } from 'shared/constants/global';
-import { generateStateString, generateTalentsState } from './transform';
+import { generateAllTalentsMap, generateStateString, generateTalentsState } from './transform';
 
 describe('features/talent-calc/lib/transform/generateTalentsState()', () => {
   it('should create correct an empty mage talentsData', () => {
     const selectedClass: CharacterClassType = 'mage';
     expect(generateTalentsState(TALENTS_TEMPLATE[selectedClass])).toStrictEqual(mageTalentsState);
+  });
+});
+
+describe('features/talent-calc/lib/transform/generateAllTalentsMap()', () => {
+  it('should create keys with a talent id', () => {
+    expect(generateAllTalentsMap(TALENTS_TEMPLATE)).toHaveProperty('deathknight_blood_butchery');
+    expect(generateAllTalentsMap(TALENTS_TEMPLATE)).toHaveProperty('mage_frost_frostbite');
+    expect(generateAllTalentsMap(TALENTS_TEMPLATE)).toHaveProperty('warrior_protection_improved_bloodrage');
   });
 });
 
