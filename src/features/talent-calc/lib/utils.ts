@@ -168,5 +168,7 @@ export const generateStateString = (state: CreateTaletsStateReturn) => {
     .reduce(
       (acc, specState) => `${acc}${acc ? '-' : ''}${Object.values(specState || '')}`,
       '',
-    ).replaceAll(',', '');
+    )
+    .replaceAll(',', '')
+    .replace(/0*$/, '');
 };
