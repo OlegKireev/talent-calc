@@ -1,22 +1,25 @@
 import { checkIsTierAvailable } from 'features/talent-calc/lib/utils';
+import { MAX_TALENTS_POINTS } from 'shared/constants/global';
 import { type TalentTierType } from 'shared/constants/talentsData';
 import { type GetPreviousTotal } from '../types';
 
 interface UseTalentPermissionsArgs {
-  tier: TalentTierType,
+  tier: TalentTierType
   value: number
   max: number
+  total: number
   deepestTierWithValue: TalentTierType
   includeTierTotal: number
   isAvailable: boolean
   isChildrenTalentsEmpty: boolean
-  getPreviousTotal: GetPreviousTotal,
+  getPreviousTotal: GetPreviousTotal
 }
 
 export const useTalentPermissions = ({
   tier,
   value,
   max,
+  total,
   deepestTierWithValue,
   includeTierTotal,
   isAvailable,
@@ -41,7 +44,7 @@ export const useTalentPermissions = ({
       && ((willNextTierBeAvailable && willCurrentTierBeAvailable) || tier === deepestTierWithValue)
       && value > 0,
   );
-  const canIncrease = isAvailable && value < max;
+  const canIncrease = isAvailable && value < max && total < MAX_TALENTS_POINTS;
 
   return {
     canIncrease,

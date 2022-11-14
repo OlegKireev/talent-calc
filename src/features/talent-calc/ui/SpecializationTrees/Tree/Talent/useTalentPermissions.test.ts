@@ -1,3 +1,4 @@
+import { MAX_TALENTS_POINTS } from 'shared/constants/global';
 import { useTalentPermissions } from './useTalentPermissions';
 
 const TOTAL_TO_UNBLOCK_ALL_TIERS = 50;
@@ -10,6 +11,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 1,
       max: 5,
       value: 0,
+      total: 0,
       deepestTierWithValue: 1,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -24,6 +26,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 1,
       max: 5,
       value: 5,
+      total: 0,
       deepestTierWithValue: 1,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -38,6 +41,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 1,
       max: 5,
       value: 0,
+      total: 0,
       deepestTierWithValue: 1,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: false,
@@ -53,6 +57,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 2,
       max: 3,
       value: 1,
+      total: 0,
       deepestTierWithValue: 4,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -67,6 +72,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 2,
       max: 3,
       value: 0,
+      total: 0,
       deepestTierWithValue: 4,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -81,6 +87,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 5,
       max: 3,
       value: 2,
+      total: 0,
       deepestTierWithValue: 5,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -97,6 +104,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 2,
       max: 3,
       value: 1,
+      total: 0,
       deepestTierWithValue: 4,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -113,6 +121,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 2,
       max: 3,
       value: 1,
+      total: 0,
       deepestTierWithValue: 4,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -127,6 +136,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 2,
       max: 3,
       value: 1,
+      total: 0,
       deepestTierWithValue: 4,
       includeTierTotal: TOTAL_TO_UNBLOCK_ALL_TIERS,
       isAvailable: true,
@@ -141,6 +151,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 2,
       max: 3,
       value: 1,
+      total: 0,
       deepestTierWithValue: 3,
       includeTierTotal: 11,
       isAvailable: true,
@@ -155,6 +166,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       tier: 2,
       max: 3,
       value: 1,
+      total: 0,
       deepestTierWithValue: 3,
       includeTierTotal: 10,
       isAvailable: true,
@@ -162,5 +174,35 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
       getPreviousTotal: mockGetPreviousTotal,
     });
     expect(canDecrease).toBe(false);
+  });
+
+  it('shouldn be able to increase if "total" < max available points', () => {
+    const { canIncrease } = useTalentPermissions({
+      tier: 2,
+      max: 3,
+      value: 1,
+      total: MAX_TALENTS_POINTS - 1,
+      deepestTierWithValue: 3,
+      includeTierTotal: 10,
+      isAvailable: true,
+      isChildrenTalentsEmpty: true,
+      getPreviousTotal: mockGetPreviousTotal,
+    });
+    expect(canIncrease).toBe(true);
+  });
+
+  it('shouldn\'t be able to increase if "total" >= max available points', () => {
+    const { canIncrease } = useTalentPermissions({
+      tier: 2,
+      max: 3,
+      value: 1,
+      total: MAX_TALENTS_POINTS,
+      deepestTierWithValue: 3,
+      includeTierTotal: 10,
+      isAvailable: true,
+      isChildrenTalentsEmpty: true,
+      getPreviousTotal: mockGetPreviousTotal,
+    });
+    expect(canIncrease).toBe(false);
   });
 });
