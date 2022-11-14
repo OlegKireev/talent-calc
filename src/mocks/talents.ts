@@ -5,6 +5,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   deathknight: [{
     title: 'blood',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/398.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_deathknight_bloodpresence.jpg`,
     talents: [{
       id: 'deathknight_blood_butchery',
       title: 'Butchery',
@@ -20,6 +21,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'frost',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/399.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_deathknight_frostpresence.jpg`,
     talents: [{
       id: 'deathknight_frost_improved_icy_touch',
       title: 'Improved Icy Touch',
@@ -36,6 +38,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'unholy',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/400.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_deathknight_unholypresence.jpg`,
     talents: [{
       id: 'deathknight_unholy_vicious_strikes',
       title: 'Vicious Strikes',
@@ -52,6 +55,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   druid: [{
     title: 'balance',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/283.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_nature_starfall.jpg`,
     talents: [{
       id: 'druid_balance_starlight_wrath',
       title: 'Starlight Wrath',
@@ -70,6 +74,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'feral',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/281.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_racial_bearform.jpg`,
     talents: [{
       id: 'druid_feral_ferocity',
       title: 'Ferocity',
@@ -88,6 +93,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'restoration',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/282.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_nature_healingtouch.jpg`,
     talents: [{
       id: 'druid_restoration_improved_mark_of_the_wild',
       title: 'Improved Mark of the Wild',
@@ -104,6 +110,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   hunter: [{
     title: 'beast_mastery',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/361.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_hunter_beasttaming.jpg`,
     talents: [{
       id: 'hunter_beast_mastery_imporved_aspect_of_the_hawk',
       title: 'Improved Aspect of the Hawk',
@@ -122,6 +129,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'marksmanship',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/363.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_marksmanship.jpg`,
     talents: [{
       id: 'hunter_marksmanship_improved_concussive_shot',
       title: 'Improved Concussive Shot',
@@ -137,6 +145,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'survival',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/362.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_hunter_swiftstrike.jpg`,
     talents: [{
       id: 'hunter_survival_improved_tracking',
       title: 'Improved Tracking',
@@ -157,6 +166,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
     {
       title: 'arcane',
       backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/81.jpg`,
+      icon: `${RESOURCE_URI}/icons/large/spell_holy_magicalsentry.jpg`,
       talents: [{
         id: 'mage_arcane_arcance_subtlety',
         title: 'Arcane Subtlety',
@@ -172,6 +182,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
     }, {
       title: 'fire',
       backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/41.jpg`,
+      icon: `${RESOURCE_URI}/icons/large/spell_fire_firebolt02.jpg`,
       talents: [{
         id: 'mage_fire_improved_fire_blast',
         title: 'Improved Fire Blast',
@@ -187,6 +198,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
     }, {
       title: 'frost',
       backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/61.jpg`,
+      icon: `${RESOURCE_URI}/icons/large/spell_frost_frostbolt02.jpg`,
       talents: [{
         id: 'mage_frost_frostbite',
         title: 'Frostbite',
@@ -539,6 +551,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   paladin: [{
     title: 'holy',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/382.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_holy_holybolt.jpg`,
     talents: [{
       id: 'paladin_holy_spiritual_focus',
       title: 'Spiritual Focus',
@@ -557,6 +570,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'protection',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/383.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_holy_devotionaura.jpg`,
     talents: [{
       id: 'paladin_protection_divinity',
       title: 'Divinity',
@@ -575,6 +589,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'retribution',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/381.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_holy_auraoflight.jpg`,
     talents: [{
       id: 'paladin_retribution_deflection',
       title: 'Deflection',
@@ -594,6 +609,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   priest: [{
     title: 'discipline',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/201.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_holy_wordfortitude.jpg`,
     talents: [{
       id: 'priest_discipline_unbreakable_will',
       title: 'Unbreakable Will',
@@ -612,6 +628,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'holy',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/202.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_holy_guardianspirit.jpg`,
     talents: [{
       id: 'priest_holy_healing_focus',
       title: 'Healing Focus',
@@ -627,6 +644,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'shadow',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/203.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_shadow_shadowwordpain.jpg`,
     talents: [{
       id: 'priest_shadow_spirit_tap',
       title: 'Spirit Tap',
@@ -644,6 +662,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   rogue: [{
     title: 'assasination',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/182.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_rogue_eviscerate.jpg`,
     talents: [{
       id: 'rogue_assasination_improved_eviscerate',
       title: 'Improved Eviscerate',
@@ -660,6 +679,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'combat',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/181.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_backstab.jpg`,
     talents: [{
       id: 'rogue_combat_improved_gouge',
       title: 'Improved Gouge',
@@ -676,6 +696,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'subtlety',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/183.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_stealth.jpg`,
     talents: [{
       id: 'rogue_subtlety_spirit_tap',
       title: 'Relentless Strikes',
@@ -695,6 +716,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   shaman: [{
     title: 'elemental',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/261.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_nature_lightning.jpg`,
     talents: [{
       id: 'shaman_elemental_convection',
       title: 'Convection',
@@ -713,6 +735,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'enhancement',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/263.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_nature_lightningshield.jpg`,
     talents: [{
       id: 'shaman_enhancement_enhancing_totems',
       title: 'Enhancing Totems',
@@ -729,6 +752,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'restoration',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/262.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_nature_magicimmunity.jpg`,
     talents: [{
       id: 'shaman_restoration_improved_healing_wave',
       title: 'Improved Healing Wave',
@@ -748,6 +772,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   warlock: [{
     title: 'affliction',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/302.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_shadow_deathcoil.jpg`,
     talents: [{
       id: 'warlock_affliction_improved_curse_of_agony',
       title: 'Improved Curse of Agony',
@@ -763,6 +788,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'demonology',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/303.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_shadow_metamorphosis.jpg`,
     talents: [{
       id: 'warlock_demonology_improved_healthstone',
       title: 'Improved Healthstone',
@@ -778,6 +804,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'destruction',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/301.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/spell_shadow_rainoffire.jpg`,
     talents: [{
       id: 'warlock_destruction_improved_shadow_bolt',
       title: 'Improved Shadow Bolt',
@@ -797,6 +824,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   warrior: [{
     title: 'arms',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/161.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_rogue_eviscerate.jpg`,
     talents: [{
       id: 'warrior_arms_improved_heroic_strike',
       title: 'Improved Heroic Strike',
@@ -813,6 +841,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'fury',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/164.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/ability_warrior_innerrage.jpg`,
     talents: [{
       id: 'warrior_fury_armored_to_the_teeth',
       title: 'Armored to the Teeth',
@@ -829,6 +858,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
   }, {
     title: 'protection',
     backgroundImage: `${RESOURCE_URI}/talents/backgrounds/wrath/163.jpg`,
+    icon: `${RESOURCE_URI}/icons/large/inv_shield_06.jpg`,
     talents: [{
       id: 'warrior_protection_improved_bloodrage',
       title: 'Improved Bloodrage',
