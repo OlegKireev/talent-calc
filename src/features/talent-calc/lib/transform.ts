@@ -6,6 +6,7 @@ export const generateTalentsState = (
   talents: TaletsOfClassType[],
   stateFromParams?: string,
 ): CreateTaletsStateReturn => {
+  const DEFAULT_VALUE = 0;
   const states = stateFromParams?.split('-') || [];
   return talents.reduce((acc, cur, specIndex) => {
     const state = states[specIndex];
@@ -15,7 +16,7 @@ export const generateTalentsState = (
         .sort((a, b) => a.tier - b.tier)
         .reduce((innerAcc, innerCur, talentIndex) => ({
           ...innerAcc,
-          [innerCur.id]: state ? Number(state[talentIndex]) : 0,
+          [innerCur.id]: state ? Number(state[talentIndex]) || DEFAULT_VALUE : DEFAULT_VALUE,
         }), {}),
     };
   }, {});
