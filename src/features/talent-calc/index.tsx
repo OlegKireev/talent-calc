@@ -15,8 +15,10 @@ import styles from './styles.module.scss';
 export const TalentCalc = () => {
   const {
     state,
+    total,
     setState,
     setTalents,
+    setTotal,
   } = useTalentCalcContext();
 
   const { characterClass } = useParams();
@@ -43,6 +45,10 @@ export const TalentCalc = () => {
       setState(generateTalentsState(TALENTS_TEMPLATE[currentClass]));
     }
   }, [currentClass, setState, stateFromSearchParams]);
+
+  useEffect(() => {
+    setTotal(totalBySpecs.reduce((acc, specTotal) => acc + specTotal, 0));
+  }, [setTotal, totalBySpecs]);
 
   const handleTalentChange: HandleTalentChange = ({
     specialization,
@@ -71,6 +77,7 @@ export const TalentCalc = () => {
         <Status
           currentClass={currentClass}
           specsTotal={totalBySpecs}
+          total={total}
         />
       )}
       {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed ? (
