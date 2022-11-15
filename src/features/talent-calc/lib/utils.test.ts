@@ -14,6 +14,7 @@ import {
   getTierTotal,
   getTotalToUnblockNextTier,
   getTreeTotal,
+  getSpecsTotal,
 } from './utils';
 
 describe('features/talent-calc/lib/utils:getTotalToUnblockNextTier()', () => {
@@ -448,5 +449,71 @@ describe('features/talent-calc/lib/utils:checkHasChildrenTalentsNoValue', () => 
       frostMageTalents,
       mockFrostMageState,
     )).toBe(false);
+  });
+});
+
+describe('features/talent-calc/lib/utils:getSpecsTotal()', () => {
+  let mockFrostMageState = mageTalentsState;
+  beforeEach(() => {
+    mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState));
+  });
+
+  it('should be "[0, 0, 0]" on initial', () => {
+    expect(getSpecsTotal(mockFrostMageState)).toStrictEqual([0, 0, 0]);
+  });
+
+  it('should be "[1, 1, 1]" if every tree has only one point', () => {
+    mockFrostMageState.arcane.mage_arcane_arcance_subtlety = 1;
+    mockFrostMageState.fire.mage_fire_blast_wave = 1;
+    mockFrostMageState.frost.mage_frost_arctic_reach = 1;
+    expect(getSpecsTotal(mockFrostMageState)).toStrictEqual([1, 1, 1]);
+  });
+
+  it('should be "[0, 1, 1]" if every only second and third tree has one point', () => {
+    mockFrostMageState.fire.mage_fire_blast_wave = 1;
+    mockFrostMageState.frost.mage_frost_arctic_reach = 1;
+    expect(getSpecsTotal(mockFrostMageState)).toStrictEqual([0, 1, 1]);
+  });
+
+  it('should be "[0, 0, 15]" for a third tree complex build', () => {
+    mockFrostMageState.frost.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.frost.mage_frost_precision = 3;
+    mockFrostMageState.frost.mage_frost_permafrost = 3;
+    mockFrostMageState.frost.mage_frost_icy_veins = 1;
+    mockFrostMageState.frost.mage_frost_improved_blizzard = 3;
+    expect(getSpecsTotal(mockFrostMageState)).toStrictEqual([0, 0, 15]);
+  });
+
+  it('should be "[0, 73, 0]" for all mage fire talents completed', () => {
+    mockFrostMageState.fire.mage_fire_improved_fire_blast = 2;
+    mockFrostMageState.fire.mage_fire_incineration = 3;
+    mockFrostMageState.fire.mage_fire_improved_fireball = 5;
+    mockFrostMageState.fire.mage_fire_ignite = 5;
+    mockFrostMageState.fire.mage_fire_burning_determination = 2;
+    mockFrostMageState.fire.mage_fire_world_in_flames = 3;
+    mockFrostMageState.fire.mage_fire_flame_throwing = 2;
+    mockFrostMageState.fire.mage_fire_impact = 3;
+    mockFrostMageState.fire.mage_fire_pyroblast = 1;
+    mockFrostMageState.fire.mage_fire_burning_soul = 2;
+    mockFrostMageState.fire.mage_fire_improved_scorch = 3;
+    mockFrostMageState.fire.mage_fire_molten_shields = 2;
+    mockFrostMageState.fire.mage_fire_master_of_elements = 3;
+    mockFrostMageState.fire.mage_fire_playing_with_fire = 3;
+    mockFrostMageState.fire.mage_fire_critical_mass = 3;
+    mockFrostMageState.fire.mage_fire_blast_wave = 1;
+    mockFrostMageState.fire.mage_fire_blazing_speed = 2;
+    mockFrostMageState.fire.mage_fire_fire_power = 5;
+    mockFrostMageState.fire.mage_fire_pyromaniac = 3;
+    mockFrostMageState.fire.mage_fire_combustion = 1;
+    mockFrostMageState.fire.mage_fire_molten_fury = 2;
+    mockFrostMageState.fire.mage_fire_fiery_payback = 2;
+    mockFrostMageState.fire.mage_fire_empowered_fire = 3;
+    mockFrostMageState.fire.mage_fire_firestarter = 2;
+    mockFrostMageState.fire.mage_fire_dragons_breath = 1;
+    mockFrostMageState.fire.mage_fire_hot_streak = 3;
+    mockFrostMageState.fire.mage_fire_burnout = 5;
+    mockFrostMageState.fire.mage_fire_living_bomb = 1;
+
+    expect(getSpecsTotal(mockFrostMageState)).toStrictEqual([0, 73, 0]);
   });
 });
