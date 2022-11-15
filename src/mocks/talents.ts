@@ -195,7 +195,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
         column: 1,
         max: 2,
       }, {
-        id: 'mage_fire_improved_fire_incineration',
+        id: 'mage_fire_incineration',
         title: 'Incineration',
         description: {
           1: 'Increases the critical strike chance of your Fire Blast, Scorch, Arcane Blast and Cone of Cold spells by 2%.',
@@ -221,7 +221,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
         column: 3,
         max: 5,
       }, {
-        id: 'mage_fire_improved_ignite',
+        id: 'mage_fire_ignite',
         title: 'Ignite',
         description: {
           1: 'Your critical strikes from Fire damage spells cause the target to burn for an additional 8% of your spell\'s damage over 4 sec.',

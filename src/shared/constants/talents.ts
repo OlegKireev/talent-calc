@@ -19,9 +19,9 @@ const HUNTER_TALENT_IDS = [
 const MAGE_TALENT_IDS = [
   'mage_arcane_arcance_subtlety',
 
-  'mage_fire_improved_fire_incineration',
+  'mage_fire_incineration',
   'mage_fire_improved_fireball',
-  'mage_fire_improved_ignite',
+  'mage_fire_ignite',
   'mage_fire_burning_determination',
   'mage_fire_world_in_flames',
   'mage_fire_flame_throwing',
