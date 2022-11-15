@@ -1,8 +1,8 @@
 .wrapper {
-  height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  max-width: 64rem;
+  max-width: 63rem;
+  height: 100vh;
   margin: 0 auto;
 }
 
