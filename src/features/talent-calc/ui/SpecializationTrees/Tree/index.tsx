@@ -78,7 +78,11 @@ export const Tree = ({
                         spaceBetweenCells += 1;
                       }
                       const emptyCells = numberToArray(cellOffset);
-                      const isRequiredTalentHasValue = checkRequiredTalent(talent.required, state);
+                      const isRequiredTalentHasValue = checkRequiredTalent(
+                        talent.required,
+                        state,
+                        talents,
+                      );
                       const arrowPosition = gerArrowPosition(
                         talent.id,
                         talent.required,
