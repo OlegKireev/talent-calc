@@ -56,7 +56,8 @@ export const Talent = ({
   });
   const { allTalents, total } = useTalentCalcContext();
 
-  const requiredTalentTitle = required ? allTalents[required]?.title : '';
+  const requiredTalentTitle = required ? allTalents[required]?.title || '' : '';
+  const requiredTalentMax = required ? allTalents[required]?.max || 0 : 0;
   const isAvailable = isTierAvailable && isRequiredTalentHasValue;
 
   useEffect(() => {
@@ -65,10 +66,17 @@ export const Talent = ({
         ? `Required ${getTotalToUnblockNextTier(tier - 1)} points in ${specialization} talents`
         : '',
       isDisabledByParent: !isRequiredTalentHasValue
-        ? `Required 1 point in ${requiredTalentTitle}`
+        ? `Required ${requiredTalentMax} point${requiredTalentMax > 1 ? 's' : ''} in ${requiredTalentTitle}`
         : '',
     });
-  }, [isTierAvailable, isRequiredTalentHasValue, specialization, tier, requiredTalentTitle]);
+  }, [
+    isTierAvailable,
+    isRequiredTalentHasValue,
+    specialization,
+    tier,
+    requiredTalentTitle,
+    requiredTalentMax,
+  ]);
 
   const { canIncrease, canDecrease } = useTalentPermissions({
     tier,
