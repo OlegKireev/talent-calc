@@ -195,22 +195,29 @@ describe('features/talent-calc/lib/utils:checkIsTierAvailable()', () => {
 });
 
 describe('features/talent-calc/lib/utils:checkRequiredTalent()', () => {
-  let mockFrostMageState: TalentsStateType = {};
+  let mockFireMageState: TalentsStateType = {};
+  const frostMageTalents = TALENTS_TEMPLATE.mage[1].talents;
+
   beforeEach(() => {
-    mockFrostMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
+    mockFireMageState = JSON.parse(JSON.stringify(mageTalentsState.frost));
   });
 
   it('should a child to be disabled if a parent has "0" value', () => {
-    expect(checkRequiredTalent('mage_frost_cold_snap', mockFrostMageState)).toBe(false);
+    expect(checkRequiredTalent('mage_fire_critical_mass', mockFireMageState, frostMageTalents)).toBe(false);
   });
 
-  it('should a child to be available if a parent has "1" value', () => {
-    mockFrostMageState.mage_frost_cold_snap = 1;
-    expect(checkRequiredTalent('mage_frost_cold_snap', mockFrostMageState)).toBe(true);
+  it('should a child to be disabled if a parent has a not max value', () => {
+    mockFireMageState.mage_fire_critical_mass = 1;
+    expect(checkRequiredTalent('mage_fire_critical_mass', mockFireMageState, frostMageTalents)).toBe(false);
+  });
+
+  it('should a child to be available if a parent has max value', () => {
+    mockFireMageState.mage_fire_critical_mass = 3;
+    expect(checkRequiredTalent('mage_fire_critical_mass', mockFireMageState, frostMageTalents)).toBe(true);
   });
 
   it('should a talent to be available if it doesn\'t have a "required" param', () => {
-    expect(checkRequiredTalent(undefined, mockFrostMageState)).toBe(true);
+    expect(checkRequiredTalent(undefined, mockFireMageState, frostMageTalents)).toBe(true);
   });
 });
 

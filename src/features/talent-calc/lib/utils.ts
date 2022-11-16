@@ -82,11 +82,14 @@ export const checkIsTierAvailable = (
 export const checkRequiredTalent = (
   requiredTalentId: CharacterTalentIdType | undefined,
   state: TalentsStateType,
+  talents: TalentType[],
 ) => {
   if (!requiredTalentId) {
     return true;
   }
-  return Boolean(state[requiredTalentId]);
+  const requiredTalentMax = talents.find((talent) => talent.id === requiredTalentId)?.max;
+
+  return requiredTalentMax === state[requiredTalentId];
 };
 
 export const gerArrowPosition = (
