@@ -17,7 +17,7 @@ describe('features/talent-calc/lib/transform/generateTalentsState()', () => {
   });
 
   it('should load talents from the state in first tree', () => {
-    state.arcane.mage_arcane_arcance_subtlety = 1;
+    state.arcane.mage_arcane_arcane_subtlety = 1;
     expect(generateTalentsState(talents, '1-0-0')).toStrictEqual(state);
   });
 
@@ -32,7 +32,7 @@ describe('features/talent-calc/lib/transform/generateTalentsState()', () => {
   });
 
   it('should load talents from the state in first and second tree', () => {
-    state.arcane.mage_arcane_arcance_subtlety = 1;
+    state.arcane.mage_arcane_arcane_subtlety = 1;
     state.fire.mage_fire_improved_fire_blast = 1;
     expect(generateTalentsState(talents, '1-1-0')).toStrictEqual(state);
   });
@@ -44,13 +44,13 @@ describe('features/talent-calc/lib/transform/generateTalentsState()', () => {
   });
 
   it('should load talents from the state in first and third tree', () => {
-    state.arcane.mage_arcane_arcance_subtlety = 1;
+    state.arcane.mage_arcane_arcane_subtlety = 1;
     state.frost.mage_frost_frostbite = 1;
     expect(generateTalentsState(talents, '1-0-1')).toStrictEqual(state);
   });
 
   it('should load talents from the state in every trees', () => {
-    state.arcane.mage_arcane_arcance_subtlety = 1;
+    state.arcane.mage_arcane_arcane_subtlety = 1;
     state.fire.mage_fire_improved_fire_blast = 1;
     state.frost.mage_frost_frostbite = 1;
     expect(generateTalentsState(talents, '1-1-1')).toStrictEqual(state);
@@ -86,7 +86,7 @@ describe('features/talent-calc/lib/transform:generateStateString', () => {
   });
 
   it('should return "1--" if only first tree has value', () => {
-    mockMageState.arcane.mage_arcane_arcance_subtlety = 1;
+    mockMageState.arcane.mage_arcane_arcane_subtlety = 1;
     expect(generateStateString(mockMageState)).toBe('1--');
   });
 
@@ -110,14 +110,14 @@ describe('features/talent-calc/lib/transform:generateStateString', () => {
   });
 
   it('should return correct string for first and third trees has value', () => {
-    mockMageState.arcane.mage_arcane_arcance_subtlety = 1;
+    mockMageState.arcane.mage_arcane_arcane_subtlety = 1;
     mockMageState.frost.mage_frost_frostbite = 2;
 
     expect(generateStateString(mockMageState)).toBe('1--2');
   });
 
   it('should return correct string for an every tree has value', () => {
-    mockMageState.arcane.mage_arcane_arcance_subtlety = 3;
+    mockMageState.arcane.mage_arcane_arcane_subtlety = 3;
     mockMageState.fire.mage_fire_improved_fire_blast = 2;
     mockMageState.frost.mage_frost_frostbite = 1;
 

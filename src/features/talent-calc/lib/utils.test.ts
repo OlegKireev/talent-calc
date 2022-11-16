@@ -470,7 +470,7 @@ describe('features/talent-calc/lib/utils:getSpecsTotal()', () => {
   });
 
   it('should be "[1, 1, 1]" if every tree has only one point', () => {
-    mockFrostMageState.arcane.mage_arcane_arcance_subtlety = 1;
+    mockFrostMageState.arcane.mage_arcane_arcane_subtlety = 1;
     mockFrostMageState.fire.mage_fire_blast_wave = 1;
     mockFrostMageState.frost.mage_frost_arctic_reach = 1;
     expect(getSpecsTotal(mockFrostMageState)).toStrictEqual([1, 1, 1]);
