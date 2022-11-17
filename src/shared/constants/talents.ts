@@ -1,5 +1,34 @@
 const DEATHKNIGHT_TALENT_IDS = [
   'deathknight_blood_butchery',
+  'deathknight_blood_butchery',
+  'deathknight_blood_subversion',
+  'deathknight_blood_blade_barrier',
+  'deathknight_blood_bladed_armor',
+  'deathknight_blood_scent_of_blood',
+  'deathknight_blood_two_handed_weapon_specialization',
+  'deathknight_blood_rune_tap',
+  'deathknight_blood_dark_conviction',
+  'deathknight_blood_death_rune_mastery',
+  'deathknight_blood_improved_rune_tap',
+  'deathknight_blood_spell_deflection',
+  'deathknight_blood_vendetta',
+  'deathknight_blood_bloody_strikes',
+  'deathknight_blood_veteran_of_the_third_war',
+  'deathknight_blood_mark_of_blood',
+  'deathknight_blood_bloody_vengeance',
+  'deathknight_blood_abominations_might',
+  'deathknight_blood_bloodworms',
+  'deathknight_blood_unholy_frenzy',
+  'deathknight_blood_improved_blood_presence',
+  'deathknight_blood_improved_death_strike',
+  'deathknight_blood_sudden_doom',
+  'deathknight_blood_vampiric_blood',
+  'deathknight_blood_will_of_the_necropolis',
+  'deathknight_blood_heart_strike',
+  'deathknight_blood_might_of_mograine',
+  'deathknight_blood_blood_gorged',
+  'deathknight_blood_dancing_rune_weapon',
+
   'deathknight_frost_improved_icy_touch',
   'deathknight_unholy_vicious_strikes',
 ] as const;
@@ -11,7 +40,7 @@ const DRUID_TALENT_IDS = [
 ] as const;
 
 const HUNTER_TALENT_IDS = [
-  'hunter_beast_mastery_imporved_aspect_of_the_hawk',
+  'hunter_beast_mastery_improved_aspect_of_the_hawk',
   'hunter_marksmanship_improved_concussive_shot',
   'hunter_survival_improved_tracking',
 ] as const;
@@ -78,7 +107,7 @@ const MAGE_TALENT_IDS = [
   'mage_fire_improved_fire_blast',
 
   'mage_frost_frostbite',
-  'mage_frost_imporved_frostbolt',
+  'mage_frost_improved_frostbolt',
   'mage_frost_ice_floes',
   'mage_frost_ice_shards',
   'mage_frost_fronst_warding',

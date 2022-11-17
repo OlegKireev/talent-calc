@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import { CharacterSpecializationType, MAX_TALENTS_POINTS } from 'shared/constants/global';
 import { snakeCaseToString } from 'shared/lib/transform';
 import styles from './styles.module.scss';
@@ -13,7 +14,10 @@ export const Header = ({
   total,
   icon,
 }: HeaderProps) => (
-  <div className={styles.wrapper}>
+  <div className={cx(styles.wrapper, {
+    [styles.highlight]: Boolean(total),
+  })}
+  >
     <div
       className={styles.icon}
       style={{

@@ -58,7 +58,7 @@ describe('features/talent-calc/lib/transform/generateTalentsState()', () => {
 
   it('should load talents from the only one detailed tree', () => {
     state.frost.mage_frost_frostbite = 2;
-    state.frost.mage_frost_imporved_frostbolt = 5;
+    state.frost.mage_frost_improved_frostbolt = 5;
     state.frost.mage_frost_ice_shards = 3;
     state.frost.mage_frost_icy_veins = 1;
 
@@ -102,7 +102,7 @@ describe('features/talent-calc/lib/transform:generateStateString', () => {
 
   it('should return correct string for the only one detailed tree', () => {
     mockMageState.frost.mage_frost_frostbite = 2;
-    mockMageState.frost.mage_frost_imporved_frostbolt = 5;
+    mockMageState.frost.mage_frost_improved_frostbolt = 5;
     mockMageState.frost.mage_frost_ice_shards = 3;
     mockMageState.frost.mage_frost_icy_veins = 1;
 

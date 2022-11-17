@@ -53,7 +53,7 @@ describe('features/talent-calc/lib/utils:getTreeTotal()', () => {
   });
 
   it('should return "15" with total data equal 15', () => {
-    mockFrostMageState.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.mage_frost_improved_frostbolt = 5;
     mockFrostMageState.mage_frost_precision = 3;
     mockFrostMageState.mage_frost_permafrost = 3;
     mockFrostMageState.mage_frost_icy_veins = 1;
@@ -74,7 +74,7 @@ describe('features/talent-calc/lib/utils:getTierTotal()', () => {
   });
 
   it('should count talents only in a selected tier', () => {
-    mockFrostMageState.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.mage_frost_improved_frostbolt = 5;
     mockFrostMageState.mage_frost_precision = 3;
     mockFrostMageState.mage_frost_permafrost = 3;
     expect(getTierTotal(1, frostMageTalents, mockFrostMageState)).toBe(5);
@@ -105,7 +105,7 @@ describe('features/talent-calc/lib/utils:getPreviousTiersTotal()', () => {
   });
 
   it('should count talents only in a previous tiers', () => {
-    mockFrostMageState.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.mage_frost_improved_frostbolt = 5;
     mockFrostMageState.mage_frost_precision = 3;
     mockFrostMageState.mage_frost_permafrost = 3;
     expect(getPreviousTiersTotal(1, frostMageTalents, mockFrostMageState)).toBe(0);
@@ -152,7 +152,7 @@ describe('features/talent-calc/lib/utils:getDeepestTierWithValue()', () => {
   });
 
   it('should find the deepest talant correctly', () => {
-    mockFrostMageState.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.mage_frost_improved_frostbolt = 5;
     expect(getDeepestTierWithValue(frostMageTalents, mockFrostMageState)).toBe(1);
     mockFrostMageState.mage_frost_precision = 3;
     mockFrostMageState.mage_frost_permafrost = 3;
@@ -483,7 +483,7 @@ describe('features/talent-calc/lib/utils:getSpecsTotal()', () => {
   });
 
   it('should be "[0, 0, 15]" for a third tree complex build', () => {
-    mockFrostMageState.frost.mage_frost_imporved_frostbolt = 5;
+    mockFrostMageState.frost.mage_frost_improved_frostbolt = 5;
     mockFrostMageState.frost.mage_frost_precision = 3;
     mockFrostMageState.frost.mage_frost_permafrost = 3;
     mockFrostMageState.frost.mage_frost_icy_veins = 1;

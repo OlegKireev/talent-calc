@@ -63,7 +63,7 @@ export const mageTalentsState = {
   },
   frost: {
     mage_frost_frostbite: 0,
-    mage_frost_imporved_frostbolt: 0,
+    mage_frost_improved_frostbolt: 0,
     mage_frost_ice_floes: 0,
     mage_frost_ice_shards: 0,
     mage_frost_fronst_warding: 0,
