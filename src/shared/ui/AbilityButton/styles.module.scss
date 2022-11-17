@@ -9,6 +9,7 @@
   color: white;
   font-weight: 900;
   text-shadow: 0 0 3px rgb(0 0 0 / 100%);
+  transition: filter 0.2s ease;
 
   &:active::after,
   &.dimmed {

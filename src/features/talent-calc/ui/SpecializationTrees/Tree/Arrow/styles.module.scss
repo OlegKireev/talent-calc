@@ -4,6 +4,7 @@
   height: 100%;
   z-index: 3;
   pointer-events: none;
+  transition: filter 0.1s ease;
 
   &.disabled {
     filter: grayscale(100%) brightness(0.625);
