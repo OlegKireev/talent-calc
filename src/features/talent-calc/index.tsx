@@ -80,14 +80,14 @@ export const TalentCalc = () => {
           total={total}
         />
       )}
-      {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed ? (
+      {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed && (
         <SpecializationTrees
           currentClass={currentClass}
           state={state}
           talentsByClass={TALENTS_TEMPLATE[currentClass]}
           onTalentChange={handleTalentChange}
         />
-      ) : <div className={styles.placeholder} />}
+      )}
     </div>
   );
 };
