@@ -69,7 +69,7 @@ export const TalentCalc = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <ClassChoser
         currentClass={currentClass}
       />

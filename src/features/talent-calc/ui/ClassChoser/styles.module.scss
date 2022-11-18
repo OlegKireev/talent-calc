@@ -1,3 +1,5 @@
+@import "shared/styles/import.scss";
+
 .title {
   margin: 0 0 0.5em;
   font-size: 2rem;
@@ -10,4 +12,5 @@
   justify-content: center;
   gap: 0.375rem;
   flex-wrap: wrap;
+  animation: fade-in 0.15s ease;
 }
