@@ -10,7 +10,6 @@ import { generateTalentsState, generateStateString } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
 import { checkIsTalentsDataRefreshed, getSpecsTotal } from './lib/utils';
 import { type HandleTalentChange } from './types';
-import styles from './styles.module.scss';
 
 export const TalentCalc = () => {
   const {
