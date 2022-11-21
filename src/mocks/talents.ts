@@ -1078,7 +1078,7 @@ export const TALENTS_TEMPLATE: TalentsType = {
         id: 'deathknight_unholy_bone_shield',
         title: 'Bone Shield',
         description: {
-          1: 'The Death Knight is surrounded by 3 whirling bones. While at least 1 bone remains, <dfn title="she">he</dfn> takes 20% less damage from all sources and deals 2% more damage with all attacks, spells and abilities. Each damaging attack that lands consumes 1 bone. Lasts 5 min.',
+          1: 'The Death Knight is surrounded by 3 whirling bones. While at least 1 bone remains, he takes 20% less damage from all sources and deals 2% more damage with all attacks, spells and abilities. Each damaging attack that lands consumes 1 bone. Lasts 5 min.',
         },
         icon: `${RESOURCE_URI}/icons/large/inv_chest_leather_13.jpg`,
         tier: 8,
@@ -1910,9 +1910,9 @@ export const TALENTS_TEMPLATE: TalentsType = {
         id: 'mage_fire_empowered_fire',
         title: 'Empowered Fire',
         description: {
-          1: 'Increases the damage of your Fireball, Frostfire Bolt and Pyroblast spells by an amount equal to 5% of your spell power. In addition, each time your Ignite talent causes damage, you have a 33% chance to regain 2% of your base mana.</',
-          2: 'Increases the damage of your Fireball, Frostfire Bolt and Pyroblast spells by an amount equal to 10% of your spell power. In addition, each time your Ignite talent causes damage, you have a 67% chance to regain 2% of your base mana.</',
-          3: 'Increases the damage of your Fireball, Frostfire Bolt and Pyroblast spells by an amount equal to 15% of your spell power. In addition, each time your Ignite talent causes damage, you have a 100% chance to regain 2% of your base mana.</',
+          1: 'Increases the damage of your Fireball, Frostfire Bolt and Pyroblast spells by an amount equal to 5% of your spell power. In addition, each time your Ignite talent causes damage, you have a 33% chance to regain 2% of your base mana.',
+          2: 'Increases the damage of your Fireball, Frostfire Bolt and Pyroblast spells by an amount equal to 10% of your spell power. In addition, each time your Ignite talent causes damage, you have a 67% chance to regain 2% of your base mana.',
+          3: 'Increases the damage of your Fireball, Frostfire Bolt and Pyroblast spells by an amount equal to 15% of your spell power. In addition, each time your Ignite talent causes damage, you have a 100% chance to regain 2% of your base mana.',
         },
         icon: `${RESOURCE_URI}/icons/large/spell_fire_flamebolt.jpg`,
         tier: 8,
