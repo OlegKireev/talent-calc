@@ -11,9 +11,10 @@ import {
   getTierTotal,
 } from 'features/talent-calc/lib/utils';
 import { numberToArray } from 'shared/lib/transform';
-import { CharacterSpecializationType } from 'shared/constants/global';
+import { CharacterSpecializationType, MAX_TALENTS_POINTS } from 'shared/constants/global';
 import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
 import { type HandleTalentChange } from 'features/talent-calc/types';
+import { useTalentCalcContext } from 'features/talent-calc/model/context';
 import { type GetPreviousTotal } from './types';
 import { Header } from './Header';
 import { Talent } from './Talent';
@@ -37,17 +38,19 @@ export const Tree = ({
   backgroundImage,
   onTalentChange,
 }: TreeProps) => {
+  const { total } = useTalentCalcContext();
+
   const maxRows = talents.sort((a, b) => b.tier - a.tier)[0].tier;
   const rows = numberToArray(maxRows) as TalentTierType[];
 
   const deepestTierWithValue = getDeepestTierWithValue(talents, state);
-  const total = getTreeTotal(state);
+  const treeTotal = getTreeTotal(state);
 
   return (
     <div
       className={styles.wrapper}
     >
-      <Header title={title} total={total} icon={icon} />
+      <Header title={title} total={treeTotal} icon={icon} />
       <div
         className={styles.tree}
         style={{
@@ -95,6 +98,10 @@ export const Tree = ({
                         state,
                       );
 
+                      const isTotalLimitReached = total === MAX_TALENTS_POINTS;
+                      const shouldHighlight = !isTotalLimitReached
+                        || (isTotalLimitReached && Boolean(state[talent.id]));
+
                       return (
                         <Fragment key={`tier${tier}-${talent.title}`}>
                           {emptyCells.map((cell) => (
@@ -102,11 +109,13 @@ export const Tree = ({
                           ))}
                           <td className={styles.cell}>
                             {arrowPosition !== false && (
-                            <Arrow
-                              from={arrowPosition.from}
-                              to={arrowPosition.to}
-                              isAvailable={isTierAvailable && isRequiredTalentHasValue}
-                            />
+                              <Arrow
+                                from={arrowPosition.from}
+                                to={arrowPosition.to}
+                                isAvailable={isTierAvailable
+                                  && isRequiredTalentHasValue
+                                  && shouldHighlight}
+                              />
                             )}
                             <Talent
                               key={talent.title}
@@ -118,6 +127,7 @@ export const Tree = ({
                               isTierAvailable={isTierAvailable}
                               isRequiredTalentHasValue={isRequiredTalentHasValue}
                               isChildrenTalentsEmpty={isChildrenTalentsEmpty}
+                              shouldHighlight={shouldHighlight}
                               getPreviousTotal={getPreviousTotal}
                               onChange={onTalentChange}
                             />

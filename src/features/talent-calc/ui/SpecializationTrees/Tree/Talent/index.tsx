@@ -21,6 +21,7 @@ export interface TalentProps {
   isTierAvailable: boolean
   isRequiredTalentHasValue: boolean
   isChildrenTalentsEmpty: boolean
+  shouldHighlight: boolean
   getPreviousTotal: GetPreviousTotal
   onChange: HandleTalentChange
 }
@@ -34,6 +35,7 @@ export const Talent = ({
   isTierAvailable,
   isRequiredTalentHasValue,
   isChildrenTalentsEmpty,
+  shouldHighlight,
   getPreviousTotal,
   onChange,
 }: TalentProps) => {
@@ -173,19 +175,21 @@ export const Talent = ({
     // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
     <div
       className={cx(styles.wrapper, {
-        [styles.available]: isAvailable,
-        [styles.max]: value === max,
+        [styles.available]: isAvailable && shouldHighlight,
+        [styles.max]: value === max && shouldHighlight,
       })}
       onMouseOver={hanldeMouseOver}
       onMouseOut={handleMouseOut}
     >
       <AbilityButton
         background={icon}
-        isDisabled={!isAvailable}
+        isDisabled={!isAvailable || !shouldHighlight}
         onClick={handleClick}
         onRightClick={handleRightClick}
       />
-      <span className={styles.value}>{`${value}/${max}`}</span>
+      {shouldHighlight && (
+        <span className={styles.value}>{`${value}/${max}`}</span>
+      )}
     </div>
   );
 };
