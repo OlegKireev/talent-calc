@@ -24,6 +24,7 @@ type TooltipTalentType = {
   costs?: AbilityCostsType,
   canIncrease: boolean,
   canDecrease: boolean,
+  shouldDisplayNextRank: boolean,
   errors: TooltipErrorsType,
 };
 

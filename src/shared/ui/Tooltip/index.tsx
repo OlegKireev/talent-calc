@@ -31,7 +31,7 @@ export const Tooltip = ({
   const [costs, setCosts] = useState<AbilityCostsType | undefined>('');
   const [range, setRange] = useState<AbilityRangeType | undefined>(0);
   const [castDuration, setCastDuration] = useState<AbilityCastDurationType | undefined>(0);
-
+  const [shouldDisplayNextRank, setShouldDisplayNextRank] = useState<boolean>(false);
   const [errors, setErrors] = useState<string[]>([]);
 
   const { type, title } = data;
@@ -39,7 +39,11 @@ export const Tooltip = ({
 
   const isTalentType = type === 'talent';
   const nextRankDescription = description[rank + 1 as TalentMaxValueType];
-  const shouldDisplayNextRankDescription = isTalentType && level > 0 && nextRankDescription;
+  const shouldDisplayNextRankDescription = shouldDisplayNextRank
+    && isTalentType
+    && level > 0
+    && nextRankDescription;
+
   const shouldDisplayTip = canIncrease || canDecrease || Boolean(errors.length);
 
   useEffect(() => {
@@ -54,6 +58,7 @@ export const Tooltip = ({
       setRange(data.range);
       setCastDuration(data.castDuration);
       setCooldown(data.cooldown);
+      setShouldDisplayNextRank(data.shouldDisplayNextRank);
     }
   }, [data]);
 

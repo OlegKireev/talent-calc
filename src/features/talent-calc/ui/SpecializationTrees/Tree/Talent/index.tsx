@@ -109,6 +109,7 @@ export const Talent = ({
         castDuration,
         canIncrease,
         canDecrease,
+        shouldDisplayNextRank: shouldHighlight,
         errors,
       });
     }
@@ -123,6 +124,7 @@ export const Talent = ({
     castDuration,
     canDecrease,
     canIncrease,
+    shouldHighlight,
     refreshLastTooltip,
     errors,
   ]);
@@ -139,6 +141,7 @@ export const Talent = ({
       castDuration,
       canIncrease,
       canDecrease,
+      shouldDisplayNextRank: shouldHighlight,
       errors,
     }, event);
   };
