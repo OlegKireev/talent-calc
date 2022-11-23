@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/62fe2c01-fbc7-4549-ab87-d8f7aa2ad58a/deploy-status)](https://app.netlify.com/sites/wow-talent/deploys)
+
 # World of Warcraft - Wrath of the Lich King Talent Calculator
 The web application allows gamers to create a character talant build and share it to each other. 
 
