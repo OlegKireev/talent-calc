@@ -14,7 +14,9 @@ export const Layout = ({
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header} />
+      <header className={styles.header}>
+        <img src="images/logo/logo-512.png" alt="World of warcraft - Wrath of the Lich King Logo" width="200" />
+      </header>
       <main className={styles.main}>
         {children}
       </main>
