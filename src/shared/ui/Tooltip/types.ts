@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import type {
   AbilityCastDurationType,
   AbilityCooldownType,
@@ -8,12 +9,16 @@ import type {
 
 export type TooltipType = TooltipDefaultType | TooltipTalentType;
 
-type TooltipDefaultType = {
-  type: 'default',
-  title: string,
+type TooltipBaseType = {
+  type: 'default' | 'talent',
+  title?: ReactNode,
 };
 
-type TooltipTalentType = {
+type TooltipDefaultType = TooltipBaseType & {
+  type: 'default',
+};
+
+type TooltipTalentType = TooltipBaseType & {
   type: 'talent',
   title: string,
   description: TalentDescriptionType,

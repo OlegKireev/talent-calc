@@ -75,7 +75,7 @@ export const Tooltip = ({
           <h3 className={styles.title}>
             {title}
           </h3>
-          {Boolean(rank) && (
+          {Boolean(data.type === 'talent') && (
             <span className={styles.rank}>
               Rank
               {' '}
@@ -86,7 +86,7 @@ export const Tooltip = ({
         {isTalentType && (
           <span className={styles.type}>Talent</span>
         )}
-        {(costs || range) && (
+        {Boolean(costs || range) && (
           <div className={styles.row}>
             {costs && (
               <span className={styles.left}>
@@ -100,7 +100,7 @@ export const Tooltip = ({
             )}
           </div>
         )}
-        {(castDuration || cooldown) && (
+        {Boolean(castDuration || cooldown) && (
           <div className={styles.row}>
             {castDuration && (
               <span className={styles.left}>
