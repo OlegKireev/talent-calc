@@ -39,8 +39,8 @@
     ]
   },
   "lint-staged": {
-    ".{ts, tsx}": "yarn eslint src",
-    "*.test.{ts, tsx}": "yarn test --watchAll=false"
+    ".{js,jsx,ts,tsx}": "yarn eslint --max-warnings=0 --ext .js,.jsx,.ts,.tsx src",
+    "*.test.{js,jsx,ts,tsx}": "yarn test --watchAll=false"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.0.0",
