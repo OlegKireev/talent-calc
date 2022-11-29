@@ -12,7 +12,7 @@ export const paladin: TaletsOfClassType[] = [{
       1: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 14%.',
       2: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 28%.',
       3: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 42%.',
-      4: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 56%.',
+      44: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 56%.',
       // 5: 'Reduces the pushback suffered from damaging attacks while casting Flash of Light and Holy Light by 70%.',
     },
     icon: `${RESOURCE_URI}/icons/large/spell_arcane_blink.jpg`,
