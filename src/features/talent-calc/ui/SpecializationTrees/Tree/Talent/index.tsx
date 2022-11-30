@@ -186,6 +186,7 @@ export const Talent = ({
     >
       <AbilityButton
         background={icon}
+        aria-label={title}
         isDisabled={!isAvailable || !shouldHighlight}
         onClick={handleClick}
         onRightClick={handleRightClick}

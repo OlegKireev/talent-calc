@@ -46,11 +46,12 @@ export const ClassChoser = ({
             key={characterClass}
             onMouseOver={handleMouseOver(characterClass)}
             onMouseOut={handleMouseOut}
+            aria-label={characterClass}
           >
             <AbilityButton
+              background={`${RESOURCE_URI}/icons/large/class_${characterClass}.jpg`}
               isSelected={characterClass === currentClass}
               isDimmed={characterClass !== currentClass}
-              background={`${RESOURCE_URI}/icons/large/class_${characterClass}.jpg`}
             />
           </Link>
         ))}

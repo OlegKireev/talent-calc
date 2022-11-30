@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { MouseEvent, ReactNode } from 'react';
 import cx from 'classnames';
 import styles from './styles.module.scss';
@@ -20,7 +21,8 @@ export const AbilityButton = ({
   isDisabled,
   onClick,
   onRightClick,
-}: AbilityButtonProps) => {
+  ...rest
+}: AbilityButtonProps & React.HTMLAttributes<HTMLElement>) => {
   const Tag = (Boolean(onClick) || Boolean(onRightClick)) ? 'button' : 'div';
 
   const handlerProps = {
@@ -42,8 +44,8 @@ export const AbilityButton = ({
         backgroundImage: `url("https://wow.zamimg.com/images/Icon/large/border/default.png"), url("${background}")`,
       }}
       disabled={isDisabled}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...restProps}
+      {...rest}
     >
       {children}
     </Tag>
