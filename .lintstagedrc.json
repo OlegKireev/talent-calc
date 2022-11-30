@@ -1,5 +1,0 @@
-{
-  "*.{js,jsx,ts,tsx}": "yarn eslint --max-warnings=0 --ext .js,.jsx,.ts,.tsx src",
-  "*.{ts,tsx}": "yarn tsc src",
-  "*.test.{js,jsx,ts,tsx}": "yarn test --watchAll=false"
-}

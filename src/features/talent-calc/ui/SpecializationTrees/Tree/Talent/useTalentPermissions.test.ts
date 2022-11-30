@@ -4,7 +4,7 @@ import { useTalentPermissions } from './useTalentPermissions';
 const TOTAL_TO_UNBLOCK_ALL_TIERS = 50;
 
 describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermissions', () => {
-  const mockGetPreviousTotal = (tier: number) => TOTAL_TO_UNBLOCK_ALL_TIERS;
+  const mockGetPreviousTotal = () => TOTAL_TO_UNBLOCK_ALL_TIERS;
 
   it('should be able to increase with an initial talent state', () => {
     const { canIncrease } = useTalentPermissions({
@@ -98,7 +98,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
   });
 
   it('shouldn\'t be able to decrease if a deepest talent with value won\'t be available by previous tiers total', () => {
-    const mockGetPreviousTotalNotEnough = (tier: number) => 15;
+    const mockGetPreviousTotalNotEnough = () => 15;
 
     const { canDecrease } = useTalentPermissions({
       tier: 2,
@@ -115,7 +115,7 @@ describe('features/talent-calc/ui/SpecializationTrees/Tree/Talent/useTalentPermi
   });
 
   it('should be able to decrease if a deepest talent with value will be available by previous tiers total', () => {
-    const mockGetPreviousTotalEnough = (tier: number) => 16;
+    const mockGetPreviousTotalEnough = () => 16;
 
     const { canDecrease } = useTalentPermissions({
       tier: 2,
