@@ -11,6 +11,7 @@ export type TooltipType = TooltipDefaultType | TooltipTalentType;
 
 type TooltipBaseType = {
   type: 'default' | 'talent',
+  isOpen: boolean;
   title?: ReactNode,
 };
 

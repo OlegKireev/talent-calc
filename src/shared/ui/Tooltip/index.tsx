@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type {
   AbilityCastDurationType,
@@ -10,6 +10,7 @@ import type {
 } from 'shared/constants/talentsData';
 import type { TooltipCoordsType, TooltipType } from './types';
 import styles from './styles.module.scss';
+import { getTooltipCoords } from './utils';
 
 const MIN_RANK_VALUE = 1;
 
@@ -22,6 +23,8 @@ export const Tooltip = ({
   data,
   coords,
 }: TooltipProps) => {
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
+
   const [level, setLevel] = useState<number>(0);
   const [rank, setRank] = useState<TalentMaxValueType>(1);
   const [description, setDescription] = useState<TalentDescriptionType>({ 1: '' });
@@ -35,7 +38,8 @@ export const Tooltip = ({
   const [errors, setErrors] = useState<string[]>([]);
 
   const { type, title } = data;
-  const { x, y } = coords;
+
+  const { x, y } = getTooltipCoords(coords, tooltipRef);
 
   const isTalentType = type === 'talent';
   const nextRankDescription = description[rank + 1 as TalentMaxValueType];
@@ -70,6 +74,7 @@ export const Tooltip = ({
           top: y,
           left: x,
         }}
+        ref={tooltipRef}
       >
         <header className={styles.header}>
           <h3 className={styles.title}>
@@ -120,6 +125,7 @@ export const Tooltip = ({
             {description[rank]}
           </p>
         )}
+
         {shouldDisplayNextRankDescription && (
           <>
             <span

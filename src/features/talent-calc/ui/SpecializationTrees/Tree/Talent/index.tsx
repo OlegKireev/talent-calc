@@ -93,13 +93,14 @@ export const Talent = ({
   });
 
   const {
-    openTooltip, closeTooltip, refreshLastTooltip, data: tooltipData,
+    openTooltip, closeTooltip, refreshLastTooltip, data: tooltipData, isOpen,
   } = useTooltipContext();
 
   useEffect(() => {
     if (tooltipData.title === title) {
       refreshLastTooltip({
         type: 'talent',
+        isOpen,
         title,
         rank: value,
         description,
@@ -127,11 +128,13 @@ export const Talent = ({
     shouldHighlight,
     refreshLastTooltip,
     errors,
+    isOpen,
   ]);
 
   const handleOpenTooltip = (rank: number, event: MouseEvent<HTMLElement>) => {
     openTooltip({
       type: 'talent',
+      isOpen,
       title,
       rank,
       description,

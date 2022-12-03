@@ -16,6 +16,7 @@ type TooltipContextType = {
 
 const initalData: TooltipType = {
   type: 'default',
+  isOpen: false,
   title: '',
 };
 

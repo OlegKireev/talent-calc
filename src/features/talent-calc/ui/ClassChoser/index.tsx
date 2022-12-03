@@ -14,12 +14,13 @@ interface ClassChoserProps {
 export const ClassChoser = ({
   currentClass,
 }: ClassChoserProps) => {
-  const { openTooltip, closeTooltip } = useTooltipContext();
+  const { openTooltip, closeTooltip, isOpen } = useTooltipContext();
   const handleMouseOver = (
     characterClass: CharacterClassType,
   ) => (e: MouseEvent<HTMLElement>) => openTooltip(
     {
       type: 'default',
+      isOpen,
       title: (
         <span style={{
           color: CHARACTER_COLORS[characterClass],
