@@ -8,6 +8,7 @@ import type {
   TalentDescriptionType,
   TalentMaxValueType,
 } from 'shared/constants/talentsData';
+import { getDuration } from 'shared/lib/utils';
 import type { TooltipCoordsType, TooltipType } from './types';
 import styles from './styles.module.scss';
 import { getTooltipCoords } from './utils';
@@ -109,12 +110,15 @@ export const Tooltip = ({
           <div className={styles.row}>
             {castDuration && (
               <span className={styles.left}>
-                {castDuration}
+                {getDuration(castDuration)}
+                {typeof castDuration === 'number' && (
+                  ' cast'
+                )}
               </span>
             )}
             {cooldown && (
               <span className={styles.right}>
-                {`${cooldown} sec cooldown`}
+                {`${getDuration(cooldown)} cooldown`}
               </span>
             )}
           </div>

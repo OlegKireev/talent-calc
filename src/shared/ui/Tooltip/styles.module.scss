@@ -41,6 +41,13 @@
   display: flex;
 }
 
+.left,
+.right {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
 .left {
   margin-right: auto;
 }
