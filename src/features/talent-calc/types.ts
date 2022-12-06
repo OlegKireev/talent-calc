@@ -12,3 +12,5 @@ export type HandleTalentChange = (args: {
   id: CharacterTalentIdType,
   value: number,
 }) => void;
+
+export type HandleTreeReset = (specialization: CharacterSpecializationType) => void;

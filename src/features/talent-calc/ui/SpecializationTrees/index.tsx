@@ -1,7 +1,7 @@
 import { CreateTaletsStateReturn } from 'features/talent-calc/lib/transform';
 import { type CharacterClassType } from 'shared/constants/global';
 import { type TaletsOfClassType } from 'shared/constants/talentsData';
-import { type HandleTalentChange } from 'features/talent-calc/types';
+import { HandleTreeReset, type HandleTalentChange } from 'features/talent-calc/types';
 import { Tree } from './Tree';
 import styles from './styles.module.scss';
 
@@ -10,12 +10,14 @@ interface SpecializationTreesProps {
   talentsByClass: TaletsOfClassType[],
   state: CreateTaletsStateReturn,
   onTalentChange: HandleTalentChange
+  onTreeReset: HandleTreeReset
 }
 export const SpecializationTrees = ({
   currentClass,
   talentsByClass,
   state,
   onTalentChange,
+  onTreeReset,
 }: SpecializationTreesProps) => {
   if (!currentClass) {
     return null;
@@ -36,6 +38,7 @@ export const SpecializationTrees = ({
           backgroundImage={specializationData.backgroundImage}
           key={specializationData.title}
           onTalentChange={onTalentChange}
+          onTreeReset={onTreeReset}
         />
       ))}
     </div>

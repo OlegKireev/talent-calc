@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.25em 0.5em;
+  font-weight: 900;
+  color: #9d9d9d;
+  background-color: transparent;
+  border-radius: 0.25rem;
+  border: 2px solid #404040;
+  transition: all ease 0.1s;
+
+  &:not(:disabled) {
+    color: white;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      border-color: #555;
+    }
+
+    &:active {
+      background-color: #111;
+    }
+  }
+
+  & svg {
+    transition: all ease 0.1s;
+  }
+}
+
+.title {
+  margin-left: 0.25em;
+}

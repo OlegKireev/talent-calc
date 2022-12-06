@@ -13,21 +13,23 @@ import {
 import { numberToArray } from 'shared/lib/transform';
 import { CharacterSpecializationType, MAX_TALENTS_POINTS } from 'shared/constants/global';
 import type { TalentTierType, TalentType } from 'shared/constants/talentsData';
-import { type HandleTalentChange } from 'features/talent-calc/types';
+import { HandleTreeReset, type HandleTalentChange } from 'features/talent-calc/types';
 import { useTalentCalcContext } from 'features/talent-calc/model/context';
 import { type GetPreviousTotal } from './types';
 import { Header } from './Header';
 import { Talent } from './Talent';
 import { Arrow } from './Arrow';
 import styles from './styles.module.scss';
+import { Footer } from './Footer';
 
 export interface TreeProps {
   state: TalentsStateType,
   title: CharacterSpecializationType
-  icon: string,
+  icon: string
   talents: TalentType[]
   backgroundImage?: string
   onTalentChange: HandleTalentChange
+  onTreeReset: HandleTreeReset
 }
 
 export const Tree = ({
@@ -37,6 +39,7 @@ export const Tree = ({
   talents,
   backgroundImage,
   onTalentChange,
+  onTreeReset,
 }: TreeProps) => {
   const { total } = useTalentCalcContext();
 
@@ -45,6 +48,8 @@ export const Tree = ({
 
   const deepestTierWithValue = getDeepestTierWithValue(talents, state);
   const treeTotal = getTreeTotal(state);
+
+  const handleTreeReset = () => onTreeReset(title);
 
   return (
     <div
@@ -141,6 +146,7 @@ export const Tree = ({
           </tbody>
         </table>
       </div>
+      <Footer treeTotal={treeTotal} onTreeReset={handleTreeReset} />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import { SpecializationTrees } from './ui/SpecializationTrees';
 import { generateTalentsState, generateStateString } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
 import { checkIsTalentsDataRefreshed, getSpecsTotal } from './lib/utils';
-import { type HandleTalentChange } from './types';
+import { HandleTreeReset, type HandleTalentChange } from './types';
 
 export const TalentCalc = () => {
   const {
@@ -62,7 +62,16 @@ export const TalentCalc = () => {
           [id]: value,
         },
       };
-      setState(newState);
+      setSearchParams({ [STATE_SEARCH_PARAM]: generateStateString(newState) });
+    }
+  };
+
+  const handleTreeReset: HandleTreeReset = (specialization) => {
+    if (state) {
+      const newState = {
+        ...state,
+        [specialization]: {},
+      };
       setSearchParams({ [STATE_SEARCH_PARAM]: generateStateString(newState) });
     }
   };
@@ -85,6 +94,7 @@ export const TalentCalc = () => {
           state={state}
           talentsByClass={TALENTS_TEMPLATE[currentClass]}
           onTalentChange={handleTalentChange}
+          onTreeReset={handleTreeReset}
         />
       )}
     </div>
