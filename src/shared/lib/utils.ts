@@ -1,10 +1,10 @@
 import { AbilityCastDurationType } from 'shared/constants/talentsData';
 
-export const getTooltipCoords = (target: HTMLElement) => {
+export const getTargetCoords = (target: HTMLElement) => {
   const targetRect = target.getBoundingClientRect();
   return {
-    x: targetRect.left + targetRect.width + 5,
-    y: targetRect.top + 1,
+    x: targetRect.left + targetRect.width,
+    y: targetRect.top,
   };
 };
 

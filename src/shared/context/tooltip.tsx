@@ -2,7 +2,7 @@ import {
   createContext, MouseEvent, useCallback, useContext, useMemo, useState,
 } from 'react';
 import { useDisclosure } from 'shared/hooks/useDisclosure';
-import { getTooltipCoords } from 'shared/lib/utils';
+import { getTargetCoords } from 'shared/lib/utils';
 import { TooltipCoordsType, TooltipType } from 'shared/ui/Tooltip/types';
 
 type TooltipContextType = {
@@ -49,7 +49,7 @@ export const TooltipProvider = ({
     tooltipData: TooltipType,
     event: MouseEvent<HTMLElement>,
   ) => {
-    setCoords(getTooltipCoords(event.currentTarget));
+    setCoords(getTargetCoords(event.currentTarget));
     setData(tooltipData);
     onOpen();
   }, [onOpen]);
