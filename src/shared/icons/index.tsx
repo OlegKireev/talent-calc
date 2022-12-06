@@ -1,0 +1,1 @@
+export { IconCross } from './Cross';
