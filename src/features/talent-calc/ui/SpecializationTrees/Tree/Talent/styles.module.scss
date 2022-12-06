@@ -40,9 +40,9 @@
   right: -5px;
   padding: 0.25em;
   font-size: 0.6875rem;
-  color: var(--color, #787878);
+  color: var(--color, --colors-neutral-600);
   line-height: 1;
-  background-color: #000;
+  background-color: var(--colors-black);
   border-radius: 0.25em;
   pointer-events: none;
 
