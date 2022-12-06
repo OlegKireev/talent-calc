@@ -45,6 +45,7 @@
   background-color: var(--colors-black);
   border-radius: 0.25em;
   pointer-events: none;
+  transition: color 0.1s ease;
 
   &::selection {
     background-color: transparent;
