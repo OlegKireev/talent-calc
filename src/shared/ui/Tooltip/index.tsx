@@ -26,6 +26,10 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement | null>(null);
 
+  const [tooltipCoods, setTooltipCoords] = useState<TooltipCoordsType>({
+    x: coords.x,
+    y: coords.y,
+  });
   const [level, setLevel] = useState<number>(0);
   const [rank, setRank] = useState<TalentMaxValueType>(1);
   const [description, setDescription] = useState<TalentDescriptionType>({ 1: '' });
@@ -40,8 +44,6 @@ export const Tooltip = ({
 
   const { type, title } = data;
 
-  const { x, y } = getTooltipCoords(coords, tooltipRef);
-
   const isTalentType = type === 'talent';
   const nextRankDescription = description[rank + 1 as TalentMaxValueType];
   const shouldDisplayNextRankDescription = shouldDisplayNextRank
@@ -50,6 +52,12 @@ export const Tooltip = ({
     && nextRankDescription;
 
   const shouldDisplayTip = canIncrease || canDecrease || Boolean(errors.length);
+
+  useEffect(() => {
+    if (tooltipRef.current) {
+      setTooltipCoords(getTooltipCoords(coords, tooltipRef));
+    }
+  }, [coords, tooltipRef]);
 
   useEffect(() => {
     if ('rank' in data) {
@@ -72,8 +80,8 @@ export const Tooltip = ({
       <div
         className={styles.wrapper}
         style={{
-          top: y,
-          left: x,
+          top: tooltipCoods.y,
+          left: tooltipCoods.x,
         }}
         ref={tooltipRef}
       >

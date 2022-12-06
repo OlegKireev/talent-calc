@@ -17,7 +17,7 @@ export const ClassChoser = ({
   const { openTooltip, closeTooltip, isOpen } = useTooltipContext();
   const handleMouseOver = (
     characterClass: CharacterClassType,
-  ) => (e: MouseEvent<HTMLElement>) => openTooltip(
+  ) => (event: MouseEvent<HTMLElement>) => openTooltip(
     {
       type: 'default',
       isOpen,
@@ -31,7 +31,7 @@ export const ClassChoser = ({
         </span>
       ),
     },
-    e,
+    event,
   );
   const handleMouseOut = () => closeTooltip();
 

@@ -1,10 +1,10 @@
 import { AbilityCastDurationType } from 'shared/constants/talentsData';
 
 export const getTargetCoords = (target: HTMLElement) => {
-  const targetRect = target.getBoundingClientRect();
+  const { top, left, width } = target.getBoundingClientRect();
   return {
-    x: targetRect.left + targetRect.width,
-    y: targetRect.top,
+    x: left + width,
+    y: top,
   };
 };
 
