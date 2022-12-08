@@ -11,14 +11,14 @@ export const App = () => (
   <TooltipProvider>
     <TalentCalcProvider>
       <div className={styles.wrapper}>
-        <Layout>
-          <BrowserRouter>
+        <BrowserRouter>
+          <Layout>
             <Routes>
               <Route path="/" element={<TalentCalc />} />
               <Route path=":characterClass" element={<TalentCalc />} />
             </Routes>
-          </BrowserRouter>
-        </Layout>
+          </Layout>
+        </BrowserRouter>
       </div>
     </TalentCalcProvider>
   </TooltipProvider>
