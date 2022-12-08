@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { MouseEvent, ReactNode } from 'react';
 import cx from 'classnames';
 import styles from './styles.module.scss';

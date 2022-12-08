@@ -10,6 +10,8 @@ import { generateTalentsState, generateStateString } from './lib/transform';
 import { useTalentCalcContext } from './model/context';
 import { checkIsTalentsDataRefreshed, getSpecsTotal } from './lib/utils';
 import { HandleTreeReset, type HandleTalentChange } from './types';
+import { Controls } from './ui/Controls';
+import styles from './styles.module.scss';
 
 export const TalentCalc = () => {
   const {
@@ -77,10 +79,11 @@ export const TalentCalc = () => {
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <ClassChoser
         currentClass={currentClass}
       />
+      <Controls />
       {currentClass && (
         <Status
           currentClass={currentClass}
