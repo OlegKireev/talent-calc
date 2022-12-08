@@ -35,8 +35,8 @@ type TooltipTalentType = TooltipBaseType & {
 };
 
 export type TooltipCoordsType = {
-  x: number,
-  y: number,
+  left: number,
+  bottom: number,
 };
 
 export type TooltipErrorsType = {

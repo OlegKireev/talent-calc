@@ -21,8 +21,8 @@ const initalData: TooltipType = {
 };
 
 const initialCoords: TooltipCoordsType = {
-  x: 0,
-  y: 0,
+  left: 0,
+  bottom: 0,
 };
 
 const initialState: TooltipContextType = {
@@ -69,7 +69,7 @@ export const TooltipProvider = ({
   const value = useMemo(() => ({
     isOpen,
     data,
-    coords: { x: coords.x, y: coords.y },
+    coords: { left: coords.left, bottom: coords.bottom },
     openTooltip,
     closeTooltip,
     refreshLastTooltip,

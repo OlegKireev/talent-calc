@@ -2,7 +2,7 @@
 
 .wrapper {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   background-color: rgb(4 4 35 / 85%);
   z-index: 10;
@@ -13,7 +13,7 @@
   border: 1px solid var(--colors-neutral-500);
   font-size: 0.75rem;
   max-width: 20rem;
-  animation: fade-in 0.15s ease;
+  animation: fade-in 0.1s ease;
 }
 
 .title {

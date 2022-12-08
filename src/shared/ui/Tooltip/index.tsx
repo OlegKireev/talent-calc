@@ -11,7 +11,6 @@ import type {
 import { getDuration } from 'shared/lib/utils';
 import type { TooltipCoordsType, TooltipType } from './types';
 import styles from './styles.module.scss';
-import { getTooltipCoords } from './utils';
 
 const MIN_RANK_VALUE = 1;
 
@@ -26,10 +25,6 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement | null>(null);
 
-  const [tooltipCoods, setTooltipCoords] = useState<TooltipCoordsType>({
-    x: coords.x,
-    y: coords.y,
-  });
   const [level, setLevel] = useState<number>(0);
   const [rank, setRank] = useState<TalentMaxValueType>(1);
   const [description, setDescription] = useState<TalentDescriptionType>({ 1: '' });
@@ -51,13 +46,7 @@ export const Tooltip = ({
     && level > 0
     && nextRankDescription;
 
-  const shouldDisplayTip = canIncrease || canDecrease || Boolean(errors.length);
-
-  useEffect(() => {
-    if (tooltipRef.current) {
-      setTooltipCoords(getTooltipCoords(coords, tooltipRef));
-    }
-  }, [coords, tooltipRef]);
+  const shouldDisplayTip = isTalentType && (canIncrease || canDecrease || Boolean(errors.length));
 
   useEffect(() => {
     if ('rank' in data) {
@@ -80,8 +69,8 @@ export const Tooltip = ({
       <div
         className={styles.wrapper}
         style={{
-          top: tooltipCoods.y,
-          left: tooltipCoods.x,
+          bottom: coords.bottom,
+          left: coords.left,
         }}
         ref={tooltipRef}
       >
