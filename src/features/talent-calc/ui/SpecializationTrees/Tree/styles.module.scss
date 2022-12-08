@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  border-radius: 0.375rem;
+  border-radius: 6px;
   overflow: hidden;
 }
 
@@ -19,7 +19,7 @@
 .table {
   margin: 0 auto;
   border-collapse: separate;
-  border-spacing: 0.75em;
+  border-spacing: 12px;
 }
 
 .cell {

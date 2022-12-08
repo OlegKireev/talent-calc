@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+:root {
+  color: white;
+  background-color: var(--colors-neutral-200);
+
+  @media screen and (max-width: 767px) {
+    font-size: 20px;
+  }
+}
+
 body {
   margin: 0;
   font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
