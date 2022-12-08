@@ -11,6 +11,7 @@ import type {
 import { getDuration } from 'shared/lib/utils';
 import type { TooltipCoordsType, TooltipType } from './types';
 import styles from './styles.module.scss';
+import { getTooltipCoords } from './utils';
 
 const MIN_RANK_VALUE = 1;
 
@@ -25,6 +26,7 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement | null>(null);
 
+  const [tooltipCoords, setTooltipCoords] = useState<TooltipCoordsType>(coords);
   const [level, setLevel] = useState<number>(0);
   const [rank, setRank] = useState<TalentMaxValueType>(1);
   const [description, setDescription] = useState<TalentDescriptionType>({ 1: '' });
@@ -64,13 +66,19 @@ export const Tooltip = ({
     }
   }, [data]);
 
+  useEffect(() => {
+    if (tooltipRef.current) {
+      setTooltipCoords(getTooltipCoords(coords, tooltipRef));
+    }
+  }, [coords, tooltipRef]);
+
   return createPortal(
     (
       <div
         className={styles.wrapper}
         style={{
-          bottom: coords.bottom,
-          left: coords.left,
+          bottom: tooltipCoords.bottom,
+          left: tooltipCoords.left,
         }}
         ref={tooltipRef}
       >
