@@ -83,13 +83,15 @@ export const TalentCalc = () => {
       <ClassChoser
         currentClass={currentClass}
       />
-      <Controls />
       {currentClass && (
-        <Status
-          currentClass={currentClass}
-          specsTotal={totalBySpecs}
-          total={total}
-        />
+        <>
+          <Controls />
+          <Status
+            currentClass={currentClass}
+            specsTotal={totalBySpecs}
+            total={total}
+          />
+        </>
       )}
       {currentClass && TALENTS_TEMPLATE[currentClass] && isDataRefreshed && (
         <SpecializationTrees
