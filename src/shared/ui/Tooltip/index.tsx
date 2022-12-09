@@ -104,9 +104,14 @@ export const Tooltip = ({
                 {costs}
               </span>
             )}
-            {range && (
+            {Boolean(range) && (
               <span className={styles.right}>
                 {`${range} yd range`}
+              </span>
+            )}
+            {range === 0 && (
+              <span className={styles.right}>
+                Melee range
               </span>
             )}
           </div>
